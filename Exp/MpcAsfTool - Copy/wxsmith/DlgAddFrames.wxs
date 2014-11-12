@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxDialog" name="DlgAddFrames">
+		<title>添加帧</title>
+		<size>511,444</size>
+		<id_arg>0</id_arg>
+		<object class="wxListCtrl" name="ID_LISTCTRL1" variable="ListCtrl_Files" member="yes">
+			<pos>24,8</pos>
+			<size>440,391</size>
+			<style>wxLC_REPORT|wxLC_SINGLE_SEL</style>
+		</object>
+		<object class="wxButton" name="ID_BUTTON3" variable="Button_UP" member="yes">
+			<label>∧</label>
+			<pos>472,130</pos>
+			<size>18,23</size>
+			<handler function="OnButton_UPClick" entry="EVT_BUTTON" />
+		</object>
+		<object class="wxButton" name="ID_BUTTON4" variable="Button_Down" member="yes">
+			<label>∨</label>
+			<pos>472,160</pos>
+			<size>18,23</size>
+			<handler function="OnButton_DownClick" entry="EVT_BUTTON" />
+		</object>
+		<object class="wxButton" name="ID_BUTTON5" variable="Button_Del" member="yes">
+			<label>×</label>
+			<pos>472,190</pos>
+			<size>18,23</size>
+			<handler function="OnButton_DelClick" entry="EVT_BUTTON" />
+		</object>
+		<object class="wxButton" name="ID_BUTTON1" variable="Button_OK" member="yes">
+			<label>确定</label>
+			<pos>88,408</pos>
+			<handler function="OnButton_OKClick" entry="EVT_BUTTON" />
+		</object>
+		<object class="wxButton" name="ID_BUTTON2" variable="Button1" member="yes">
+			<label>取消</label>
+			<pos>312,408</pos>
+			<handler function="OnButton1Click" entry="EVT_BUTTON" />
+		</object>
+	</object>
+</wxsmith>

@@ -1,0 +1,62 @@
+little-endian
+ulong -> unsigned long
+transparancy color: 
+RGB
+255 240 240
+105 146 103
+framecounts max is 256
+
+pos  	    length       			description
+---file begin---
+0		   64 bytes		   		    MPC File Ver2.0 + null
+64(0x40)   4  bytes(    )           frames data length(head+data) sum
+68(0x44)   4  bytes(long)			width(global)
+72(0x48)   4  bytes(long)			height(global)
+76(0x4C)   4  bytes(ulong)			fram counts
+80(0x50)   4  bytes(long)			direction
+84(0x54)   4  bytes(ulong)          colour counts
+88(0x58)   4  bytes(long)		    interval(ms/frame)
+92(0x5C)   4  bytes(long)			bottom
+96(0x60)   32 bytes                 null
+128(0x80)  4*(colour counts)        palette
++^         4*(fram counts)          each frame data length
+{
+1: 0
+2:framelen(1) + 1's counts
+3:framelen(2) + 2's counts
+4:framelen(3) + 3's counts
+.
+.
+.
+n-1:framelen(n-2) + (n-3)'s counts
+n: framelen(n-1) + (n-2)'s counts
+}
+frames data
+{
+1:
+datalength 4bytes
+width      4bytes
+height     4bytes
+null       8bytes
+compressed data (datalength-20)bytes
+2:
+datalength 4bytes
+width   4bytes
+height  4bytes
+null    2bytes
+compressed data datalength
+.
+.
+.
+n:
+width   4bytes
+height  4bytes
+null    2bytes
+compressed data (framelen(n)-10)
+}
+
+---file end---
+
+
+
+

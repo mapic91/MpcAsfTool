@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxDialog" name="BatDialog">
+		<title>图片批量导出</title>
+		<size>385,387</size>
+		<id_arg>0</id_arg>
+		<object class="wxRichTextCtrl" name="ID_RICHTEXTCTRL1" variable="RichTextCtrl_List" member="yes">
+			<pos>8,16</pos>
+			<size>288,240</size>
+		</object>
+		<object class="wxButton" name="ID_BUTTON1" variable="Button_Add" member="yes">
+			<label>添加</label>
+			<pos>304,32</pos>
+			<handler function="OnButton_AddClick" entry="EVT_BUTTON" />
+		</object>
+		<object class="wxButton" name="ID_BUTTON2" variable="Button_Empty" member="yes">
+			<label>清空</label>
+			<pos>304,72</pos>
+			<handler function="OnButton_EmptyClick" entry="EVT_BUTTON" />
+		</object>
+		<object class="wxRadioButton" name="ID_RADIOBUTTON1" variable="RadioButton_Gif" member="yes">
+			<label>GIF</label>
+			<selected>1</selected>
+			<pos>320,152</pos>
+			<handler function="OnRadioButton_GifSelect" entry="EVT_RADIOBUTTON" />
+		</object>
+		<object class="wxRadioButton" name="ID_RADIOBUTTON2" variable="RadioButton_Png" member="yes">
+			<label>PNG</label>
+			<pos>320,176</pos>
+			<handler function="OnRadioButton_PngSelect" entry="EVT_RADIOBUTTON" />
+		</object>
+		<object class="wxStaticText" name="ID_STATICTEXT1" variable="StaticText1" member="yes">
+			<label>导出为：</label>
+			<pos>304,120</pos>
+		</object>
+		<object class="wxButton" name="ID_BUTTON3" variable="Button_Ok" member="yes">
+			<label>确定</label>
+			<pos>72,350</pos>
+			<handler function="OnButton_OkClick" entry="EVT_BUTTON" />
+		</object>
+		<object class="wxButton" name="ID_BUTTON4" variable="Button_Cancle" member="yes">
+			<label>取消</label>
+			<pos>224,350</pos>
+			<handler function="OnButton_CancleClick" entry="EVT_BUTTON" />
+		</object>
+		<object class="wxCheckBox" name="ID_CHECKBOX1" variable="CheckBox_isShd" member="yes">
+			<label>SHD</label>
+			<checked>1</checked>
+			<pos>16,272</pos>
+			<tooltip>是否包含影子</tooltip>
+		</object>
+		<object class="wxStaticText" name="ID_STATICTEXT2" variable="StaticText2" member="yes">
+			<label>底色：</label>
+			<pos>72,272</pos>
+		</object>
+		<object class="wxColourPickerCtrl" name="ID_COLOURPICKERCTRL1" variable="ColourPickerCtrl_BaseColor" member="yes">
+			<colour>#FFFFFF</colour>
+			<pos>112,268</pos>
+		</object>
+		<object class="wxStaticText" name="ID_STATICTEXT3" variable="StaticText3" member="yes">
+			<label>透明域：</label>
+			<pos>176,272</pos>
+		</object>
+		<object class="wxSpinCtrl" name="ID_SPINCTRL1" variable="SpinCtrl_AlphaMask" member="yes">
+			<value>0</value>
+			<max>255</max>
+			<pos>230,268</pos>
+		</object>
+		<object class="wxSpinCtrl" name="ID_SPINCTRL2" variable="SpinCtrl_FrameEnd" member="yes">
+			<value>99999999</value>
+			<min>1</min>
+			<max>99999999</max>
+			<pos>210,305</pos>
+			<size>88,21</size>
+		</object>
+		<object class="wxSpinCtrl" name="ID_SPINCTRL3" variable="SpinCtrl_FrameBegin" member="yes">
+			<value>1</value>
+			<min>1</min>
+			<max>99999999</max>
+			<pos>80,305</pos>
+			<size>88,21</size>
+		</object>
+		<object class="wxStaticText" name="ID_STATICTEXT4" variable="StaticText4" member="yes">
+			<label>到</label>
+			<pos>180,307</pos>
+		</object>
+		<object class="wxStaticText" name="ID_STATICTEXT5" variable="StaticText5" member="yes">
+			<label>帧范围：</label>
+			<pos>24,307</pos>
+		</object>
+	</object>
+</wxsmith>

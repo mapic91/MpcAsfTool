@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxDialog" name="ProgressDlg">
+		<size>800,200</size>
+		<pos_arg>1</pos_arg>
+		<size_arg>1</size_arg>
+		<style>wxTRANSPARENT_WINDOW</style>
+		<object class="wxStaticText" name="ID_STATICTEXT1" variable="StaticText1" member="yes">
+			<label></label>
+			<pos>152,136</pos>
+			<style>wxTRANSPARENT_WINDOW</style>
+		</object>
+		<object class="wxStaticText" name="ID_STATICTEXT2" variable="StaticText_Progress" member="yes">
+			<label>.......</label>
+			<pos>0,88</pos>
+			<size>100,20</size>
+			<style>wxALIGN_CENTRE|wxTRANSPARENT_WINDOW</style>
+		</object>
+	</object>
+</wxsmith>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="asftest" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug-dll">
+				<Option output="bin/Debug-dll/asftest" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-D__WXDEBUG__" />
+					<Add directory="$(#wx.lib)/gcc_dll/mswud" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(#wx.lib)/gcc_dll/mswud" />
+				</ResourceCompiler>
+				<Linker>
+					<Add library="$(#wx.lib)\gcc_dll\libwxmsw28ud_richtext.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxmsw28ud_xrc.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxmsw28ud_adv.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxmsw28ud_html.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxbase28ud_xml.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxmsw28ud_core.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxbase28ud.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxpngd.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxjpegd.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxtiffd.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxzlibd.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxexpatd.a" />
+					<Add directory="$(#wx.lib)/gcc_dll" />
+				</Linker>
+			</Target>
+			<Target title="Debug-static">
+				<Option output="bin/Debug-static/asftest" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-D__WXDEBUG__" />
+					<Add directory="$(#wx.lib)/gcc_lib/mswud" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(#wx.lib)/gcc_lib/mswud" />
+				</ResourceCompiler>
+				<Linker>
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw28ud_richtext.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw28ud_xrc.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw28ud_adv.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw28ud_html.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxbase28ud_xml.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw28ud_core.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxbase28ud.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxpngd.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxjpegd.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxtiffd.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxzlibd.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxexpatd.a" />
+					<Add directory="$(#wx.lib)/gcc_lib" />
+				</Linker>
+			</Target>
+			<Target title="Release-dll">
+				<Option output="bin/Release-dll/asftest" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="$(#wx.lib)/gcc_dll/mswu" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(#wx.lib)/gcc_dll/mswu" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxmsw28u_richtext.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxmsw28u_xrc.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxmsw28u_adv.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxmsw28u_html.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxbase28u_xml.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxmsw28u_core.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxbase28u.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxpng.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxjpeg.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxtiff.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxzlib.a" />
+					<Add library="$(#wx.lib)\gcc_dll\libwxexpat.a" />
+					<Add directory="$(#wx.lib)/gcc_dll" />
+				</Linker>
+			</Target>
+			<Target title="Release-static">
+				<Option output="bin/Release-static/asftest" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="$(#wx.lib)/gcc_lib/mswu" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(#wx.lib)/gcc_lib/mswu" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-static-libgcc" />
+					<Add option="-static-libstdc++" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw28u_richtext.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw28u_xrc.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw28u_adv.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw28u_html.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxbase28u_xml.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw28u_core.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxbase28u.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxpng.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxjpeg.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxtiff.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxzlib.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxexpat.a" />
+					<Add directory="$(#wx.lib)/gcc_lib" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-pipe" />
+			<Add option="-mthreads" />
+			<Add option='[[if (PLATFORM == PLATFORM_MSW &amp;&amp; (GetCompilerFactory().GetCompilerVersionString(_T(&quot;gcc&quot;)) &gt;= _T(&quot;4.0.0&quot;))) print(_T(&quot;-Wno-attributes&quot;));]]' />
+			<Add option="-finput-charset=GBK" />
+			<Add option="-D__GNUWIN32__" />
+			<Add option="-D__WXMSW__" />
+			<Add option="-DwxUSE_UNICODE" />
+			<Add directory="$(#wx.include)" />
+			<Add directory="$(#wx)/contrib/include" />
+		</Compiler>
+		<ResourceCompiler>
+			<Add directory="$(#wx.include)" />
+		</ResourceCompiler>
+		<Linker>
+			<Add option="-mthreads" />
+			<Add library="libkernel32.a" />
+			<Add library="libuser32.a" />
+			<Add library="libgdi32.a" />
+			<Add library="libwinspool.a" />
+			<Add library="libcomdlg32.a" />
+			<Add library="libadvapi32.a" />
+			<Add library="libshell32.a" />
+			<Add library="libole32.a" />
+			<Add library="liboleaut32.a" />
+			<Add library="libuuid.a" />
+			<Add library="libcomctl32.a" />
+			<Add library="libwsock32.a" />
+			<Add library="libodbc32.a" />
+		</Linker>
+		<Unit filename="App.cpp" />
+		<Unit filename="App.h" />
+		<Unit filename="AsfDecode.cpp" />
+		<Unit filename="AsfDecode.hpp" />
+		<Unit filename="NewFrame.cpp" />
+		<Unit filename="NewFrame.h" />
+		<Unit filename="resource.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="wxsmith/NewFrame.wxs" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<wxsmith version="1">
+				<gui name="wxWidgets" src="App.cpp" main="NewFrame" init_handlers="necessary" language="CPP" />
+				<resources>
+					<wxFrame wxs="wxsmith/NewFrame.wxs" src="NewFrame.cpp" hdr="NewFrame.h" fwddecl="0" i18n="1" name="NewFrame" language="CPP" />
+				</resources>
+			</wxsmith>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,5 @@
+aaaa ICON "wx/msw/std.ico"
+play ICON "ICO/Play.ico"
+pause ICON "ICO/Pause.ico"
+
+#include "wx/msw/wx.rc"

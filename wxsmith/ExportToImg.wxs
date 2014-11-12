@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxDialog" name="ExportToImg">
+		<title>请输入</title>
+		<size>275,110</size>
+		<id_arg>0</id_arg>
+		<object class="wxPanel" name="ID_PANEL1" variable="Panel1" member="yes">
+			<pos>-8,-8</pos>
+			<size>336,152</size>
+			<object class="wxStaticText" name="ID_STATICTEXT1" variable="StaticText1" member="yes">
+				<label>文件名前缀：</label>
+				<pos>32,35</pos>
+			</object>
+			<object class="wxButton" name="ID_BUTTON1" variable="Button1" member="yes">
+				<label>确定</label>
+				<pos>56,80</pos>
+				<handler function="OnButton1Click" entry="EVT_BUTTON" />
+			</object>
+			<object class="wxButton" name="ID_BUTTON2" variable="Button2" member="yes">
+				<label>取消</label>
+				<pos>152,80</pos>
+				<handler function="OnButton2Click" entry="EVT_BUTTON" />
+			</object>
+			<object class="wxTextCtrl" name="ID_TEXTCTRL1" variable="TextCtrl_FilePrefix" member="yes">
+				<pos>104,31</pos>
+				<size>152,21</size>
+				<tooltip>不要包含  \\  /  :  *  ?  &quot;  &lt;  &gt;  | </tooltip>
+			</object>
+		</object>
+	</object>
+</wxsmith>
