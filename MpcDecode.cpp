@@ -46,9 +46,9 @@ bool MpcDecode::ReadMpcFile()
         //Read head
         mpcfile.read(FileHead.VersionInfo, 64);
         if(mpcfile.fail() ||
-           strncmp(FileHead.VersionInfo,
-                   "MPC File Ver",
-                   sizeof("MPC File Ver")-1) != 0)
+                strncmp(FileHead.VersionInfo,
+                        "MPC File Ver",
+                        sizeof("MPC File Ver")-1) != 0)
         {
             return false;
         }
@@ -110,7 +110,7 @@ bool MpcDecode::ReadMpcFile()
         tempul |= ( ((unsigned long)temp4b[2] & (unsigned long)0xFF) << 16 );
         tempul |= ( ((unsigned long)temp4b[3] & (unsigned long)0xFF) << 24 );
         FileHead.Bottom = (long)(0x0 | tempul);
-		mpcfile.read((char*)temp4b, 4);
+        mpcfile.read((char*)temp4b, 4);
         tempul = 0;
         tempul |= ( ((unsigned long)temp4b[0] & (unsigned long)0xFF) );
         tempul |= ( ((unsigned long)temp4b[1] & (unsigned long)0xFF) << 8 );
@@ -347,86 +347,212 @@ unsigned char* MpcDecode::GetDecodedFrameData(const unsigned long index, long* W
         {
             *isTransparent = true;//always transparent
         }
-        mpcfile.read((char*)temp,1);
 
-        for(unsigned long i = 0; i < datalength - 20;)
+        if(DecodeType == 0 || DecodeType == 4)
         {
-            if(curdecposition > (unsigned long)decdatalen)
-            {
-                free(decdata);
-                mpcfile.close();
-                return NULL;
-            }
-            if(temp[0] > (unsigned char)0x80)
-            {
-                temppos = temp[0] - (unsigned char)0x80;
-                for(unsigned char j = 0; j < temppos; j++)
-                {
-                    switch(mod)
-                    {
-                    case PIC_RGB:
-                        decdata[curdecposition++] = transcol.Red;
-                        decdata[curdecposition++] = transcol.Green;
-                        decdata[curdecposition++] = transcol.Blue;
-                        break;
-                    case PIC_RGBA:
-                        decdata[curdecposition++] = transcol.Red;
-                        decdata[curdecposition++] = transcol.Green;
-                        decdata[curdecposition++] = transcol.Blue;
-                        decdata[curdecposition++] = 0x0;
-                        break;
-                    case PIC_BGRA:
-                        decdata[curdecposition++] = transcol.Blue;
-                        decdata[curdecposition++] = transcol.Green;
-                        decdata[curdecposition++] = transcol.Red;
-                        decdata[curdecposition++] = 0x0;
-                        break;
-                    default:
-                        //can't be here
-                        return NULL;
-                    }
-                }
-            }
-            else
-            {
-                temppos = temp[0];
-                for(unsigned char m = 0; m < temppos; m++)
-                {
-                    if(mpcfile.fail())
-                    {
-                        mpcfile.close();
-                        free(decdata);
-                        return NULL;
-                    }
-                    mpcfile.read((char*)temp,1);
-                    i++;
-                    switch(mod)
-                    {
-                    case PIC_RGB:
-                        decdata[curdecposition++] = PaletteData.Data[temp[0]].Red;
-                        decdata[curdecposition++] = PaletteData.Data[temp[0]].Green;
-                        decdata[curdecposition++] = PaletteData.Data[temp[0]].Blue;
-                        break;
-                    case PIC_RGBA:
-                        decdata[curdecposition++] = PaletteData.Data[temp[0]].Red;
-                        decdata[curdecposition++] = PaletteData.Data[temp[0]].Green;
-                        decdata[curdecposition++] = PaletteData.Data[temp[0]].Blue;
-                        decdata[curdecposition++] = 0xFF;
-                        break;
-                    case PIC_BGRA:
-                        decdata[curdecposition++] = PaletteData.Data[temp[0]].Blue;
-                        decdata[curdecposition++] = PaletteData.Data[temp[0]].Green;
-                        decdata[curdecposition++] = PaletteData.Data[temp[0]].Red;
-                        decdata[curdecposition++] = 0xFF;
-                        break;
-                    default:
-                        //can't be here
-                        return NULL;
-                    }
-                }
-            }
             mpcfile.read((char*)temp,1);
-            i++;
+            for(unsigned long i = 0; i < datalength - 20;)
+            {
+                if(curdecposition > (unsigned long)decdatalen)
+                {
+                    free(decdata);
+                    mpcfile.close();
+                    return NULL;
+                }
+                if(temp[0] > (unsigned char)0x80)
+                {
+                    temppos = temp[0] - (unsigned char)0x80;
+                    for(unsigned char j = 0; j < temppos; j++)
+                    {
+                        switch(mod)
+                        {
+                        case PIC_RGB:
+                            decdata[curdecposition++] = transcol.Red;
+                            decdata[curdecposition++] = transcol.Green;
+                            decdata[curdecposition++] = transcol.Blue;
+                            break;
+                        case PIC_RGBA:
+                            decdata[curdecposition++] = transcol.Red;
+                            decdata[curdecposition++] = transcol.Green;
+                            decdata[curdecposition++] = transcol.Blue;
+                            decdata[curdecposition++] = 0x0;
+                            break;
+                        case PIC_BGRA:
+                            decdata[curdecposition++] = transcol.Blue;
+                            decdata[curdecposition++] = transcol.Green;
+                            decdata[curdecposition++] = transcol.Red;
+                            decdata[curdecposition++] = 0x0;
+                            break;
+                        default:
+                            //can't be here
+                            return NULL;
+                        }
+                    }
+                }
+                else
+                {
+                    temppos = temp[0];
+                    for(unsigned char m = 0; m < temppos; m++)
+                    {
+                        if(mpcfile.fail())
+                        {
+                            mpcfile.close();
+                            free(decdata);
+                            return NULL;
+                        }
+                        mpcfile.read((char*)temp,1);
+                        i++;
+                        switch(mod)
+                        {
+                        case PIC_RGB:
+                            decdata[curdecposition++] = PaletteData.Data[temp[0]].Red;
+                            decdata[curdecposition++] = PaletteData.Data[temp[0]].Green;
+                            decdata[curdecposition++] = PaletteData.Data[temp[0]].Blue;
+                            break;
+                        case PIC_RGBA:
+                            decdata[curdecposition++] = PaletteData.Data[temp[0]].Red;
+                            decdata[curdecposition++] = PaletteData.Data[temp[0]].Green;
+                            decdata[curdecposition++] = PaletteData.Data[temp[0]].Blue;
+                            decdata[curdecposition++] = 0xFF;
+                            break;
+                        case PIC_BGRA:
+                            decdata[curdecposition++] = PaletteData.Data[temp[0]].Blue;
+                            decdata[curdecposition++] = PaletteData.Data[temp[0]].Green;
+                            decdata[curdecposition++] = PaletteData.Data[temp[0]].Red;
+                            decdata[curdecposition++] = 0xFF;
+                            break;
+                        default:
+                            //can't be here
+                            return NULL;
+                        }
+                    }
+                }
+                mpcfile.read((char*)temp,1);
+                i++;
+            }
+        }//DecodeType == 0
+        else
+        {
+            unsigned int pixelCount;
+            mpcfile.read((char*)temp,2);
+            for(unsigned long i = 0; i < datalength - 20;)
+            {
+                if(temp[1] >= 0x80)
+                {
+                    pixelCount = temp[0] + ((unsigned int)temp[1] - 0x80)*0x100;
+                    for(unsigned int j = 0; j < pixelCount; j++)
+                    {
+                        switch(mod)
+                        {
+                        case PIC_RGB:
+                            decdata[curdecposition++] = transcol.Red;
+                            decdata[curdecposition++] = transcol.Green;
+                            decdata[curdecposition++] = transcol.Blue;
+                            break;
+                        case PIC_RGBA:
+                            decdata[curdecposition++] = transcol.Red;
+                            decdata[curdecposition++] = transcol.Green;
+                            decdata[curdecposition++] = transcol.Blue;
+                            decdata[curdecposition++] = 0x0;
+                            break;
+                        case PIC_BGRA:
+                            decdata[curdecposition++] = transcol.Blue;
+                            decdata[curdecposition++] = transcol.Green;
+                            decdata[curdecposition++] = transcol.Red;
+                            decdata[curdecposition++] = 0x0;
+                            break;
+                        default:
+                            //can't be here
+                            return NULL;
+                        }
+                    }
+                }//>= 0x80
+                else if(temp[1] == 0x40)
+                {
+                    pixelCount = temp[0];
+                    for(unsigned char m = 0; m < pixelCount; m++)
+                    {
+                        if(mpcfile.fail())
+                        {
+                            mpcfile.close();
+                            free(decdata);
+                            return NULL;
+                        }
+                        mpcfile.read((char*)temp,2);
+                        i += 2;
+                        switch(mod)
+                        {
+                        case PIC_RGB:
+                            decdata[curdecposition++] = PaletteData.Data[temp[1]].Red;
+                            decdata[curdecposition++] = PaletteData.Data[temp[1]].Green;
+                            decdata[curdecposition++] = PaletteData.Data[temp[1]].Blue;
+                            break;
+                        case PIC_RGBA:
+                            decdata[curdecposition++] = PaletteData.Data[temp[1]].Red;
+                            decdata[curdecposition++] = PaletteData.Data[temp[1]].Green;
+                            decdata[curdecposition++] = PaletteData.Data[temp[1]].Blue;
+                            decdata[curdecposition++] = temp[0];
+                            break;
+                        case PIC_BGRA:
+                            decdata[curdecposition++] = PaletteData.Data[temp[1]].Blue;
+                            decdata[curdecposition++] = PaletteData.Data[temp[1]].Green;
+                            decdata[curdecposition++] = PaletteData.Data[temp[1]].Red;
+                            decdata[curdecposition++] = temp[0];
+                            break;
+                        default:
+                            //can't be here
+                            return NULL;
+                        }
+                    }
+                }// == 0x40
+                else if(temp[1] == 0x00)
+                {
+                    pixelCount = temp[0];
+                    for(unsigned char m = 0; m < pixelCount; m++)
+                    {
+                        if(mpcfile.fail())
+                        {
+                            mpcfile.close();
+                            free(decdata);
+                            return NULL;
+                        }
+                        mpcfile.read((char*)temp,1);
+                        i++;
+                        switch(mod)
+                        {
+                        case PIC_RGB:
+                            decdata[curdecposition++] = PaletteData.Data[temp[0]].Red;
+                            decdata[curdecposition++] = PaletteData.Data[temp[0]].Green;
+                            decdata[curdecposition++] = PaletteData.Data[temp[0]].Blue;
+                            break;
+                        case PIC_RGBA:
+                            decdata[curdecposition++] = PaletteData.Data[temp[0]].Red;
+                            decdata[curdecposition++] = PaletteData.Data[temp[0]].Green;
+                            decdata[curdecposition++] = PaletteData.Data[temp[0]].Blue;
+                            decdata[curdecposition++] = 0xFF;
+                            break;
+                        case PIC_BGRA:
+                            decdata[curdecposition++] = PaletteData.Data[temp[0]].Blue;
+                            decdata[curdecposition++] = PaletteData.Data[temp[0]].Green;
+                            decdata[curdecposition++] = PaletteData.Data[temp[0]].Red;
+                            decdata[curdecposition++] = 0xFF;
+                            break;
+                        default:
+                            //can't be here
+                            return NULL;
+                        }
+                    }
+                }// 0x00
+                else
+                {
+                    //Error!
+                    mpcfile.close();
+                    free(decdata);
+                    return NULL;
+                }
+                mpcfile.read((char*)temp,2);
+                i += 2;
+            }
         }
 
         mpcfile.close();
@@ -569,179 +695,44 @@ unsigned char* MpcDecode::GetGlobleDecodedFrameData(const unsigned long index, l
 FILOCRGBQUAD* MpcDecode::GetFIDecodedFrameData(const unsigned long index, long* Width, long* Height,
         COLOUR_MODLE mod, bool *isTransparent, Palette_Colour *TransparentColor)
 {
-    switch(mod)
+	long width, height;
+    unsigned char* data = GetDecodedFrameData(index, &width, &height, mod, isTransparent, TransparentColor);
+    if(data == NULL) return NULL;
+    else
     {
-    case PIC_RGB:
-    case PIC_BGRA:
-    case PIC_RGBA:
-        break;
-    default:
-        return NULL;
-    }
-
-    if(index < FileHead.FrameCounts)
-    {
-        Palette_Colour transcol;
-        transcol.Red = 0xFF;
-        transcol.Green = 0xFF;
-        transcol.Blue = 0xFF;
-        transcol.Alpha = 0x00;
-        if(TransparentColor != NULL)
+    	FILOCRGBQUAD* decdata;
+        long count = width*height;
+        decdata = new FILOCRGBQUAD[count];
+        long index = 0;
+        for(int i = 0; i < count; i++)
         {
-            transcol.Red = TransparentColor->Red;
-            transcol.Green = TransparentColor->Green;
-            transcol.Blue = TransparentColor->Blue;
-            transcol.Alpha =  TransparentColor->Alpha;
+            switch(mod)
+            {
+            case PIC_RGB:
+            	decdata[i].rgbRed = data[index++];
+            	decdata[i].rgbGreen = data[index++];
+            	decdata[i].rgbBlue = data[index++];
+            	decdata[i].rgbReserved = 0xFF;
+            	break;
+            case PIC_BGRA:
+            	decdata[i].rgbBlue = data[index++];
+            	decdata[i].rgbGreen = data[index++];
+            	decdata[i].rgbRed = data[index++];
+            	decdata[i].rgbReserved = data[index++];
+            	break;
+            case PIC_RGBA:
+            	decdata[i].rgbRed = data[index++];
+            	decdata[i].rgbGreen = data[index++];
+            	decdata[i].rgbBlue = data[index++];
+            	decdata[i].rgbReserved = data[index++];
+                break;
+            }
         }
-
-        unsigned long temppos = 0, datalength, width = FileHead.GlobleWidth,
-                      height = FileHead.GlobleHeight, curdecposition = 0;
-        unsigned char temp[8];
-        std::ifstream mpcfile(FilePath.char_str(), std::ios_base::binary|std::ios_base::in);
-        long decdatalen;
-        FILOCRGBQUAD* decdata;
-        if(!mpcfile.is_open())
-        {
-            return NULL;
-        }
-        mpcfile.seekg(FrameDataBegPos+index*4);
-        mpcfile.read((char*)temp, 4);
-        temppos = 0;
-        temppos |= ( ((unsigned long)temp[0] & (unsigned long)0xFF) );
-        temppos |= ( ((unsigned long)temp[1] & (unsigned long)0xFF) << 8 );
-        temppos |= ( ((unsigned long)temp[2] & (unsigned long)0xFF) << 16 );
-        temppos |= ( ((unsigned long)temp[3] & (unsigned long)0xFF) << 24 );
-        mpcfile.seekg(FrameDataBegPos + FileHead.FrameCounts*4 + temppos);
-        if(mpcfile.eof())
-        {
-            mpcfile.close();
-            return NULL;
-        }
-
-        mpcfile.read((char*)temp, 4);
-        temppos = 0;
-        temppos |= ( ((unsigned long)temp[0] & (unsigned long)0xFF) );
-        temppos |= ( ((unsigned long)temp[1] & (unsigned long)0xFF) << 8 );
-        temppos |= ( ((unsigned long)temp[2] & (unsigned long)0xFF) << 16 );
-        temppos |= ( ((unsigned long)temp[3] & (unsigned long)0xFF) << 24 );
-        datalength = temppos;
-        mpcfile.read((char*)temp, 4);
-        temppos = 0;
-        temppos |= ( ((unsigned long)temp[0] & (unsigned long)0xFF) );
-        temppos |= ( ((unsigned long)temp[1] & (unsigned long)0xFF) << 8 );
-        temppos |= ( ((unsigned long)temp[2] & (unsigned long)0xFF) << 16 );
-        temppos |= ( ((unsigned long)temp[3] & (unsigned long)0xFF) << 24 );
-        width = temppos;
-        mpcfile.read((char*)temp, 4);
-        temppos = 0;
-        temppos |= ( ((unsigned long)temp[0] & (unsigned long)0xFF) );
-        temppos |= ( ((unsigned long)temp[1] & (unsigned long)0xFF) << 8 );
-        temppos |= ( ((unsigned long)temp[2] & (unsigned long)0xFF) << 16 );
-        temppos |= ( ((unsigned long)temp[3] & (unsigned long)0xFF) << 24 );
-        height = temppos;
-        mpcfile.seekg(8, std::ios_base::cur);
+        free(data);
         if(Width != NULL)*Width = width;
         if(Height != NULL)*Height = height;
-
-        decdatalen = width * height;
-        decdata = new FILOCRGBQUAD[decdatalen];
-        if(decdata == NULL)return NULL;
-
-        for(long datidx = 0; datidx < decdatalen;)
-        {
-            decdata[datidx].rgbRed = transcol.Red;
-            decdata[datidx].rgbGreen = transcol.Green;
-            decdata[datidx].rgbBlue = transcol.Blue;
-            decdata[datidx].rgbReserved = 0x00;
-            datidx++;
-        }
-
-        if(isTransparent != NULL)
-        {
-            *isTransparent = true;//always transparent
-        }
-        mpcfile.read((char*)temp,1);
-
-        for(unsigned long i = 0; i < datalength - 20;)
-        {
-            if(curdecposition > (unsigned long)decdatalen)
-            {
-                delete[] decdata;
-                mpcfile.close();
-                return NULL;
-            }
-            if(temp[0] > (unsigned char)0x80)
-            {
-                temppos = temp[0] - (unsigned char)0x80;
-                for(unsigned char j = 0; j < temppos; j++)
-                {
-                    switch(mod)
-                    {
-                    case PIC_RGB:
-                        decdata[curdecposition].rgbRed = transcol.Red;
-                        decdata[curdecposition].rgbGreen = transcol.Green;
-                        decdata[curdecposition].rgbBlue = transcol.Blue;
-                        decdata[curdecposition].rgbReserved = 0x0;
-                        curdecposition++;
-                        break;
-                    case PIC_RGBA:
-                    case PIC_BGRA:
-                        decdata[curdecposition].rgbRed = transcol.Red;
-                        decdata[curdecposition].rgbGreen = transcol.Green;
-                        decdata[curdecposition].rgbBlue = transcol.Blue;
-                        decdata[curdecposition].rgbReserved = 0x0;
-                        curdecposition++;
-                        break;
-                    default:
-                        //can't be here
-                        return NULL;
-                    }
-                }
-            }
-            else
-            {
-                temppos = temp[0];
-                for(unsigned char m = 0; m < temppos; m++)
-                {
-                    if(mpcfile.fail())
-                    {
-                        mpcfile.close();
-                        delete[] decdata;
-                        return NULL;
-                    }
-                    mpcfile.read((char*)temp,1);
-                    i++;
-                    switch(mod)
-                    {
-                    case PIC_RGB:
-                        decdata[curdecposition].rgbRed = PaletteData.Data[temp[0]].Red;
-                        decdata[curdecposition].rgbGreen = PaletteData.Data[temp[0]].Green;
-                        decdata[curdecposition].rgbBlue = PaletteData.Data[temp[0]].Blue;
-                        decdata[curdecposition].rgbReserved = 0xFF;
-                        curdecposition++;
-                        break;
-                    case PIC_RGBA:
-                    case PIC_BGRA:
-                        decdata[curdecposition].rgbRed = PaletteData.Data[temp[0]].Red;
-                        decdata[curdecposition].rgbGreen = PaletteData.Data[temp[0]].Green;
-                        decdata[curdecposition].rgbBlue = PaletteData.Data[temp[0]].Blue;
-                        decdata[curdecposition].rgbReserved = 0xFF;
-                        curdecposition++;
-                        break;
-                    default:
-                        //can't be here
-                        return NULL;
-                    }
-                }
-            }
-            mpcfile.read((char*)temp,1);
-            i++;
-        }
-
-        mpcfile.close();
         return decdata;
     }
-    else return NULL;
 }
 FILOCRGBQUAD* MpcDecode::GetGlobleFIDecodedFrameData(const unsigned long index, long* Width, long* Height,
         COLOUR_MODLE mod, bool *isTransparent, Palette_Colour *TransparentColor)
@@ -803,7 +794,9 @@ FILOCRGBQUAD* MpcDecode::GetGlobleFIDecodedFrameData(const unsigned long index, 
         //assign
         switch(mod)
         {
-        case PIC_RGB:case PIC_RGBA:case PIC_BGRA:
+        case PIC_RGB:
+        case PIC_RGBA:
+        case PIC_BGRA:
             for(long datidx = 0; datidx < (long)glbdatalen; datidx++)//inital
             {
                 glbdata[datidx].rgbRed = transcol.Red;

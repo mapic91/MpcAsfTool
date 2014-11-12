@@ -9508,28 +9508,26 @@
 
 1300793815 d:\protools\wxwidgets\wxwidgets-2.8\lib\gcc_lib\mswu\wx\setup.h
 
-1413372617 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\about.cpp
+1415772088 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\about.cpp
 	"About.h"
 	"ICO/about.hpp"
-	<wx/bitmap.h>
-	<wx/intl.h>
-	<wx/image.h>
-	<wx/string.h>
-
-1386056150 e:\programmingworkshop\_store_\jxqy\mpcasftool\about.h
 	<wx/stattext.h>
+	<wx/bitmap.h>
 	<wx/panel.h>
 	<wx/hyperlink.h>
 	<wx/statbmp.h>
 	<wx/button.h>
+	<wx/image.h>
+	<wx/string.h>
+
+1415772089 e:\programmingworkshop\_store_\jxqy\mpcasftool\about.h
 	<wx/dialog.h>
 
 1384298731 e:\programmingworkshop\_store_\jxqy\mpcasftool\ico\about.hpp
 
-1398390111 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\adjustpositiondialog.cpp
+1415772123 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\adjustpositiondialog.cpp
 	"AdjustPositionDialog.h"
 	"wx/dcbuffer.h"
-	<wx/intl.h>
 	<wx/string.h>
 
 1398390026 e:\programmingworkshop\_store_\jxqy\mpcasftool\adjustpositiondialog.h
@@ -9645,10 +9643,9 @@
 	"wx/filename.h"
 	<fstream>
 
-1409793237 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\batdialog.cpp
+1415772135 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\batdialog.cpp
 	"BatDialog.h"
 	"wx/filedlg.h"
-	<wx/intl.h>
 	<wx/string.h>
 
 1409793470 e:\programmingworkshop\_store_\jxqy\mpcasftool\batdialog.h
@@ -9661,10 +9658,9 @@
 	<wx/dialog.h>
 	<wx/clrpicker.h>
 
-1398309181 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\dlgaddframes.cpp
+1415772147 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\dlgaddframes.cpp
 	"DlgAddFrames.h"
 	"wx/msgdlg.h"
-	<wx/intl.h>
 	<wx/string.h>
 
 1383989675 e:\programmingworkshop\_store_\jxqy\mpcasftool\dlgaddframes.h
@@ -9673,7 +9669,7 @@
 	<wx/button.h>
 	<wx/dialog.h>
 
-1385997175 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\exporttoimg.cpp
+1415772157 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\exporttoimg.cpp
 	"ExportToImg.h"
 	"wx/msgdlg.h"
 
@@ -9708,7 +9704,7 @@
 	"wx/filename.h"
 	<cstdlib>
 
-1409823042 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.cpp
+1415797189 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.cpp
 	"MpcAsfTool.h"
 	"DlgAddFrames.h"
 	"wx/filedlg.h"
@@ -9725,13 +9721,12 @@
 	"About.h"
 	"BatDialog.h"
 	<wx/bitmap.h>
-	<wx/intl.h>
 	<wx/image.h>
 	<wx/string.h>
 
 1385531197 e:\programmingworkshop\_store_\jxqy\mpcasftool\ico\jxqynyd.hpp
 
-1415771505 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcdecode.cpp
+1415796890 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcdecode.cpp
 	"MpcDecode.hpp"
 	"ShdDecode.hpp"
 	"wx/image.h"
@@ -11168,19 +11163,19 @@
 1412631242 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\generic\panelg.h
 	"wx/bitmap.h"
 
-1384175916 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\hyperlink.h
+1412631242 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\hyperlink.h
 	"wx/defs.h"
 	"wx/control.h"
 	"wx/gtk/hyperlink.h"
 	"wx/msw/hyperlink.h"
 	"wx/generic/hyperlink.h"
 
-1384175916 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\gtk\hyperlink.h
+1412631242 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\gtk\hyperlink.h
 	"wx/generic/hyperlink.h"
 
-1384175916 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\generic\hyperlink.h
+1412631242 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\generic\hyperlink.h
 
-1384175916 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\msw\hyperlink.h
+1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\msw\hyperlink.h
 	"wx/generic/hyperlink.h"
 
 1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\statbmp.h
@@ -12985,14 +12980,14 @@
 	"wx/defs.h"
 	"wx/stream.h"
 
-1384175917 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\richtext\richtextctrl.h
+1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\richtext\richtextctrl.h
 	"wx/richtext/richtextbuffer.h"
 	"wx/scrolwin.h"
 	"wx/caret.h"
 	"wx/textctrl.h"
 	"wx/dnd.h"
 
-1384175917 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\richtext\richtextbuffer.h
+1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\richtext\richtextbuffer.h
 	"wx/defs.h"
 	"wx/list.h"
 	"wx/textctrl.h"
@@ -13004,35 +12999,35 @@
 	"wx/position.h"
 	"wx/dataobj.h"
 
-1384175916 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\cmdproc.h
+1412631242 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\cmdproc.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/list.h"
 
-1384175917 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\txtstrm.h
+1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\txtstrm.h
 	"wx/stream.h"
 	"wx/convauto.h"
 
-1384175917 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\position.h
+1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\position.h
 	"wx/gdicmn.h"
 
-1384175916 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\caret.h
+1412631242 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\caret.h
 	"wx/defs.h"
 	"wx/gdicmn.h"
 	"wx/msw/caret.h"
 	"wx/generic/caret.h"
 
-1384175916 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\msw\caret.h
+1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\msw\caret.h
 
-1384175916 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\generic\caret.h
+1412631242 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\generic\caret.h
 	"wx/timer.h"
 	"wx/dc.h"
 	"wx/overlay.h"
 
-1384175916 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\overlay.h
+1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\overlay.h
 	"wx/defs.h"
 
-1384175917 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\stdpaths.h
+1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\stdpaths.h
 	"wx/defs.h"
 	"wx/string.h"
 	"wx/filefn.h"
@@ -13041,14 +13036,14 @@
 	"wx/os2/stdpaths.h"
 	"wx/unix/stdpaths.h"
 
-1384175916 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\msw\stdpaths.h
+1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\msw\stdpaths.h
 
-1384175916 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\osx\core\stdpaths.h
+1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\osx\core\stdpaths.h
 	"wx/unix/stdpaths.h"
 
-1384175917 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\unix\stdpaths.h
+1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\unix\stdpaths.h
 
-1384175916 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\os2\stdpaths.h
+1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\os2\stdpaths.h
 
 1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\msw\wx.rc
 	<windows.h>
@@ -13068,4 +13063,6 @@
 1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\msw\rcdefs.h
 
 1412631243 d:\protools\wxwidgets\wxwidgets-3.0\lib\gcc_dll\mswu\wx\setup.h
+
+1412631243 d:\protools\wxwidgets\wxwidgets-3.0\lib\gcc_lib\mswud\wx\setup.h
 

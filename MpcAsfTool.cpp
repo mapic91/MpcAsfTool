@@ -554,7 +554,7 @@ MpcAsfTool::MpcAsfTool(wxWindow* parent,wxWindowID id,const wxPoint& pos,const w
     ScrolledWindow_BmpShow->SetScrollRate(20, 20);
 
     this->SetIcon(wxICON(aaaa));
-    this->SetSize(900, 675);
+    this->SetSize(940, 710);
     this->SetSizeHints(wxSize(830, 400));
 
     //Tab Sequence
