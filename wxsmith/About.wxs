@@ -40,7 +40,7 @@
 				<handler function="OnButton_OKClick" entry="EVT_BUTTON" />
 			</object>
 			<object class="wxStaticText" name="ID_STATICTEXT6" variable="StaticText6" member="yes">
-				<label>2014.11.12</label>
+				<label>2014.11.13</label>
 				<pos>136,160</pos>
 			</object>
 			<object class="wxHyperlinkCtrl" name="ID_HYPERLINKCTRL1" variable="HyperlinkCtrl_MyWebPage" member="yes">

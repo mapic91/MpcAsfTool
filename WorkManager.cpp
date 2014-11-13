@@ -1,6 +1,7 @@
 #include "WorkManager.hpp"
 #include "GifData.hpp"
 #include "wx/filename.h"
+#include "RpcDecode.hpp"
 
 ///////////////
 //public
@@ -261,6 +262,28 @@ bool WorkManager::OpenFile(wxString InPath, int frameBegin, int frameEnd )
             if(!tempdata) return false;
             AddFrame(tempdata, tempwidth, tempheight);
         }
+    }
+    else if(ext.CmpNoCase(wxT("rpc")) == 0)
+    {
+        RpcDecode decode;
+        if(decode.ReadFile(InPath))
+        {
+            tempwidth = decode.GetGlobleWidth();
+            tempheight = decode.GetGlobleHeight();
+            SetGlobalWidth(tempwidth);
+            SetGlobalHeight(tempheight);
+            SetDirection(decode.GetDirection());
+            SetBottom(decode.GetBottom());
+            SetInterval(decode.GetInterval());
+
+            for(unsigned long conti = frameBegin; conti < decode.GetFramesCounts() && ((int)conti) <= frameEnd; conti++)
+            {
+                tempdata = decode.GetFIDecodedFrameData(conti);
+                if(!tempdata) return false;
+                AddFrame(tempdata, tempwidth, tempheight);
+            }
+        }
+        else return false;
     }
     else
     {

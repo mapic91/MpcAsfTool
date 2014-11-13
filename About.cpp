@@ -2,12 +2,7 @@
 #include "ICO/about.hpp"
 
 //(*InternalHeaders(About)
-#include <wx/stattext.h>
 #include <wx/bitmap.h>
-#include <wx/panel.h>
-#include <wx/hyperlink.h>
-#include <wx/statbmp.h>
-#include <wx/button.h>
 #include <wx/image.h>
 #include <wx/string.h>
 //*)
@@ -52,7 +47,7 @@ About::About(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& siz
 	StaticText4 = new wxStaticText(Panel1, ID_STATICTEXT4, _T("程序："), wxPoint(55,110), wxDefaultSize, 0, _T("ID_STATICTEXT4"));
 	StaticText5 = new wxStaticText(Panel1, ID_STATICTEXT5, _T("感谢："), wxPoint(55,135), wxDefaultSize, 0, _T("ID_STATICTEXT5"));
 	Button_OK = new wxButton(Panel1, ID_BUTTON1, _T("不忍直视"), wxPoint(265,165), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
-	StaticText6 = new wxStaticText(Panel1, ID_STATICTEXT6, _T("2014.11.12"), wxPoint(136,160), wxDefaultSize, 0, _T("ID_STATICTEXT6"));
+	StaticText6 = new wxStaticText(Panel1, ID_STATICTEXT6, _T("2014.11.13"), wxPoint(136,160), wxDefaultSize, 0, _T("ID_STATICTEXT6"));
 	HyperlinkCtrl_MyWebPage = new wxHyperlinkCtrl(Panel1, ID_HYPERLINKCTRL1, _T("小试刀剑"), _T("http://hi.baidu.com/qndryqnqbmbbceq"), wxPoint(100,109), wxDefaultSize, wxHL_CONTEXTMENU|wxHL_ALIGN_CENTRE|wxNO_BORDER, _T("ID_HYPERLINKCTRL1"));
 	HyperlinkCtrl1 = new wxHyperlinkCtrl(Panel1, ID_HYPERLINKCTRL2, _T("Upwinded"), _T("http://tieba.baidu.com/p/2279039886"), wxPoint(100,134), wxDefaultSize, wxHL_CONTEXTMENU|wxHL_ALIGN_CENTRE|wxNO_BORDER, _T("ID_HYPERLINKCTRL2"));
 	HyperlinkCtrl2 = new wxHyperlinkCtrl(Panel1, ID_HYPERLINKCTRL3, _T("FreeImage"), _T("http://sourceforge.net/projects/freeimage/"), wxPoint(138,84), wxDefaultSize, wxHL_CONTEXTMENU|wxHL_ALIGN_CENTRE|wxNO_BORDER, _T("ID_HYPERLINKCTRL3"));

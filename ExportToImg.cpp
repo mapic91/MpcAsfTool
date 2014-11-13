@@ -27,7 +27,7 @@ ExportToImg::ExportToImg(wxWindow* parent,wxWindowID id,const wxPoint& pos,const
 	StaticText1 = new wxStaticText(Panel1, ID_STATICTEXT1, _T("文件名前缀："), wxPoint(32,35), wxDefaultSize, 0, _T("ID_STATICTEXT1"));
 	Button1 = new wxButton(Panel1, ID_BUTTON1, _T("确定"), wxPoint(56,80), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
 	Button2 = new wxButton(Panel1, ID_BUTTON2, _T("取消"), wxPoint(152,80), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON2"));
-	TextCtrl_FilePrefix = new wxTextCtrl(Panel1, ID_TEXTCTRL1, wxEmptyString, wxPoint(104,31), wxSize(152,21), 0, wxDefaultValidator, _T("ID_TEXTCTRL1"));
+	TextCtrl_FilePrefix = new wxTextCtrl(Panel1, ID_TEXTCTRL1, wxEmptyString, wxPoint(114,31), wxSize(152,21), 0, wxDefaultValidator, _T("ID_TEXTCTRL1"));
 	TextCtrl_FilePrefix->SetToolTip(_T("不要包含  \\  /  :  *  \?  \"  <  >  | "));
 
 	Connect(ID_BUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ExportToImg::OnButton1Click);

@@ -22,7 +22,7 @@
 				<handler function="OnButton2Click" entry="EVT_BUTTON" />
 			</object>
 			<object class="wxTextCtrl" name="ID_TEXTCTRL1" variable="TextCtrl_FilePrefix" member="yes">
-				<pos>104,31</pos>
+				<pos>114,31</pos>
 				<size>152,21</size>
 				<tooltip>不要包含  \\  /  :  *  ?  &quot;  &lt;  &gt;  | </tooltip>
 			</object>

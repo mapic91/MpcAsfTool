@@ -636,8 +636,8 @@ void MpcAsfTool::OnFileOpen(wxCommandEvent &event)
 
     if(!ChangeSaved()) return;
 
-    wxFileDialog filedlg(this, wxT("选择MPC ASF SPR文件"), wxT(""), wxT(""),
-                         wxT("MPC ASF(*.mpc,*.asf,*.spr)|*.mpc;*.asf;*.spr|MPC(*.mpc)|*.mpc|ASF(*.asf)|*.asf|SPR(*.spr)|*.spr"),
+    wxFileDialog filedlg(this, wxT("选择MPC ASF SPR RPC文件"), wxT(""), wxT(""),
+                         wxT("MPC ASF SPR RPC(*.mpc,*.asf,*.spr,*.rpc)|*.mpc;*.asf;*.spr;*.rpc|MPC(*.mpc)|*.mpc|ASF(*.asf)|*.asf|SPR(*.spr)|*.spr|RPC(*.rpc)|*.rpc"),
                          wxFD_OPEN|wxFD_FILE_MUST_EXIST);
 
     if(filedlg.ShowModal() == wxID_OK)

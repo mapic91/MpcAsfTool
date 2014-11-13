@@ -233,10 +233,14 @@
 		<Unit filename="MpcDecode.hpp" />
 		<Unit filename="MpctoGif.cpp" />
 		<Unit filename="MpctoPic.hpp" />
+		<Unit filename="RpcDecode.cpp" />
+		<Unit filename="RpcDecode.hpp" />
 		<Unit filename="ShdDecode.cpp" />
 		<Unit filename="ShdDecode.hpp" />
 		<Unit filename="SprDecode.cpp" />
 		<Unit filename="SprDecode.hpp" />
+		<Unit filename="Utils.cpp" />
+		<Unit filename="Utils.hpp" />
 		<Unit filename="WorkManager.cpp" />
 		<Unit filename="WorkManager.hpp" />
 		<Unit filename="mydefs.hpp" />

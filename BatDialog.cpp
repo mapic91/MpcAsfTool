@@ -35,7 +35,7 @@ BatDialog::BatDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxS
 {
 	//(*Initialize(BatDialog)
 	Create(parent, wxID_ANY, _T("图片批量导出"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("wxID_ANY"));
-	SetClientSize(wxSize(385,387));
+	SetClientSize(wxSize(400,387));
 	RichTextCtrl_List = new wxRichTextCtrl(this, ID_RICHTEXTCTRL1, wxEmptyString, wxPoint(8,16), wxSize(288,240), wxRE_MULTILINE, wxDefaultValidator, _T("ID_RICHTEXTCTRL1"));
 	wxRichTextAttr rchtxtAttr_1;
 	rchtxtAttr_1.SetBulletStyle(wxTEXT_ATTR_BULLET_STYLE_ALIGN_LEFT);
@@ -80,8 +80,8 @@ BatDialog::~BatDialog()
 
 void BatDialog::OnButton_AddClick(wxCommandEvent& event)
 {
-    wxFileDialog filedlg(this, wxT("选择MPC ASF SPR文件"), _(""), _(""),
-                         wxT("MPC ASF SPR(*.mpc,*.asf,*.spr)|*.mpc;*.asf;*.spr|MPC(*.mpc)|*.mpc|ASF(*.asf)|*.asf|SPR(*.spr)|*.spr|所有文件|*.*"),
+    wxFileDialog filedlg(this, wxT("选择MPC ASF SPR RPC文件"), wxT(""), wxT(""),
+                         wxT("MPC ASF SPR RPC(*.mpc,*.asf,*.spr,*.rpc)|*.mpc;*.asf;*.spr;*.rpc|MPC(*.mpc)|*.mpc|ASF(*.asf)|*.asf|SPR(*.spr)|*.spr|RPC(*.rpc)|*.rpc"),
                          wxFD_OPEN|wxFD_FILE_MUST_EXIST|wxFD_MULTIPLE);
 
     if(filedlg.ShowModal() == wxID_OK)

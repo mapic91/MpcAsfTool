@@ -2,12 +2,12 @@
 #define ABOUT_H
 
 //(*Headers(About)
+#include <wx/stattext.h>
+#include <wx/panel.h>
+#include <wx/hyperlink.h>
+#include <wx/statbmp.h>
+#include <wx/button.h>
 #include <wx/dialog.h>
-class wxPanel;
-class wxHyperlinkCtrl;
-class wxStaticBitmap;
-class wxStaticText;
-class wxButton;
 //*)
 
 class About: public wxDialog

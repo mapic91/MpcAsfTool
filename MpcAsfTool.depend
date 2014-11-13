@@ -9520,7 +9520,12 @@
 	<wx/image.h>
 	<wx/string.h>
 
-1415772089 e:\programmingworkshop\_store_\jxqy\mpcasftool\about.h
+1415875203 e:\programmingworkshop\_store_\jxqy\mpcasftool\about.h
+	<wx/stattext.h>
+	<wx/panel.h>
+	<wx/hyperlink.h>
+	<wx/statbmp.h>
+	<wx/button.h>
 	<wx/dialog.h>
 
 1384298731 e:\programmingworkshop\_store_\jxqy\mpcasftool\ico\about.hpp
@@ -9643,7 +9648,7 @@
 	"wx/filename.h"
 	<fstream>
 
-1415772135 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\batdialog.cpp
+1415874149 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\batdialog.cpp
 	"BatDialog.h"
 	"wx/filedlg.h"
 	<wx/string.h>
@@ -9669,7 +9674,7 @@
 	<wx/button.h>
 	<wx/dialog.h>
 
-1415772157 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\exporttoimg.cpp
+1415874801 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\exporttoimg.cpp
 	"ExportToImg.h"
 	"wx/msgdlg.h"
 
@@ -9704,7 +9709,7 @@
 	"wx/filename.h"
 	<cstdlib>
 
-1415797189 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.cpp
+1415848174 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.cpp
 	"MpcAsfTool.h"
 	"DlgAddFrames.h"
 	"wx/filedlg.h"
@@ -9726,7 +9731,7 @@
 
 1385531197 e:\programmingworkshop\_store_\jxqy\mpcasftool\ico\jxqynyd.hpp
 
-1415796890 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcdecode.cpp
+1415797680 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcdecode.cpp
 	"MpcDecode.hpp"
 	"ShdDecode.hpp"
 	"wx/image.h"
@@ -9755,10 +9760,11 @@
 	<cstring>
 	<fstream>
 
-1413469149 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\workmanager.cpp
+1415871358 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\workmanager.cpp
 	"WorkManager.hpp"
 	"GifData.hpp"
 	"wx/filename.h"
+	"RpcDecode.hpp"
 
 1413469505 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\sprdecode.cpp
 	"SprDecode.hpp"
@@ -9911,7 +9917,7 @@
 
 1412631242 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\compiler.h
 
-1384175916 d:\protools\wxwidgets\wxwidgets-3.0\lib\gcc_lib\mswu\wx\setup.h
+1412631243 d:\protools\wxwidgets\wxwidgets-3.0\lib\gcc_lib\mswu\wx\setup.h
 
 1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\msw\wince\libraries.h
 
@@ -13065,4 +13071,19 @@
 1412631243 d:\protools\wxwidgets\wxwidgets-3.0\lib\gcc_dll\mswu\wx\setup.h
 
 1412631243 d:\protools\wxwidgets\wxwidgets-3.0\lib\gcc_lib\mswud\wx\setup.h
+
+1415869268 e:\programmingworkshop\_store_\jxqy\mpcasftool\rpcdecode.hpp
+	"wx/string.h"
+	"FreeImage.h"
+
+1415875031 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\rpcdecode.cpp
+	"RpcDecode.hpp"
+	<fstream>
+	"Utils.hpp"
+	"wx/msgdlg.h"
+
+1415847433 e:\programmingworkshop\_store_\jxqy\mpcasftool\utils.hpp
+
+1415864862 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\utils.cpp
+	"Utils.hpp"
 

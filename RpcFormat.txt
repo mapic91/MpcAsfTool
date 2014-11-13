@@ -8,5 +8,5 @@
 
 
 
-
+80 or 272  24*frameSum,each frame data length
 (bytes):

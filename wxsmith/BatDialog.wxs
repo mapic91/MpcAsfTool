@@ -2,7 +2,7 @@
 <wxsmith>
 	<object class="wxDialog" name="BatDialog">
 		<title>图片批量导出</title>
-		<size>385,387</size>
+		<size>400,387</size>
 		<id_arg>0</id_arg>
 		<object class="wxRichTextCtrl" name="ID_RICHTEXTCTRL1" variable="RichTextCtrl_List" member="yes">
 			<pos>8,16</pos>
