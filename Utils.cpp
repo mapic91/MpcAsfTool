@@ -44,7 +44,8 @@ void Bit5ToBit8RGB(char* char2, unsigned char *rgb)
 	rgb[1] = Bit6ToBit8(rgb[1]);
 	rgb[2] = Bit5ToBit8(rgb[2]);
 }
-
+#include "wx/string.h"
+#include "wx/msgdlg.h"
 FILOCRGBQUAD *RGBAtoFIRGBA(unsigned char *data, long width, long height, long globalWidth, long globalHeight, int offx, int offy)
 {
 	if(data == NULL) return NULL;
@@ -59,9 +60,9 @@ FILOCRGBQUAD *RGBAtoFIRGBA(unsigned char *data, long width, long height, long gl
 		fidata[i].rgbReserved = 0;
 	}
 	long offwidth, offheight;
-	for(long hi = 0; hi < globalWidth; hi++)
+	for(long hi = 0; hi < globalHeight; hi++)
     {
-        for(long wi = 0; wi < globalHeight; wi++)
+        for(long wi = 0; wi < globalWidth; wi++)
         {
             offwidth = wi + offx;
             offheight = hi + offy;
@@ -76,6 +77,10 @@ FILOCRGBQUAD *RGBAtoFIRGBA(unsigned char *data, long width, long height, long gl
                 fidata[fiIndex].rgbBlue = data[index+2];
                 fidata[fiIndex].rgbReserved = data[index+3];
             }
+            else
+			{
+				wxMessageBox(wxString::Format("ox:%d,oy:%d,w:%d,h:%d", offwidth, offheight, wi, hi));
+			}
         }
     }
     return fidata;
