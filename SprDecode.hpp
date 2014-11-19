@@ -37,24 +37,11 @@ public:
     Palette_Colour GetTransparentColor();
     unsigned char* GetDecodedFrameData(const unsigned long index, long* Width = NULL, long* Height = NULL,
                                        COLOUR_MODLE mod = PIC_RGB,bool *isTransparent = NULL,
-                                       Palette_Colour *TransparentColor = NULL, unsigned char transmask = 0);
-    unsigned char* GetGlobleDecodedFrameData(const unsigned long index, long* Width = NULL, long* Height = NULL,
-                                       COLOUR_MODLE mod = PIC_RGB,bool *isTransparent = NULL,
-                                       Palette_Colour *TransparentColor = NULL, unsigned char transmask = 0)
-    {
-        return GetDecodedFrameData(index, Width, Height, mod, isTransparent, TransparentColor, transmask);
-    }
+                                       Palette_Colour *TransparentColor = NULL, unsigned char transmask = 0,
+                                       int *offX = NULL, int *offY = NULL);
 
     //transmask - pixel alpha value is less than transmask consider tottle transparent
-    FILOCRGBQUAD* GetFIDecodedFrameData(const unsigned long index, long* Width = NULL, long* Height = NULL,
-                                       COLOUR_MODLE mod = PIC_RGB,bool *isTransparent = NULL,
-                                       Palette_Colour *TransparentColor = NULL, unsigned char transmask = 0);
-    FILOCRGBQUAD* GetGlobleFIDecodedFrameData(const unsigned long index, long* Width = NULL, long* Height = NULL,
-                                       COLOUR_MODLE mod = PIC_RGB,bool *isTransparent = NULL,
-                                       Palette_Colour *TransparentColor = NULL, unsigned char transmask = 0)
-    {
-        return GetFIDecodedFrameData(index, Width, Height, mod, isTransparent, TransparentColor, transmask);
-    }
+    FILOCRGBQUAD* GetFIDecodedFrameData(const unsigned long index);
     wxImage GetFrameImage(const unsigned long index, unsigned char transmask = 0);
 
 

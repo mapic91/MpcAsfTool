@@ -54,7 +54,8 @@ struct SprFileHead
 	unsigned short FrameCounts;
 	unsigned short ColourCounts;
 	unsigned short DirectionCount;
-	char Reserved[14];
+	unsigned short Interval;
+	char Reserved[12];
 };
 
 struct Palette_Colour

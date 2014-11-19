@@ -58,6 +58,7 @@ const long MpcAsfTool::ID_STATICTEXT29 = wxNewId();
 const long MpcAsfTool::ID_SPINCTRL13 = wxNewId();
 const long MpcAsfTool::ID_STATICTEXT30 = wxNewId();
 const long MpcAsfTool::ID_SPINCTRL14 = wxNewId();
+const long MpcAsfTool::ID_CHECKBOX6 = wxNewId();
 const long MpcAsfTool::ID_CHECKBOX4 = wxNewId();
 const long MpcAsfTool::ID_STATICLINE3 = wxNewId();
 const long MpcAsfTool::ID_STATICTEXT8 = wxNewId();
@@ -311,6 +312,10 @@ MpcAsfTool::MpcAsfTool(wxWindow* parent,wxWindowID id,const wxPoint& pos,const w
     SpinCtrl_PicOffY->SetValue(_T("0"));
     SpinCtrl_PicOffY->Disable();
     BoxSizer14->Add(SpinCtrl_PicOffY, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    CheckBox_LockPicOffset = new wxCheckBox(ScrolledWindow_Setting, ID_CHECKBOX6, _T("锁定"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOX6"));
+    CheckBox_LockPicOffset->SetValue(false);
+    CheckBox_LockPicOffset->SetToolTip(_T("锁定当前帧"));
+    BoxSizer14->Add(CheckBox_LockPicOffset, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     CheckBox_AssiLine = new wxCheckBox(ScrolledWindow_Setting, ID_CHECKBOX4, _T("辅助线"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOX4"));
     CheckBox_AssiLine->SetValue(false);
     CheckBox_AssiLine->Disable();
@@ -478,6 +483,7 @@ MpcAsfTool::MpcAsfTool(wxWindow* parent,wxWindowID id,const wxPoint& pos,const w
     Connect(ID_BUTTON5,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MpcAsfTool::OnButton_AdjustPositionClick);
     Connect(ID_SPINCTRL13,wxEVT_COMMAND_SPINCTRL_UPDATED,(wxObjectEventFunction)&MpcAsfTool::OnSpinCtrl_PicOffXChange);
     Connect(ID_SPINCTRL14,wxEVT_COMMAND_SPINCTRL_UPDATED,(wxObjectEventFunction)&MpcAsfTool::OnSpinCtrl_PicOffYChange);
+    Connect(ID_CHECKBOX6,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MpcAsfTool::OnCheckBox_LockPicOffsetClick);
     Connect(ID_CHECKBOX4,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MpcAsfTool::OnCheckBox_AssiLineClick);
     Connect(ID_CHECKBOX1,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MpcAsfTool::OnCheckBox_ShowShdClick);
     Connect(ID_SPINCTRL3,wxEVT_COMMAND_SPINCTRL_UPDATED,(wxObjectEventFunction)&MpcAsfTool::OnSpinCtrl_LeftChange);
@@ -554,7 +560,7 @@ MpcAsfTool::MpcAsfTool(wxWindow* parent,wxWindowID id,const wxPoint& pos,const w
     ScrolledWindow_BmpShow->SetScrollRate(20, 20);
 
     this->SetIcon(wxICON(aaaa));
-    this->SetSize(940, 710);
+    this->SetSize(1000, 710);
     this->SetSizeHints(wxSize(830, 400));
 
     //Tab Sequence
@@ -1386,6 +1392,22 @@ void MpcAsfTool::SetLockState()
         CheckBox_NextLock->SetValue(false);
         CheckBox_NextLock->Enable(false);
     }
+
+	FRAMERGBA *temp = manager.GetUndeletedFrameData(currentframeindex - 1);
+	if(temp)
+	{
+		CheckBox_LockPicOffset->SetValue(temp->ispicoffsetlocked);
+		if(temp->ispicoffsetlocked)
+		{
+			SpinCtrl_PicOffX->SetValue(temp->picoffx);
+			SpinCtrl_PicOffY->SetValue(temp->picoffy);
+		}
+		else
+		{
+			SpinCtrl_PicOffX->SetValue(manager.GetPicOffX());
+			SpinCtrl_PicOffY->SetValue(manager.GetPicOffY());
+		}
+	}
 }
 void MpcAsfTool::InitTabSequence()
 {
@@ -1766,14 +1788,30 @@ void MpcAsfTool::OnSpinCtrl_AlphaMaskChange(wxSpinEvent& event)
 void MpcAsfTool::OnSpinCtrl_PicOffXChange(wxSpinEvent& event)
 {
     SetStateChange(true);
-    manager.SetPicOffX((long)event.GetPosition());
+    if(CheckBox_LockPicOffset->GetValue())
+    {
+        FRAMERGBA *temp = manager.GetUndeletedFrameData(currentframeindex - 1);
+        if(temp)
+        {
+            temp->picoffx = event.GetPosition();
+        }
+    }
+    else manager.SetPicOffX((long)event.GetPosition());
     RefreshBmpShow();
 }
 
 void MpcAsfTool::OnSpinCtrl_PicOffYChange(wxSpinEvent& event)
 {
     SetStateChange(true);
-    manager.SetPicOffY((long)event.GetPosition());
+    if(CheckBox_LockPicOffset->GetValue())
+    {
+        FRAMERGBA *temp = manager.GetUndeletedFrameData(currentframeindex - 1);
+        if(temp)
+        {
+            temp->picoffy = event.GetPosition();
+        }
+    }
+    else manager.SetPicOffY((long)event.GetPosition());
     RefreshBmpShow();
 }
 
@@ -1822,21 +1860,64 @@ void MpcAsfTool::OnButton_AdjustPositionClick(wxCommandEvent& event)
 {
     m_adjustPosDlg->Center();
     m_adjustPosDlg->AssignValue(SpinCtrl_Left->GetValue(),
-                    SpinCtrl_Bottom->GetValue(),
-                    SpinCtrl_PicOffX->GetValue(),
-                    SpinCtrl_PicOffY->GetValue());
+                                SpinCtrl_Bottom->GetValue(),
+                                SpinCtrl_PicOffX->GetValue(),
+                                SpinCtrl_PicOffY->GetValue(),
+								CheckBox_LockPicOffset->GetValue());
     m_adjustPosDlg->SetShowImage(manager.GetUndeletedGlobalizedImage(Slider_Frame->GetValue()-1));
     if(m_adjustPosDlg->ShowModal() == wxID_OK)
     {
         SpinCtrl_Left->SetValue(m_adjustPosDlg->GetOffX());
         SpinCtrl_Bottom->SetValue(m_adjustPosDlg->GetOffY());
+
+        FRAMERGBA *temp = manager.GetUndeletedFrameData(currentframeindex - 1);
+        if(m_adjustPosDlg->IsLockCurrentFrame())
+		{
+			if(temp)
+			{
+				temp->picoffx = m_adjustPosDlg->GetPicX();
+				temp->picoffy = m_adjustPosDlg->GetPicY();
+				temp->ispicoffsetlocked = true;
+			}
+			CheckBox_LockPicOffset->SetValue(true);
+		}
+        else
+		{
+			if(temp)
+			{
+				temp->ispicoffsetlocked = true;
+			}
+			manager.SetPicOffX(m_adjustPosDlg->GetPicX());
+			manager.SetPicOffY(m_adjustPosDlg->GetPicY());
+			CheckBox_LockPicOffset->SetValue(false);
+        }
         SpinCtrl_PicOffX->SetValue(m_adjustPosDlg->GetPicX());
-        SpinCtrl_PicOffY->SetValue(m_adjustPosDlg->GetPicY());
+		SpinCtrl_PicOffY->SetValue(m_adjustPosDlg->GetPicY());
+
         manager.SetLeft(m_adjustPosDlg->GetOffX());
         manager.SetBottom(m_adjustPosDlg->GetOffY());
-        manager.SetPicOffX(m_adjustPosDlg->GetPicX());
-        manager.SetPicOffY(m_adjustPosDlg->GetPicY());
         SetStateChange(true);
         RefreshBmpShow();
     }
+}
+
+void MpcAsfTool::OnCheckBox_LockPicOffsetClick(wxCommandEvent& event)
+{
+	SetStateChange(true);
+    FRAMERGBA *temp = manager.GetUndeletedFrameData(currentframeindex - 1);
+    if(temp)
+    {
+        temp->ispicoffsetlocked = event.IsChecked();
+        if(event.IsChecked())
+		{
+			SpinCtrl_PicOffX->SetValue(temp->picoffx);
+			SpinCtrl_PicOffY->SetValue(temp->picoffy);
+		}
+		else
+		{
+			SpinCtrl_PicOffX->SetValue(manager.GetPicOffX());
+			SpinCtrl_PicOffY->SetValue(manager.GetPicOffY());
+		}
+    }
+    RefreshBmpShow();
 }

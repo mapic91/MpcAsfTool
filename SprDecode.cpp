@@ -1,6 +1,7 @@
 #include "SprDecode.hpp"
 #include "wx/image.h"
 #include "wx/msgdlg.h"
+#include "Utils.hpp"
 
 #include <cstring>
 #include <fstream>
@@ -64,6 +65,7 @@ bool SprDecode::ReadSprFile()
         FileHead.FrameCounts  = toUShort(temp28 + 8);
         FileHead.ColourCounts  = toUShort(temp28 + 10);
         FileHead.DirectionCount = toUShort(temp28 + 12);
+        FileHead.Interval = toUShort(temp28 + 14);
 
         PaletteData.Size = FileHead.ColourCounts;
 
@@ -116,15 +118,15 @@ unsigned long SprDecode::GetColourCounts()
 }
 unsigned long SprDecode::GetInterval()
 {
-    return 0;
+    return FileHead.Interval;
 }
 long SprDecode::GetBottom()
 {
-   return 0;
+   return FileHead.OffY;
 }
 long SprDecode::GetLeft()
 {
-   return 0;
+   return FileHead.OffX;
 }
 Palette_Colour SprDecode::GetTransparentColor()
 {
@@ -138,7 +140,8 @@ void SprDecode::InitTransparentColor()
     TransparentColor.Alpha = 0x00;
 }
 unsigned char* SprDecode::GetDecodedFrameData(const unsigned long index, long* Width, long* Height,
-        COLOUR_MODLE mod, bool *isTransparent, Palette_Colour *TransparentColor, unsigned char transmask)
+        COLOUR_MODLE mod, bool *isTransparent, Palette_Colour *TransparentColor, unsigned char transmask,
+        int *offX, int *offY)
 {
     switch(mod)
     {
@@ -197,6 +200,8 @@ unsigned char* SprDecode::GetDecodedFrameData(const unsigned long index, long* W
 		height = toUShort((char*)temp+2);
         if(Width != NULL)*Width = width;
         if(Height != NULL)*Height = height;
+        if(offX != NULL)*offX = toUShort((char*)temp+4);
+        if(offY != NULL)*offY = toUShort((char*)temp+6);
         switch(mod)
         {
         case PIC_RGB:
@@ -346,185 +351,29 @@ unsigned char* SprDecode::GetDecodedFrameData(const unsigned long index, long* W
     }
     else return NULL;
 }
-FILOCRGBQUAD* SprDecode::GetFIDecodedFrameData(const unsigned long index, long* Width, long* Height,
-        COLOUR_MODLE mod, bool *isTransparent, Palette_Colour *TransparentColor, unsigned char transmask)
+FILOCRGBQUAD* SprDecode::GetFIDecodedFrameData(const unsigned long index)
 {
-    switch(mod)
-    {
-    case PIC_RGB:
-    case PIC_BGRA:
-    case PIC_RGBA:
-        break;
-    default:
-        return NULL;
-    }
+	int offx, offy;
+	long width, height;
+    unsigned char* data = GetDecodedFrameData(index, &width, &height, PIC_RGBA,
+											NULL,
+											NULL,
+											0,
+											&offx,
+											&offy);
 
-    if(index < FileHead.FrameCounts)
-    {
-        Palette_Colour transcol;
-        transcol.Red = 0xFF;
-        transcol.Green = 0xFF;
-        transcol.Blue = 0xFF;
-        transcol.Alpha = 0x00;
-        if(TransparentColor != NULL)
-        {
-            transcol.Red = TransparentColor->Red;
-            transcol.Green = TransparentColor->Green;
-            transcol.Blue = TransparentColor->Blue;
-            //transcol.Alpha =  TransparentColor->Alpha;
-        }
-
-        unsigned long temppos = 0, datalength, width = FileHead.GlobleWidth,
-                      height = FileHead.GlobleHeight, curdecposition = 0;
-        unsigned char temp[8], alpha;
-        std::ifstream file(FilePath.char_str(), std::ios_base::binary|std::ios_base::in);
-        long decdatalen;
-        FILOCRGBQUAD* decdata;
-        if(!file.is_open())
-        {
-            return NULL;
-        }
-        file.seekg(FrameDataBegPos+index*8);
-        file.read((char*)temp, 8);
-        temppos = 0;
-        temppos |= ( ((unsigned long)temp[0] & (unsigned long)0xFF) );
-        temppos |= ( ((unsigned long)temp[1] & (unsigned long)0xFF) << 8 );
-        temppos |= ( ((unsigned long)temp[2] & (unsigned long)0xFF) << 16 );
-        temppos |= ( ((unsigned long)temp[3] & (unsigned long)0xFF) << 24 );
-        temppos += FrameDataBegPos + 8 * FileHead.FrameCounts;
-        file.seekg(temppos);
-        if(file.eof())
-        {
-            file.close();
-            return NULL;
-        }
-        temppos = 0;
-        temppos |= ( ((unsigned long)temp[4] & (unsigned long)0xFF) );
-        temppos |= ( ((unsigned long)temp[5] & (unsigned long)0xFF) << 8 );
-        temppos |= ( ((unsigned long)temp[6] & (unsigned long)0xFF) << 16 );
-        temppos |= ( ((unsigned long)temp[7] & (unsigned long)0xFF) << 24 );
-        datalength = temppos;
-
-        file.read((char*)temp, 8);
-		width = toUShort((char*)temp);
-		height = toUShort((char*)temp+2);
-        if(Width != NULL)*Width = width;
-        if(Height != NULL)*Height = height;
-
-        decdatalen = width * height;
-        decdata = new FILOCRGBQUAD[decdatalen];
-        if(decdata == NULL)return NULL;
-
-        for(long datidx = 0; datidx < decdatalen;)
-        {
-            decdata[datidx].rgbRed = transcol.Red;
-            decdata[datidx].rgbGreen = transcol.Green;
-            decdata[datidx].rgbBlue = transcol.Blue;
-            decdata[datidx].rgbReserved = transcol.Alpha;
-            datidx++;
-        }
-
-
-        if(isTransparent != NULL)
-        {
-            *isTransparent = true;//always transparent
-        }
-        file.read((char*)temp,2);
-        for(unsigned long i = 0; i < datalength - 8;)
-        {
-            if(curdecposition > (unsigned long)decdatalen)
-            {
-                delete[] decdata;
-                file.close();
-                return NULL;
-            }
-            if(temp[1] == (unsigned char)0x00)
-            {
-                temppos = temp[0];
-                for(unsigned char j = 0; j < temppos; j++)
-                {
-                    switch(mod)
-                    {
-                    case PIC_RGB:
-                    case PIC_RGBA:
-                    case PIC_BGRA:
-                        decdata[curdecposition].rgbRed = transcol.Red;
-                        decdata[curdecposition].rgbGreen = transcol.Blue;
-                        decdata[curdecposition].rgbBlue = transcol.Green;
-                        decdata[curdecposition].rgbReserved = transcol.Alpha;
-                        curdecposition++;
-                        break;
-                    default:
-                        //can't be here
-                        return NULL;
-                    }
-                }
-            }
-            else
-            {
-                temppos = temp[0];
-                alpha = temp[1];
-                for(unsigned char m = 0; m < temppos; m++)
-                {
-                    if(file.fail())
-                    {
-                        file.close();
-                        delete[] decdata;
-                        return NULL;
-                    }
-                    file.read((char*)temp,1);
-                    i++;
-                    switch(mod)
-                    {
-                    case PIC_RGB:
-                        if(alpha < transmask)
-                        {
-                            decdata[curdecposition].rgbRed = transcol.Red;
-                            decdata[curdecposition].rgbGreen = transcol.Blue;
-                            decdata[curdecposition].rgbBlue = transcol.Green;
-                            decdata[curdecposition].rgbReserved = transcol.Alpha;
-                        }
-                        else
-                        {
-                            decdata[curdecposition].rgbRed = (unsigned char)(((double)PaletteData.Data[temp[0]].Red)*((double)alpha/(double)0xFF) +
-                                                             ((double)transcol.Red)*((double)(0xFF-alpha)/(double)0xFF));
-                            decdata[curdecposition].rgbGreen = (unsigned char)(((double)PaletteData.Data[temp[0]].Green)*((double)alpha/(double)0xFF) +
-                                                               ((double)transcol.Green)*((double)(0xFF-alpha)/(double)0xFF));
-                            decdata[curdecposition].rgbBlue = (unsigned char)(((double)PaletteData.Data[temp[0]].Blue)*((double)alpha/(double)0xFF) +
-                                                              ((double)transcol.Blue)*((double)(0xFF-alpha)/(double)0xFF));
-                            decdata[curdecposition].rgbReserved = 0xFF;
-                        }
-                        curdecposition++;
-                        break;
-                    case PIC_RGBA:
-                    case PIC_BGRA:
-                        decdata[curdecposition].rgbRed = PaletteData.Data[temp[0]].Red;
-                        decdata[curdecposition].rgbGreen = PaletteData.Data[temp[0]].Green;
-                        decdata[curdecposition].rgbBlue = PaletteData.Data[temp[0]].Blue;
-                        decdata[curdecposition].rgbReserved = alpha;
-                        curdecposition++;
-                        break;
-                    default:
-                        //can't be here
-                        return NULL;
-                    }
-                }
-            }
-            file.read((char*)temp,2);
-            i += 2;
-        }
-
-        file.close();
-        return decdata;
-    }
-    else return NULL;
+	if(data == NULL) return NULL;
+	long globalWidth = GetGlobleWidth(), globalHeight = GetGlobleHeight();
+//	wxMessageBox(wxString::Format("gw:%d,gh:%d,w:%d,h:%d,ox:%d, oy:%d", globalWidth,
+//								globalHeight,width,height,offx,offy));
+	return RGBAtoFIRGBA(data, width, height, globalWidth, globalHeight, offx, offy);
 }
 wxImage SprDecode::GetFrameImage(const unsigned long index, unsigned char transmask)
 {
     if(index < FileHead.FrameCounts)
     {
         long width, height;
-        unsigned char *decdata = GetGlobleDecodedFrameData(index, &width, &height, PIC_RGB, NULL, NULL, transmask);
+        unsigned char *decdata = GetDecodedFrameData(index, &width, &height, PIC_RGB, NULL, NULL, transmask);
         if(decdata == NULL)
         {
             return wxNullImage;

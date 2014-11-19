@@ -6,6 +6,7 @@
 //(*Headers(AdjustPositionDialog)
 #include <wx/sizer.h>
 #include <wx/stattext.h>
+#include <wx/checkbox.h>
 #include <wx/spinctrl.h>
 #include <wx/radiobut.h>
 #include <wx/panel.h>
@@ -34,6 +35,7 @@ class AdjustPositionDialog: public wxDialog
 		wxStaticText* StaticText1;
 		wxStaticText* StaticText3;
 		wxPanel* Panel_Show;
+		wxCheckBox* CheckBox_LockCurrentFrame;
 		wxSpinCtrl* SpinCtrl_OffY;
 		wxStaticText* StaticText4;
 		//*)
@@ -53,6 +55,7 @@ class AdjustPositionDialog: public wxDialog
 		static const long ID_SPINCTRL3;
 		static const long ID_STATICTEXT4;
 		static const long ID_SPINCTRL4;
+		static const long ID_CHECKBOX1;
 		static const long ID_BUTTON1;
 		static const long ID_BUTTON2;
 		//*)
@@ -80,7 +83,7 @@ class AdjustPositionDialog: public wxDialog
 		    event.Skip();
         }
 
-		void AssignValue(int offx, int offy, int picx, int picy)
+		void AssignValue(int offx, int offy, int picx, int picy, bool ispicoffsetlocked)
 		{
 		    SpinCtrl_OffX->SetValue(offx);
 		    SpinCtrl_OffY->SetValue(offy);
@@ -88,12 +91,14 @@ class AdjustPositionDialog: public wxDialog
 		    SpinCtrl_PicY->SetValue(picy);
 		    m_PicX = picx;
 		    m_PicY = picy;
+		    CheckBox_LockCurrentFrame->SetValue(ispicoffsetlocked);
 		}
 		void SetShowImage(wxImage img) {m_img = img;}
 		int GetOffX() const {return SpinCtrl_OffX->GetValue();}
 		int GetOffY() const {return SpinCtrl_OffY->GetValue();}
 		int GetPicX() const {return SpinCtrl_PicX->GetValue();}
 		int GetPicY() const {return SpinCtrl_PicY->GetValue();}
+		bool IsLockCurrentFrame() {return CheckBox_LockCurrentFrame->GetValue();}
 
     private:
         wxImage m_img;

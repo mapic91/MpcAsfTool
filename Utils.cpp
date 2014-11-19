@@ -45,3 +45,38 @@ void Bit5ToBit8RGB(char* char2, unsigned char *rgb)
 	rgb[2] = Bit5ToBit8(rgb[2]);
 }
 
+FILOCRGBQUAD *RGBAtoFIRGBA(unsigned char *data, long width, long height, long globalWidth, long globalHeight, int offx, int offy)
+{
+	if(data == NULL) return NULL;
+	long size = globalWidth*globalHeight;
+	FILOCRGBQUAD *fidata = new FILOCRGBQUAD[size];
+	if(!fidata) return NULL;
+	for(long i = 0; i < size; i++)
+	{
+		fidata[i].rgbRed = 0;
+		fidata[i].rgbGreen = 0;
+		fidata[i].rgbBlue = 0;
+		fidata[i].rgbReserved = 0;
+	}
+	long offwidth, offheight;
+	for(long hi = 0; hi < globalWidth; hi++)
+    {
+        for(long wi = 0; wi < globalHeight; wi++)
+        {
+            offwidth = wi + offx;
+            offheight = hi + offy;
+            if(hi < height && wi < width &&
+                    offwidth >= 0 && offwidth < globalWidth &&
+                    offheight >= 0 && offheight < globalHeight)
+            {
+            	long index = (hi*width+wi)*4;
+            	long fiIndex = offheight*globalWidth+offwidth;
+                fidata[fiIndex].rgbRed = data[index];
+                fidata[fiIndex].rgbGreen = data[index+1];
+                fidata[fiIndex].rgbBlue = data[index+2];
+                fidata[fiIndex].rgbReserved = data[index+3];
+            }
+        }
+    }
+    return fidata;
+}

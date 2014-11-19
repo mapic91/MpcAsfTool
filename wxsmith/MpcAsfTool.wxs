@@ -425,6 +425,15 @@
 																<option>1</option>
 															</object>
 															<object class="sizeritem">
+																<object class="wxCheckBox" name="ID_CHECKBOX6" variable="CheckBox_LockPicOffset" member="yes">
+																	<label>锁定</label>
+																	<tooltip>锁定当前帧</tooltip>
+																	<handler function="OnCheckBox_LockPicOffsetClick" entry="EVT_CHECKBOX" />
+																</object>
+																<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+																<border>5</border>
+															</object>
+															<object class="sizeritem">
 																<object class="wxCheckBox" name="ID_CHECKBOX4" variable="CheckBox_AssiLine" member="yes">
 																	<label>辅助线</label>
 																	<enabled>0</enabled>

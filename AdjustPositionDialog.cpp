@@ -18,6 +18,7 @@ const long AdjustPositionDialog::ID_STATICTEXT3 = wxNewId();
 const long AdjustPositionDialog::ID_SPINCTRL3 = wxNewId();
 const long AdjustPositionDialog::ID_STATICTEXT4 = wxNewId();
 const long AdjustPositionDialog::ID_SPINCTRL4 = wxNewId();
+const long AdjustPositionDialog::ID_CHECKBOX1 = wxNewId();
 const long AdjustPositionDialog::ID_BUTTON1 = wxNewId();
 const long AdjustPositionDialog::ID_BUTTON2 = wxNewId();
 //*)
@@ -76,6 +77,10 @@ AdjustPositionDialog::AdjustPositionDialog(wxWindow* parent,wxWindowID id,const 
     SpinCtrl_PicY = new wxSpinCtrl(this, ID_SPINCTRL4, _T("0"), wxDefaultPosition, wxDefaultSize, 0, -2147483646, 2147483646, 0, _T("ID_SPINCTRL4"));
     SpinCtrl_PicY->SetValue(_T("0"));
     BoxSizer6->Add(SpinCtrl_PicY, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    CheckBox_LockCurrentFrame = new wxCheckBox(this, ID_CHECKBOX1, _T("锁定"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOX1"));
+    CheckBox_LockCurrentFrame->SetValue(false);
+    CheckBox_LockCurrentFrame->SetToolTip(_T("锁定当前帧"));
+    BoxSizer6->Add(CheckBox_LockCurrentFrame, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     BoxSizer1->Add(BoxSizer6, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     BoxSizer5 = new wxBoxSizer(wxHORIZONTAL);
     Button_Ok = new wxButton(this, ID_BUTTON1, _T("确认"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));

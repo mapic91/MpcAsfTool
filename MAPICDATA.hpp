@@ -13,15 +13,30 @@ struct FRAMERGBA
 {
     long width;
     long height;
-    bool islocked;
     long sunoffx;
     long sunoffy;
     long shadowoffx;
     long shadowoffy;
+    long picoffx;
+    long picoffy;
+    bool islocked;
     bool isdeleted;
+    bool ispicoffsetlocked;
     FILOCRGBQUAD *data;
     FILOCRGBQUAD *shddata;
     FRAMERGBA *next;
+
+    FRAMERGBA()
+    {
+    	width = height = sunoffx = sunoffy
+			= shadowoffx = shadowoffy = picoffx
+			= picoffy
+			= 0;
+		islocked = isdeleted = ispicoffsetlocked = false;
+		data = NULL;
+		shddata = NULL;
+		next = NULL;
+    }
 };
 
 class MAPICDATA

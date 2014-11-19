@@ -163,9 +163,11 @@ wxArrayString WorkManager::AddFiles(wxArrayString files)
         {
             if(sprdecode.ReadSprFile(files[i]))
             {
+            	tempwidth = sprdecode.GetGlobleWidth();
+            	tempheight = sprdecode.GetGlobleHeight();
                 for(unsigned long i = 0; i < sprdecode.GetFramesCounts(); i++)
                 {
-                    buffer = sprdecode.GetFIDecodedFrameData(i, (long*)&tempwidth, (long*)&tempheight, SprDecode::PIC_RGBA);
+                    buffer = sprdecode.GetFIDecodedFrameData(i);
                     if(buffer)
                     {
                         if(totalframecounts == 0)
@@ -294,13 +296,14 @@ bool WorkManager::OpenFile(wxString InPath, int frameBegin, int frameEnd )
             SetGlobalWidth(tempwidth);
             SetGlobalHeight(tempheight);
             SetDirection(sprdecode.GetDirection());
+            SetInterval(sprdecode.GetInterval());
+            SetBottom(sprdecode.GetBottom());
+            SetLeft(sprdecode.GetLeft());
 
             for(unsigned long conti = frameBegin; conti < sprdecode.GetFramesCounts() && ((int)conti) <= frameEnd; conti++)
             {
-                tempdata = sprdecode.GetGlobleFIDecodedFrameData(conti, &tempwidth, &tempheight, SprDecode::PIC_BGRA);
+                tempdata = sprdecode.GetFIDecodedFrameData(conti);
                 if(!tempdata) return false;
-                if(tempwidth > sprdecode.GetGlobleWidth())SetGlobalWidth(tempwidth);
-                if(tempheight > sprdecode.GetGlobleHeight())SetGlobalHeight(tempheight);
                 AddFrame(tempdata, tempwidth, tempheight);
             }
         }
@@ -490,6 +493,13 @@ FILOCRGBQUAD* WorkManager::GetUndeletedGlobalizedFrameData(unsigned long index)
     decdata = temp->data;
     glbdatalen = (unsigned long)GetGlobalWidth()*GetGlobalHeight();
     glbdata = new FILOCRGBQUAD[(size_t)glbdatalen];
+    long offx = GetPicOffX();
+    long offy = GetPicOffY();
+    if(temp->ispicoffsetlocked)
+	{
+		offx = temp->picoffx;
+		offy = temp->picoffy;
+	}
 
     if(!glbdata)
     {
@@ -509,8 +519,8 @@ FILOCRGBQUAD* WorkManager::GetUndeletedGlobalizedFrameData(unsigned long index)
     {
         for(long wi = 0; wi < GetGlobalWidth(); wi++)
         {
-            offwidth = wi + GetPicOffX();
-            offheight = hi + GetPicOffY();
+            offwidth = wi + offx;
+            offheight = hi + offy;
             if(hi < height && wi < width &&
                     offwidth >= 0 && offwidth < GetGlobalWidth() &&
                     offheight >= 0 && offheight < GetGlobalHeight())
@@ -543,6 +553,13 @@ FILOCRGBQUAD* WorkManager::GetUndeletedGlobalizedShdFrameData(unsigned long inde
     decdata = temp->shddata;
     glbdatalen = (unsigned long)GetGlobalWidth()*GetGlobalHeight();
     glbdata = new FILOCRGBQUAD[(size_t)glbdatalen];
+    long offx = GetPicOffX();
+    long offy = GetPicOffY();
+    if(temp->ispicoffsetlocked)
+	{
+		offx = temp->picoffx;
+		offy = temp->picoffy;
+	}
 
     if(!glbdata)
     {
@@ -562,8 +579,8 @@ FILOCRGBQUAD* WorkManager::GetUndeletedGlobalizedShdFrameData(unsigned long inde
     {
         for(long wi = 0; wi < GetGlobalWidth(); wi++)
         {
-            offwidth = wi + GetPicOffX();
-            offheight = hi + GetPicOffY();
+            offwidth = wi + offx;
+            offheight = hi + offy;
             if(hi < height && wi < width &&
                     offwidth >= 0 && offwidth < GetGlobalWidth() &&
                     offheight >= 0 && offheight < GetGlobalHeight())

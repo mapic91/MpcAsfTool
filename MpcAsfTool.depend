@@ -9508,15 +9508,10 @@
 
 1300793815 d:\protools\wxwidgets\wxwidgets-2.8\lib\gcc_lib\mswu\wx\setup.h
 
-1415772088 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\about.cpp
+1416147239 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\about.cpp
 	"About.h"
 	"ICO/about.hpp"
-	<wx/stattext.h>
 	<wx/bitmap.h>
-	<wx/panel.h>
-	<wx/hyperlink.h>
-	<wx/statbmp.h>
-	<wx/button.h>
 	<wx/image.h>
 	<wx/string.h>
 
@@ -9530,15 +9525,16 @@
 
 1384298731 e:\programmingworkshop\_store_\jxqy\mpcasftool\ico\about.hpp
 
-1415772123 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\adjustpositiondialog.cpp
+1416147202 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\adjustpositiondialog.cpp
 	"AdjustPositionDialog.h"
 	"wx/dcbuffer.h"
 	<wx/string.h>
 
-1398390026 e:\programmingworkshop\_store_\jxqy\mpcasftool\adjustpositiondialog.h
+1416147009 e:\programmingworkshop\_store_\jxqy\mpcasftool\adjustpositiondialog.h
 	"wx/image.h"
 	<wx/sizer.h>
 	<wx/stattext.h>
+	<wx/checkbox.h>
 	<wx/spinctrl.h>
 	<wx/radiobut.h>
 	<wx/panel.h>
@@ -9559,7 +9555,7 @@
 1362620473 e:\programmingworkshop\_store_\jxqy\mpcasftool\app.h
 	<wx/app.h>
 
-1409788824 e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.h
+1416140560 e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.h
 	<wx/scrolwin.h>
 	<wx/sizer.h>
 	<wx/stattext.h>
@@ -9590,7 +9586,7 @@
 	"ShdDecode.hpp"
 	"SprDecode.hpp"
 
-1386338171 e:\programmingworkshop\_store_\jxqy\mpcasftool\mapicdata.hpp
+1416145445 e:\programmingworkshop\_store_\jxqy\mpcasftool\mapicdata.hpp
 	"wx/string.h"
 	"wx/colour.h"
 	"wx/gdicmn.h"
@@ -9606,7 +9602,7 @@
 	"mydefs.hpp"
 	"FreeImage.h"
 
-1413469443 e:\programmingworkshop\_store_\jxqy\mpcasftool\mydefs.hpp
+1416377840 e:\programmingworkshop\_store_\jxqy\mpcasftool\mydefs.hpp
 
 1383957170 e:\programmingworkshop\_store_\jxqy\mpcasftool\mpctopic.hpp
 	"wx/wx.h"
@@ -9709,7 +9705,7 @@
 	"wx/filename.h"
 	<cstdlib>
 
-1415848174 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.cpp
+1416147308 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.cpp
 	"MpcAsfTool.h"
 	"DlgAddFrames.h"
 	"wx/filedlg.h"
@@ -9760,20 +9756,21 @@
 	<cstring>
 	<fstream>
 
-1415871358 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\workmanager.cpp
+1416378820 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\workmanager.cpp
 	"WorkManager.hpp"
 	"GifData.hpp"
 	"wx/filename.h"
 	"RpcDecode.hpp"
 
-1413469505 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\sprdecode.cpp
+1416381121 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\sprdecode.cpp
 	"SprDecode.hpp"
 	"wx/image.h"
 	"wx/msgdlg.h"
+	"Utils.hpp"
 	<cstring>
 	<fstream>
 
-1409712823 e:\programmingworkshop\_store_\jxqy\mpcasftool\sprdecode.hpp
+1416378450 e:\programmingworkshop\_store_\jxqy\mpcasftool\sprdecode.hpp
 	"wx/string.h"
 	"wx/image.h"
 	"mydefs.hpp"
@@ -13082,8 +13079,9 @@
 	"Utils.hpp"
 	"wx/msgdlg.h"
 
-1415847433 e:\programmingworkshop\_store_\jxqy\mpcasftool\utils.hpp
+1416378117 e:\programmingworkshop\_store_\jxqy\mpcasftool\utils.hpp
+	"FreeImage.h"
 
-1415864862 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\utils.cpp
+1416381092 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\utils.cpp
 	"Utils.hpp"
 

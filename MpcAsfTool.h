@@ -42,6 +42,7 @@ class MpcAsfTool: public wxFrame
 		wxStaticText* StaticText20;
 		wxStaticText* StaticText_Frame_Sum;
 		wxStaticLine* StaticLine8;
+		wxCheckBox* CheckBox_LockPicOffset;
 		wxScrolledWindow* ScrolledWindow_BmpShow;
 		wxSpinCtrl* SpinCtrl_PicOffX;
 		wxButton* Button_UnDelete;
@@ -153,6 +154,7 @@ class MpcAsfTool: public wxFrame
 		static const long ID_SPINCTRL13;
 		static const long ID_STATICTEXT30;
 		static const long ID_SPINCTRL14;
+		static const long ID_CHECKBOX6;
 		static const long ID_CHECKBOX4;
 		static const long ID_STATICLINE3;
 		static const long ID_STATICTEXT8;
@@ -228,6 +230,7 @@ class MpcAsfTool: public wxFrame
 		void OnCheckBox_KeepSetClick(wxCommandEvent& event);
 		void OnButton_AnimateClick(wxCommandEvent& event);
 		void OnButton_AdjustPositionClick(wxCommandEvent& event);
+		void OnCheckBox_LockPicOffsetClick(wxCommandEvent& event);
 		//*)
 
 		DECLARE_EVENT_TABLE()
