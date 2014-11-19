@@ -77,10 +77,6 @@ FILOCRGBQUAD *RGBAtoFIRGBA(unsigned char *data, long width, long height, long gl
                 fidata[fiIndex].rgbBlue = data[index+2];
                 fidata[fiIndex].rgbReserved = data[index+3];
             }
-            else
-			{
-				wxMessageBox(wxString::Format("ox:%d,oy:%d,w:%d,h:%d", offwidth, offheight, wi, hi));
-			}
         }
     }
     return fidata;
