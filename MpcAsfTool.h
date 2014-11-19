@@ -248,6 +248,8 @@ class MpcAsfTool: public wxFrame
 		void OnExit(wxCommandEvent &event);
 		void PreviousFrame(wxCommandEvent &event);
 		void NextFrame(wxCommandEvent &event);
+		void Resize(wxCommandEvent &event);
+		void ResizeCurrent(wxCommandEvent &event);
 		void OnHelp(wxCommandEvent &event);
 		void OnAbout(wxCommandEvent &event);
 		void OnTravesal(wxCommandEvent &event);
@@ -281,6 +283,7 @@ class MpcAsfTool: public wxFrame
         void ReNewFocus();
         void BeginAnimate(bool ReNewIndex = false);
         void StopAnimate(bool ReNewIndex = false);
+        void ResizeFrame(int index, int toWidth, int toHeight);
 
         enum EvtID
         {
@@ -288,6 +291,8 @@ class MpcAsfTool: public wxFrame
             ID_EXPORT_TO_PNG,
             ID_FRAME_PREVIOUS,
             ID_FRAME_NEXT,
+            ID_RESIZE,
+            ID_RESIZECURRENT,
             ID_TRAVESAL,
             ID_RETURN,
             ID_BAT,

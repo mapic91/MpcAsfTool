@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxDialog" name="ResizeDialog">
+		<title>缩放图片</title>
+		<centered>1</centered>
+		<size>435,155</size>
+		<pos_arg>1</pos_arg>
+		<size_arg>1</size_arg>
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+					<object class="sizeritem">
+						<object class="wxStaticText" name="ID_STATICTEXT1" variable="StaticText1" member="yes">
+							<label>宽：    </label>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxSpinCtrl" name="ID_SPINCTRL1" variable="msc_Width" member="yes">
+							<value>0</value>
+							<min>1</min>
+							<max>99999</max>
+							<handler function="Onmsc_WidthChange" entry="EVT_SPINCTRL" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxStaticText" name="ID_STATICTEXT2" variable="StaticText2" member="yes">
+							<label>高：    </label>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxSpinCtrl" name="ID_SPINCTRL2" variable="msc_Height" member="yes">
+							<value>0</value>
+							<min>1</min>
+							<max>99999</max>
+							<handler function="Onmsc_HeightChange" entry="EVT_SPINCTRL" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+				</object>
+				<flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+					<object class="sizeritem">
+						<object class="wxStaticText" name="ID_STATICTEXT3" variable="StaticText3" member="yes">
+							<label>比例：</label>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxSpinCtrl" name="ID_SPINCTRL3" variable="msc_Percent" member="yes">
+							<value>100</value>
+							<min>1</min>
+							<max>9999</max>
+							<handler function="Onmsc_PercentChange" entry="EVT_SPINCTRL" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxStaticText" name="ID_STATICTEXT4" variable="StaticText4" member="yes">
+							<label>%</label>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="spacer">
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxCheckBox" name="ID_CHECKBOX1" variable="mcb_KeepRatio" member="yes">
+							<label>保持长宽比</label>
+							<checked>1</checked>
+							<handler function="Onmcb_KeepRatioClick" entry="EVT_CHECKBOX" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer4" member="no">
+					<object class="sizeritem">
+						<object class="wxButton" name="ID_BUTTON1" variable="mb_Ok" member="yes">
+							<label>确定</label>
+							<handler function="Onmb_OkClick" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxButton" name="ID_BUTTON2" variable="mb_Cancle" member="yes">
+							<label>取消</label>
+							<handler function="Onmb_CancleClick" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+				</object>
+				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+		</object>
+	</object>
+</wxsmith>

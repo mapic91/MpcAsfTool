@@ -14,6 +14,7 @@
 #include "ExportToImg.h"
 #include "About.h"
 #include "BatDialog.h"
+#include "ResizeDialog.h"
 
 //(*InternalHeaders(MpcAsfTool)
 #include <wx/bitmap.h>
@@ -117,6 +118,8 @@ BEGIN_EVENT_TABLE(MpcAsfTool,wxFrame)
     EVT_MENU(wxID_EXIT, MpcAsfTool::OnExit)
     EVT_MENU(ID_FRAME_PREVIOUS, MpcAsfTool::PreviousFrame)
     EVT_MENU(ID_FRAME_NEXT, MpcAsfTool::NextFrame)
+    EVT_MENU(ID_RESIZE, MpcAsfTool::Resize)
+    EVT_MENU(ID_RESIZECURRENT, MpcAsfTool::ResizeCurrent)
     EVT_MENU(wxID_HELP, MpcAsfTool::OnHelp)
     EVT_MENU(wxID_ABOUT, MpcAsfTool::OnAbout)
     EVT_MENU(ID_TRAVESAL, MpcAsfTool::OnTravesal)
@@ -542,6 +545,9 @@ MpcAsfTool::MpcAsfTool(wxWindow* parent,wxWindowID id,const wxPoint& pos,const w
     wxMenu *menu_frame = new wxMenu;
     menu_frame->Append(ID_FRAME_PREVIOUS, wxT("上一帧\tA"));
     menu_frame->Append(ID_FRAME_NEXT, wxT("下一帧\tD"));
+    wxMenu *menu_process = new wxMenu;
+    menu_process->Append(ID_RESIZE, wxT("缩放所有..."));
+    menu_process->Append(ID_RESIZECURRENT, wxT("缩放当前帧..."));
     wxMenu *menu_help = new wxMenu;
     menu_help->Append(wxID_HELP,  wxT("帮助\tF1"));
     menu_help->Append(wxID_ABOUT, wxT("关于..."));
@@ -552,6 +558,7 @@ MpcAsfTool::MpcAsfTool(wxWindow* parent,wxWindowID id,const wxPoint& pos,const w
 
     MenuBar_MpcAsfTool->Append(menu_file, wxT("文件(&F)"));
     MenuBar_MpcAsfTool->Append(menu_frame, wxT("帧(&I)"));
+    MenuBar_MpcAsfTool->Append(menu_process, wxT("图像处理"));
     MenuBar_MpcAsfTool->Append(menu_help, wxT("帮助(&H)"));
     MenuBar_BatPicConv->Append(menu_batpicconv, wxT("批处理"));
 
@@ -978,6 +985,94 @@ void MpcAsfTool::NextFrame(wxCommandEvent &event)
     }
 
 }
+
+FILOCRGBQUAD* ResizeTo(FILOCRGBQUAD *data, int currentWidth, int currentHeight, int toWidth, int toHeight)
+{
+    FILOCRGBQUAD *scaledData = NULL;
+    FIBITMAP *bitmap = FreeImage_Allocate(currentWidth, currentHeight, 32);
+    if(bitmap)
+    {
+        FILOCRGBQUAD *bits = (FILOCRGBQUAD*)FreeImage_GetBits(bitmap);
+        for(int i = 0; i < currentWidth*currentHeight; i++)
+            bits[i] = data[i];
+        FIBITMAP *scaled = FreeImage_Rescale(bitmap, toWidth, toHeight, FILTER_BICUBIC);
+        if(scaled)
+        {
+            scaledData = new FILOCRGBQUAD[toWidth*toHeight];
+            bits = (FILOCRGBQUAD*)FreeImage_GetBits(scaled);
+            for(int j = 0; j < toWidth*toHeight; j++)
+            {
+                scaledData[j] = bits[j];
+            }
+            FreeImage_Unload(scaled);
+        }
+        FreeImage_Unload(bitmap);
+    }
+    return scaledData;
+}
+
+void MpcAsfTool::ResizeFrame(int i, int toWidth, int toHeight)
+{
+    FRAMERGBA *frame;
+    FILOCRGBQUAD *data;
+    frame = manager.GetFrameData(i);
+    if(frame != NULL)
+    {
+        data = manager.GetUndeletedGlobalizedFrameData(i);
+        if(data != NULL)
+        {
+        	if(frame->data) delete[] frame->data;
+            frame->data = ResizeTo(data, manager.GetGlobalWidth(), manager.GetGlobalHeight(), toWidth, toHeight);
+            delete[] data;
+        }
+        data = manager.GetUndeletedGlobalizedShdFrameData(i);
+        if(data != NULL)
+        {
+        	if(frame->shddata) delete[] frame->shddata;
+            frame->shddata = ResizeTo(data, manager.GetGlobalWidth(), manager.GetGlobalHeight(), toWidth, toHeight);
+            delete[] data;
+        }
+        frame->width = toWidth;
+        frame->height = toHeight;
+        SetStateChange(true);
+    }
+}
+
+void MpcAsfTool::Resize(wxCommandEvent& event)
+{
+    ResizeDialog dialog(this);
+    dialog.SetCurrentWidth(manager.GetGlobalWidth());
+    dialog.SetCurrentHeight(manager.GetGlobalHeight());
+    if(dialog.ShowModal() == wxID_OK)
+    {
+        int toWidth = dialog.GetWidth();
+        int toHeight = dialog.GetHeight();
+        int frameCount = manager.GetFrameCounts();
+
+        for(int i = 0; i < frameCount; i++)
+        {
+            ResizeFrame(i, toWidth, toHeight);
+        }
+        manager.SetGlobalWidth(toWidth);
+        manager.SetGlobalHeight(toHeight);
+        SpinCtrl_GlobalWidth->SetValue(toWidth);
+        SpinCtrl_GlobalHeight->SetValue(toHeight);
+        RefreshBmpShow();
+    }
+}
+
+void MpcAsfTool::ResizeCurrent(wxCommandEvent& event)
+{
+    ResizeDialog dialog(this);
+    dialog.SetCurrentWidth(manager.GetGlobalWidth());
+    dialog.SetCurrentHeight(manager.GetGlobalHeight());
+    if(dialog.ShowModal() == wxID_OK)
+    {
+        ResizeFrame(currentframeindex - 1, dialog.GetWidth(), dialog.GetHeight());
+        RefreshBmpShow();
+    }
+}
+
 void MpcAsfTool::OnHelp(wxCommandEvent &event)
 {
     wxString exepath, execmd;
@@ -1393,21 +1488,21 @@ void MpcAsfTool::SetLockState()
         CheckBox_NextLock->Enable(false);
     }
 
-	FRAMERGBA *temp = manager.GetUndeletedFrameData(currentframeindex - 1);
-	if(temp)
-	{
-		CheckBox_LockPicOffset->SetValue(temp->ispicoffsetlocked);
-		if(temp->ispicoffsetlocked)
-		{
-			SpinCtrl_PicOffX->SetValue(temp->picoffx);
-			SpinCtrl_PicOffY->SetValue(temp->picoffy);
-		}
-		else
-		{
-			SpinCtrl_PicOffX->SetValue(manager.GetPicOffX());
-			SpinCtrl_PicOffY->SetValue(manager.GetPicOffY());
-		}
-	}
+    FRAMERGBA *temp = manager.GetUndeletedFrameData(currentframeindex - 1);
+    if(temp)
+    {
+        CheckBox_LockPicOffset->SetValue(temp->ispicoffsetlocked);
+        if(temp->ispicoffsetlocked)
+        {
+            SpinCtrl_PicOffX->SetValue(temp->picoffx);
+            SpinCtrl_PicOffY->SetValue(temp->picoffy);
+        }
+        else
+        {
+            SpinCtrl_PicOffX->SetValue(manager.GetPicOffX());
+            SpinCtrl_PicOffY->SetValue(manager.GetPicOffY());
+        }
+    }
 }
 void MpcAsfTool::InitTabSequence()
 {
@@ -1863,7 +1958,7 @@ void MpcAsfTool::OnButton_AdjustPositionClick(wxCommandEvent& event)
                                 SpinCtrl_Bottom->GetValue(),
                                 SpinCtrl_PicOffX->GetValue(),
                                 SpinCtrl_PicOffY->GetValue(),
-								CheckBox_LockPicOffset->GetValue());
+                                CheckBox_LockPicOffset->GetValue());
     m_adjustPosDlg->SetShowImage(manager.GetUndeletedGlobalizedImage(Slider_Frame->GetValue()-1));
     if(m_adjustPosDlg->ShowModal() == wxID_OK)
     {
@@ -1872,27 +1967,27 @@ void MpcAsfTool::OnButton_AdjustPositionClick(wxCommandEvent& event)
 
         FRAMERGBA *temp = manager.GetUndeletedFrameData(currentframeindex - 1);
         if(m_adjustPosDlg->IsLockCurrentFrame())
-		{
-			if(temp)
-			{
-				temp->picoffx = m_adjustPosDlg->GetPicX();
-				temp->picoffy = m_adjustPosDlg->GetPicY();
-				temp->ispicoffsetlocked = true;
-			}
-			CheckBox_LockPicOffset->SetValue(true);
-		}
+        {
+            if(temp)
+            {
+                temp->picoffx = m_adjustPosDlg->GetPicX();
+                temp->picoffy = m_adjustPosDlg->GetPicY();
+                temp->ispicoffsetlocked = true;
+            }
+            CheckBox_LockPicOffset->SetValue(true);
+        }
         else
-		{
-			if(temp)
-			{
-				temp->ispicoffsetlocked = true;
-			}
-			manager.SetPicOffX(m_adjustPosDlg->GetPicX());
-			manager.SetPicOffY(m_adjustPosDlg->GetPicY());
-			CheckBox_LockPicOffset->SetValue(false);
+        {
+            if(temp)
+            {
+                temp->ispicoffsetlocked = true;
+            }
+            manager.SetPicOffX(m_adjustPosDlg->GetPicX());
+            manager.SetPicOffY(m_adjustPosDlg->GetPicY());
+            CheckBox_LockPicOffset->SetValue(false);
         }
         SpinCtrl_PicOffX->SetValue(m_adjustPosDlg->GetPicX());
-		SpinCtrl_PicOffY->SetValue(m_adjustPosDlg->GetPicY());
+        SpinCtrl_PicOffY->SetValue(m_adjustPosDlg->GetPicY());
 
         manager.SetLeft(m_adjustPosDlg->GetOffX());
         manager.SetBottom(m_adjustPosDlg->GetOffY());
@@ -1903,21 +1998,21 @@ void MpcAsfTool::OnButton_AdjustPositionClick(wxCommandEvent& event)
 
 void MpcAsfTool::OnCheckBox_LockPicOffsetClick(wxCommandEvent& event)
 {
-	SetStateChange(true);
+    SetStateChange(true);
     FRAMERGBA *temp = manager.GetUndeletedFrameData(currentframeindex - 1);
     if(temp)
     {
         temp->ispicoffsetlocked = event.IsChecked();
         if(event.IsChecked())
-		{
-			SpinCtrl_PicOffX->SetValue(temp->picoffx);
-			SpinCtrl_PicOffY->SetValue(temp->picoffy);
-		}
-		else
-		{
-			SpinCtrl_PicOffX->SetValue(manager.GetPicOffX());
-			SpinCtrl_PicOffY->SetValue(manager.GetPicOffY());
-		}
+        {
+            SpinCtrl_PicOffX->SetValue(temp->picoffx);
+            SpinCtrl_PicOffY->SetValue(temp->picoffy);
+        }
+        else
+        {
+            SpinCtrl_PicOffX->SetValue(manager.GetPicOffX());
+            SpinCtrl_PicOffY->SetValue(manager.GetPicOffY());
+        }
     }
     RefreshBmpShow();
 }

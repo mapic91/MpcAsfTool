@@ -41,7 +41,7 @@ About::About(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& siz
 	Panel1 = new wxPanel(this, ID_PANEL1, wxPoint(0,0), wxSize(400,200), wxTAB_TRAVERSAL, _T("ID_PANEL1"));
 	Panel1->SetBackgroundColour(wxColour(202,209,247));
 	StaticBitmap1 = new wxStaticBitmap(Panel1, ID_STATICBITMAP1, showbitmap, wxPoint(250,50), wxSize(96,96), wxNO_BORDER, _T("ID_STATICBITMAP1"));
-	StaticText2 = new wxStaticText(Panel1, ID_STATICTEXT2, _T("MPC ASF ±à¼­Æ÷ V1.6.5"), wxPoint(130,24), wxDefaultSize, 0, _T("ID_STATICTEXT2"));
+	StaticText2 = new wxStaticText(Panel1, ID_STATICTEXT2, _T("MPC ASF ±à¼­Æ÷ V1.7"), wxPoint(130,24), wxDefaultSize, 0, _T("ID_STATICTEXT2"));
 	StaticText1 = new wxStaticText(Panel1, ID_STATICTEXT1, _T("GUI Framework£º"), wxPoint(55,60), wxDefaultSize, 0, _T("ID_STATICTEXT1"));
 	StaticText3 = new wxStaticText(Panel1, ID_STATICTEXT3, _T("Í¼Æ¬½âÂë¿â£º"), wxPoint(55,85), wxDefaultSize, 0, _T("ID_STATICTEXT3"));
 	StaticText4 = new wxStaticText(Panel1, ID_STATICTEXT4, _T("³ÌÐò£º"), wxPoint(55,110), wxDefaultSize, 0, _T("ID_STATICTEXT4"));

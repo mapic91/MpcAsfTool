@@ -233,6 +233,8 @@
 		<Unit filename="MpcDecode.hpp" />
 		<Unit filename="MpctoGif.cpp" />
 		<Unit filename="MpctoPic.hpp" />
+		<Unit filename="ResizeDialog.cpp" />
+		<Unit filename="ResizeDialog.h" />
 		<Unit filename="RpcDecode.cpp" />
 		<Unit filename="RpcDecode.hpp" />
 		<Unit filename="ShdDecode.cpp" />
@@ -254,6 +256,7 @@
 		<Unit filename="wxsmith/ExportToImg.wxs" />
 		<Unit filename="wxsmith/MpcAsfTool.wxs" />
 		<Unit filename="wxsmith/ProgressDlg.wxs" />
+		<Unit filename="wxsmith/ResizeDialog.wxs" />
 		<Extensions>
 			<code_completion />
 			<envvars />
@@ -268,6 +271,7 @@
 					<wxDialog wxs="wxsmith/BatDialog.wxs" src="BatDialog.cpp" hdr="BatDialog.h" fwddecl="0" i18n="0" name="BatDialog" language="CPP" />
 					<wxDialog wxs="wxsmith/ProgressDlg.wxs" src="ProgressDlg.cpp" hdr="ProgressDlg.h" fwddecl="0" i18n="0" name="ProgressDlg" language="CPP" />
 					<wxDialog wxs="wxsmith/AdjustPositionDialog.wxs" src="AdjustPositionDialog.cpp" hdr="AdjustPositionDialog.h" fwddecl="0" i18n="0" name="AdjustPositionDialog" language="CPP" />
+					<wxDialog wxs="wxsmith/ResizeDialog.wxs" src="ResizeDialog.cpp" hdr="ResizeDialog.h" fwddecl="0" i18n="0" name="ResizeDialog" language="CPP" />
 				</resources>
 			</wxsmith>
 		</Extensions>
