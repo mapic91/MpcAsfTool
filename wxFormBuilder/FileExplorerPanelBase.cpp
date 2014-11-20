@@ -32,7 +32,7 @@ FileExplorerPanelBase::FileExplorerPanelBase( wxWindow* parent, wxWindowID id, c
 	mcb_Fileter->Append( wxT("ASF") );
 	mcb_Fileter->Append( wxT("SPR") );
 	mcb_Fileter->Append( wxT("RPC") );
-	mcb_Fileter->SetSelection( 0 );
+	mcb_Fileter->SetSelection( 1 );
 	bSizer2->Add( mcb_Fileter, 0, wxALL|wxEXPAND, 1 );
 	
 	
@@ -46,6 +46,7 @@ FileExplorerPanelBase::FileExplorerPanelBase( wxWindow* parent, wxWindowID id, c
 	this->Layout();
 	
 	// Connect Events
+	this->Connect( wxEVT_CLOSE_WINDOW, wxCloseEventHandler( FileExplorerPanelBase::OnClose ) );
 	m_genericDirCtrl1->Connect( wxEVT_COMMAND_TREE_ITEM_ACTIVATED, wxTreeEventHandler( FileExplorerPanelBase::OnTreeItemActivated ), NULL, this );
 	mcb_Fileter->Connect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( FileExplorerPanelBase::OnFilterChange ), NULL, this );
 }
@@ -53,6 +54,7 @@ FileExplorerPanelBase::FileExplorerPanelBase( wxWindow* parent, wxWindowID id, c
 FileExplorerPanelBase::~FileExplorerPanelBase()
 {
 	// Disconnect Events
+	this->Disconnect( wxEVT_CLOSE_WINDOW, wxCloseEventHandler( FileExplorerPanelBase::OnClose ) );
 	m_genericDirCtrl1->Disconnect( wxEVT_COMMAND_TREE_ITEM_ACTIVATED, wxTreeEventHandler( FileExplorerPanelBase::OnTreeItemActivated ), NULL, this );
 	mcb_Fileter->Disconnect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( FileExplorerPanelBase::OnFilterChange ), NULL, this );
 	

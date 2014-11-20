@@ -37,13 +37,14 @@ class FileExplorerPanelBase : public wxFrame
 		wxComboBox* mcb_Fileter;
 		
 		// Virtual event handlers, overide them in your derived class
+		virtual void OnClose( wxCloseEvent& event ) { event.Skip(); }
 		virtual void OnTreeItemActivated( wxTreeEvent& event ) { event.Skip(); }
 		virtual void OnFilterChange( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
 		
-		FileExplorerPanelBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("ÎÄ¼þä¯ÀÀ"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 353,451 ), long style = wxCAPTION|wxCLOSE_BOX|wxFRAME_FLOAT_ON_PARENT|wxFRAME_NO_TASKBAR|wxFRAME_TOOL_WINDOW|wxRESIZE_BORDER|wxSYSTEM_MENU|wxTAB_TRAVERSAL );
+		FileExplorerPanelBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("wjll"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 353,451 ), long style = wxCAPTION|wxCLOSE_BOX|wxFRAME_FLOAT_ON_PARENT|wxFRAME_NO_TASKBAR|wxFRAME_TOOL_WINDOW|wxRESIZE_BORDER|wxSYSTEM_MENU|wxTAB_TRAVERSAL );
 		
 		~FileExplorerPanelBase();
 	

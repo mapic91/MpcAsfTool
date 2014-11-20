@@ -251,6 +251,7 @@ class MpcAsfTool: public wxFrame
 		void NextFrame(wxCommandEvent &event);
 		void Resize(wxCommandEvent &event);
 		void ResizeCurrent(wxCommandEvent &event);
+		void OnFileExplorerWindow(wxCommandEvent &event);
 		void OnHelp(wxCommandEvent &event);
 		void OnAbout(wxCommandEvent &event);
 		void OnTravesal(wxCommandEvent &event);
@@ -299,7 +300,8 @@ class MpcAsfTool: public wxFrame
             ID_RETURN,
             ID_BAT,
             ID_BAT_PIC_CANCLE,
-            ID_ANIMATE_TIMER
+            ID_ANIMATE_TIMER,
+            ID_SHOWHIDE_FILEEXPLORER
         };
 
         WorkManager manager;
@@ -338,12 +340,15 @@ public:
 	FileExplorerPanel(wxWindow *parent)
 		:FileExplorerPanelBase(parent)
 	{
+		SetTitle(wxT("ÎÄ¼þä¯ÀÀ"));
 		m_genericDirCtrl1->SetFilter(wxT("ALL|*.*|MPC ASF SPR RPC(*.mpc,*.asf,*.spr,*.rpc)|*.mpc;*.asf;*.spr;*.rpc|MPC(*.mpc)|*.mpc|ASF(*.asf)|*.asf|SPR(*.spr)|*.spr|RPC(*.rpc)|*.rpc"));
+		m_genericDirCtrl1->SetFilterIndex(1);
 		m_parent = (MpcAsfTool*)parent;
 	}
 protected:
 	virtual void OnFilterChange( wxCommandEvent& event );
 	virtual void OnTreeItemActivated( wxTreeEvent& event );
+	virtual void OnClose( wxCloseEvent& event ) { Show(false); }
 
 	MpcAsfTool *m_parent;
 };

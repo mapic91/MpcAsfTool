@@ -120,6 +120,7 @@ BEGIN_EVENT_TABLE(MpcAsfTool,wxFrame)
     EVT_MENU(ID_FRAME_NEXT, MpcAsfTool::NextFrame)
     EVT_MENU(ID_RESIZE, MpcAsfTool::Resize)
     EVT_MENU(ID_RESIZECURRENT, MpcAsfTool::ResizeCurrent)
+    EVT_MENU(ID_SHOWHIDE_FILEEXPLORER, MpcAsfTool::OnFileExplorerWindow)
     EVT_MENU(wxID_HELP, MpcAsfTool::OnHelp)
     EVT_MENU(wxID_ABOUT, MpcAsfTool::OnAbout)
     EVT_MENU(ID_TRAVESAL, MpcAsfTool::OnTravesal)
@@ -529,6 +530,7 @@ MpcAsfTool::MpcAsfTool(wxWindow* parent,wxWindowID id,const wxPoint& pos,const w
     MpcAsfDrop *droptag = new MpcAsfDrop(this);
     SetDropTarget(droptag);
 
+	//Menu start
     wxMenu *menu_file = new wxMenu;
     menu_file->Append(wxID_NEW, wxT("新建...\tCtrl+N"));
     menu_file->Append(wxID_OPEN, wxT("打开...\tCtrl+O"));
@@ -537,17 +539,22 @@ MpcAsfTool::MpcAsfTool(wxWindow* parent,wxWindowID id,const wxPoint& pos,const w
     menu_file->Append(ID_EXPORT_TO_GIF, wxT("导出为 GIF..."));
     menu_file->Append(ID_EXPORT_TO_PNG, wxT("导出为 PNG..."));
     menu_file->Append(ID_BAT, wxT("图片批量导出...\tCtrl+P"));
-    menu_file->Append(wxID_EXIT, wxT("退出\tAlt+f4"));
+    menu_file->Append(wxID_EXIT, wxT("退出\tAlt+F4"));
     menu_file->Enable(wxID_SAVE, false);
     menu_file->Enable(wxID_SAVEAS, false);
     menu_file->Enable(ID_EXPORT_TO_GIF, false);
     menu_file->Enable(ID_EXPORT_TO_PNG, false);
+
     wxMenu *menu_frame = new wxMenu;
     menu_frame->Append(ID_FRAME_PREVIOUS, wxT("上一帧\tA"));
     menu_frame->Append(ID_FRAME_NEXT, wxT("下一帧\tD"));
     wxMenu *menu_process = new wxMenu;
-    menu_process->Append(ID_RESIZE, wxT("缩放所有..."));
-    menu_process->Append(ID_RESIZECURRENT, wxT("缩放当前帧..."));
+    menu_process->Append(ID_RESIZE, wxT("缩放所有...\tCtrl+R"));
+    menu_process->Append(ID_RESIZECURRENT, wxT("缩放当前帧...\tCtrl+L"));
+
+    wxMenu *menu_window = new wxMenu;
+    menu_window->Append(ID_SHOWHIDE_FILEEXPLORER, wxT("文件浏览窗口\tCtrl+E"));
+
     wxMenu *menu_help = new wxMenu;
     menu_help->Append(wxID_HELP,  wxT("帮助\tF1"));
     menu_help->Append(wxID_ABOUT, wxT("关于..."));
@@ -555,13 +562,13 @@ MpcAsfTool::MpcAsfTool(wxWindow* parent,wxWindowID id,const wxPoint& pos,const w
     menu_batpicconv->Append(ID_BAT_PIC_CANCLE, wxT("取消"));
 
     MenuBar_BatPicConv = new wxMenuBar();
-
     MenuBar_MpcAsfTool->Append(menu_file, wxT("文件(&F)"));
     MenuBar_MpcAsfTool->Append(menu_frame, wxT("帧(&I)"));
     MenuBar_MpcAsfTool->Append(menu_process, wxT("图像处理"));
+    MenuBar_MpcAsfTool->Append(menu_window, wxT("窗口"));
     MenuBar_MpcAsfTool->Append(menu_help, wxT("帮助(&H)"));
     MenuBar_BatPicConv->Append(menu_batpicconv, wxT("批处理"));
-
+	//Menu end
 
     ScrolledWindow_Setting->SetScrollRate(0, 20);
     ScrolledWindow_BmpShow->SetScrollRate(20, 20);
@@ -575,7 +582,6 @@ MpcAsfTool::MpcAsfTool(wxWindow* parent,wxWindowID id,const wxPoint& pos,const w
 
     //Pnaels
     m_fileExplorer = new FileExplorerPanel(this);
-    m_fileExplorer->Show();
 
     manager.Init();
 }
@@ -1107,6 +1113,11 @@ void MpcAsfTool::ResizeCurrent(wxCommandEvent& event)
         ResizeFrame(&manager, currentframeindex - 1, dialog.GetWidth(), dialog.GetHeight());
         RefreshBmpShow();
     }
+}
+
+void MpcAsfTool::OnFileExplorerWindow(wxCommandEvent& event)
+{
+	m_fileExplorer->Show();
 }
 
 void MpcAsfTool::OnHelp(wxCommandEvent &event)

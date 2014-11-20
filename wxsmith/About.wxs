@@ -15,7 +15,7 @@
 				<style>wxNO_BORDER</style>
 			</object>
 			<object class="wxStaticText" name="ID_STATICTEXT2" variable="StaticText2" member="yes">
-				<label>MPC ASF 编辑器 V1.7</label>
+				<label>MPC ASF 编辑器 V1.7.1</label>
 				<pos>130,24</pos>
 			</object>
 			<object class="wxStaticText" name="ID_STATICTEXT1" variable="StaticText1" member="yes">
@@ -40,7 +40,7 @@
 				<handler function="OnButton_OKClick" entry="EVT_BUTTON" />
 			</object>
 			<object class="wxStaticText" name="ID_STATICTEXT6" variable="StaticText6" member="yes">
-				<label>2014.11.19</label>
+				<label>2014.11.20</label>
 				<pos>136,160</pos>
 			</object>
 			<object class="wxHyperlinkCtrl" name="ID_HYPERLINKCTRL1" variable="HyperlinkCtrl_MyWebPage" member="yes">
