@@ -826,6 +826,7 @@ void MpcAsfTool::OnBat(wxCommandEvent &event)
             }
         }
 
+		float ratio = batdlg.getScaleRatio();
         filecounts = (int)files.GetCount();
         if(filecounts != 0)
         {
@@ -851,6 +852,13 @@ void MpcAsfTool::OnBat(wxCommandEvent &event)
                 conv.SetAlphaMask(batdlg.GetAlphaMask());
                 if(conv.OpenFile(files[j], frameBegin, frameEnd))
                 {
+                	if(ratio != 1)
+					{
+						ResizeAll(&conv,
+								(int)(ratio*conv.GetGlobalWidth()),
+								(int)(ratio*conv.GetGlobalHeight()));
+					}
+
                     filename = wxFileName::FileName(files[j]).GetName();
                     if(batdlg.isGif())
                     {
@@ -866,6 +874,20 @@ void MpcAsfTool::OnBat(wxCommandEvent &event)
                             errs.Add(files[j]);
                         }
                     }
+                    else if(batdlg.isAsf())
+					{
+						if(!conv.SaveToAsf(outpath+filename+wxT(".asf")))
+						{
+							errs.Add(files[j]);
+						}
+					}
+					else if(batdlg.isMpc())
+					{
+						if(!conv.SaveToMpc(outpath+filename+wxT(".mpc")))
+						{
+							errs.Add(files[j]);
+						}
+					}
                 }
                 else errs.Add(files[j]);
             }
@@ -993,14 +1015,16 @@ FILOCRGBQUAD* ResizeTo(FILOCRGBQUAD *data, int currentWidth, int currentHeight, 
     if(bitmap)
     {
         FILOCRGBQUAD *bits = (FILOCRGBQUAD*)FreeImage_GetBits(bitmap);
-        for(int i = 0; i < currentWidth*currentHeight; i++)
+        int length = currentWidth*currentHeight;
+        for(int i = 0; i < length; i++)
             bits[i] = data[i];
         FIBITMAP *scaled = FreeImage_Rescale(bitmap, toWidth, toHeight, FILTER_BICUBIC);
         if(scaled)
         {
             scaledData = new FILOCRGBQUAD[toWidth*toHeight];
             bits = (FILOCRGBQUAD*)FreeImage_GetBits(scaled);
-            for(int j = 0; j < toWidth*toHeight; j++)
+            length = toWidth*toHeight;
+            for(int j = 0; j < length; j++)
             {
                 scaledData[j] = bits[j];
             }
@@ -1011,31 +1035,43 @@ FILOCRGBQUAD* ResizeTo(FILOCRGBQUAD *data, int currentWidth, int currentHeight, 
     return scaledData;
 }
 
-void MpcAsfTool::ResizeFrame(int i, int toWidth, int toHeight)
+void MpcAsfTool::ResizeFrame(WorkManager *manager, int i, int toWidth, int toHeight)
 {
     FRAMERGBA *frame;
     FILOCRGBQUAD *data;
-    frame = manager.GetFrameData(i);
+    frame = manager->GetFrameData(i);
     if(frame != NULL)
     {
-        data = manager.GetUndeletedGlobalizedFrameData(i);
+        data = manager->GetUndeletedGlobalizedFrameData(i);
         if(data != NULL)
         {
-        	if(frame->data) delete[] frame->data;
-            frame->data = ResizeTo(data, manager.GetGlobalWidth(), manager.GetGlobalHeight(), toWidth, toHeight);
+            if(frame->data) delete[] frame->data;
+            frame->data = ResizeTo(data, manager->GetGlobalWidth(), manager->GetGlobalHeight(), toWidth, toHeight);
             delete[] data;
         }
-        data = manager.GetUndeletedGlobalizedShdFrameData(i);
+        data = manager->GetUndeletedGlobalizedShdFrameData(i);
         if(data != NULL)
         {
-        	if(frame->shddata) delete[] frame->shddata;
-            frame->shddata = ResizeTo(data, manager.GetGlobalWidth(), manager.GetGlobalHeight(), toWidth, toHeight);
+            if(frame->shddata) delete[] frame->shddata;
+            frame->shddata = ResizeTo(data, manager->GetGlobalWidth(), manager->GetGlobalHeight(), toWidth, toHeight);
             delete[] data;
         }
         frame->width = toWidth;
         frame->height = toHeight;
         SetStateChange(true);
     }
+}
+
+void MpcAsfTool::ResizeAll(WorkManager *manager, int toWidth, int toHeight)
+{
+    int frameCount = manager->GetFrameCounts();
+
+    for(int i = 0; i < frameCount; i++)
+    {
+        ResizeFrame(manager, i, toWidth, toHeight);
+    }
+    manager->SetGlobalWidth(toWidth);
+    manager->SetGlobalHeight(toHeight);
 }
 
 void MpcAsfTool::Resize(wxCommandEvent& event)
@@ -1047,14 +1083,9 @@ void MpcAsfTool::Resize(wxCommandEvent& event)
     {
         int toWidth = dialog.GetWidth();
         int toHeight = dialog.GetHeight();
-        int frameCount = manager.GetFrameCounts();
-
-        for(int i = 0; i < frameCount; i++)
-        {
-            ResizeFrame(i, toWidth, toHeight);
-        }
-        manager.SetGlobalWidth(toWidth);
-        manager.SetGlobalHeight(toHeight);
+        if(toWidth == manager.GetGlobalWidth() &&
+			toHeight == manager.GetGlobalHeight())return;
+        ResizeAll(&manager, toWidth, toHeight);
         SpinCtrl_GlobalWidth->SetValue(toWidth);
         SpinCtrl_GlobalHeight->SetValue(toHeight);
         RefreshBmpShow();
@@ -1068,7 +1099,7 @@ void MpcAsfTool::ResizeCurrent(wxCommandEvent& event)
     dialog.SetCurrentHeight(manager.GetGlobalHeight());
     if(dialog.ShowModal() == wxID_OK)
     {
-        ResizeFrame(currentframeindex - 1, dialog.GetWidth(), dialog.GetHeight());
+        ResizeFrame(&manager, currentframeindex - 1, dialog.GetWidth(), dialog.GetHeight());
         RefreshBmpShow();
     }
 }

@@ -60,15 +60,14 @@ FILOCRGBQUAD *RGBAtoFIRGBA(unsigned char *data, long width, long height, long gl
 		fidata[i].rgbReserved = 0;
 	}
 	long offwidth, offheight;
-	for(long hi = 0; hi < globalHeight; hi++)
+	for(long hi = 0; hi < height; hi++)
     {
-        for(long wi = 0; wi < globalWidth; wi++)
+        for(long wi = 0; wi < width; wi++)
         {
             offwidth = wi + offx;
             offheight = hi + offy;
-            if(hi < height && wi < width &&
-                    offwidth >= 0 && offwidth < globalWidth &&
-                    offheight >= 0 && offheight < globalHeight)
+            if(offwidth >= 0 && offwidth < globalWidth &&
+				offheight >= 0 && offheight < globalHeight)
             {
             	long index = (hi*width+wi)*4;
             	long fiIndex = offheight*globalWidth+offwidth;

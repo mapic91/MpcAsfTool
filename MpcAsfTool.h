@@ -283,7 +283,8 @@ class MpcAsfTool: public wxFrame
         void ReNewFocus();
         void BeginAnimate(bool ReNewIndex = false);
         void StopAnimate(bool ReNewIndex = false);
-        void ResizeFrame(int index, int toWidth, int toHeight);
+        void ResizeFrame(WorkManager *manager, int i, int toWidth, int toHeight);
+        void ResizeAll(WorkManager *manager, int toWidth, int toHeight);
 
         enum EvtID
         {

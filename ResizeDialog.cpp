@@ -61,9 +61,9 @@ ResizeDialog::ResizeDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,con
     BoxSizer1->Add(BoxSizer3, 1, wxALL|wxEXPAND|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
     BoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
     mb_Ok = new wxButton(this, ID_BUTTON1, _T("确定"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
-    BoxSizer4->Add(mb_Ok, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    BoxSizer4->Add(mb_Ok, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     mb_Cancle = new wxButton(this, ID_BUTTON2, _T("取消"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON2"));
-    BoxSizer4->Add(mb_Cancle, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    BoxSizer4->Add(mb_Cancle, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     BoxSizer1->Add(BoxSizer4, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     SetSizer(BoxSizer1);
     SetSizer(BoxSizer1);

@@ -28,13 +28,18 @@ class BatDialog: public wxDialog
 		wxRadioButton* RadioButton_Gif;
 		wxStaticText* StaticText2;
 		wxSpinCtrl* SpinCtrl_FrameBegin;
+		wxStaticText* StaticText6;
 		wxRichTextCtrl* RichTextCtrl_List;
+		wxRadioButton* RadioButton_Asf;
+		wxRadioButton* RadioButton_Mpc;
 		wxButton* Button_Cancle;
 		wxStaticText* StaticText1;
 		wxButton* Button_Empty;
 		wxStaticText* StaticText3;
 		wxColourPickerCtrl* ColourPickerCtrl_BaseColor;
 		wxStaticText* StaticText5;
+		wxStaticText* StaticText7;
+		wxSpinCtrl* SpinCtrl_Scale;
 		wxSpinCtrl* SpinCtrl_AlphaMask;
 		wxButton* Button_Add;
 		wxStaticText* StaticText4;
@@ -61,6 +66,11 @@ class BatDialog: public wxDialog
 		static const long ID_SPINCTRL3;
 		static const long ID_STATICTEXT4;
 		static const long ID_STATICTEXT5;
+		static const long ID_RADIOBUTTON3;
+		static const long ID_RADIOBUTTON4;
+		static const long ID_SPINCTRL4;
+		static const long ID_STATICTEXT6;
+		static const long ID_STATICTEXT7;
 		//*)
 
 	public:
@@ -82,6 +92,9 @@ class BatDialog: public wxDialog
         int GetFrameEnd(){return (SpinCtrl_FrameEnd->GetValue() - 1);}
         bool isGif(){return RadioButton_Gif->GetValue();}
         bool isPng(){return RadioButton_Png->GetValue();}
+        bool isMpc(){return RadioButton_Mpc->GetValue();}
+        bool isAsf(){return RadioButton_Asf->GetValue();}
+        float getScaleRatio(){return (float)SpinCtrl_Scale->GetValue()/(float)100;}
         bool isShd(){return CheckBox_isShd->IsChecked();}
 		DECLARE_EVENT_TABLE()
 };

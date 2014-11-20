@@ -103,7 +103,6 @@
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
-						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxButton" name="ID_BUTTON2" variable="mb_Cancle" member="yes">
@@ -112,7 +111,6 @@
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
-						<option>1</option>
 					</object>
 				</object>
 				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>

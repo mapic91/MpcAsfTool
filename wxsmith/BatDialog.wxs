@@ -2,7 +2,7 @@
 <wxsmith>
 	<object class="wxDialog" name="BatDialog">
 		<title>图片批量导出</title>
-		<size>400,387</size>
+		<size>400,405</size>
 		<id_arg>0</id_arg>
 		<object class="wxRichTextCtrl" name="ID_RICHTEXTCTRL1" variable="RichTextCtrl_List" member="yes">
 			<pos>8,16</pos>
@@ -35,12 +35,12 @@
 		</object>
 		<object class="wxButton" name="ID_BUTTON3" variable="Button_Ok" member="yes">
 			<label>确定</label>
-			<pos>72,350</pos>
+			<pos>72,370</pos>
 			<handler function="OnButton_OkClick" entry="EVT_BUTTON" />
 		</object>
 		<object class="wxButton" name="ID_BUTTON4" variable="Button_Cancle" member="yes">
 			<label>取消</label>
-			<pos>224,350</pos>
+			<pos>224,370</pos>
 			<handler function="OnButton_CancleClick" entry="EVT_BUTTON" />
 		</object>
 		<object class="wxCheckBox" name="ID_CHECKBOX1" variable="CheckBox_isShd" member="yes">
@@ -87,6 +87,28 @@
 		<object class="wxStaticText" name="ID_STATICTEXT5" variable="StaticText5" member="yes">
 			<label>帧范围：</label>
 			<pos>24,307</pos>
+		</object>
+		<object class="wxRadioButton" name="ID_RADIOBUTTON3" variable="RadioButton_Mpc" member="yes">
+			<label>MPC</label>
+			<pos>320,200</pos>
+		</object>
+		<object class="wxRadioButton" name="ID_RADIOBUTTON4" variable="RadioButton_Asf" member="yes">
+			<label>ASF</label>
+			<pos>320,224</pos>
+		</object>
+		<object class="wxSpinCtrl" name="ID_SPINCTRL4" variable="SpinCtrl_Scale" member="yes">
+			<value>100</value>
+			<min>1</min>
+			<pos>80,336</pos>
+			<size>88,21</size>
+		</object>
+		<object class="wxStaticText" name="ID_STATICTEXT6" variable="StaticText6" member="yes">
+			<label>缩放：</label>
+			<pos>34,340</pos>
+		</object>
+		<object class="wxStaticText" name="ID_STATICTEXT7" variable="StaticText7" member="yes">
+			<label>%</label>
+			<pos>176,340</pos>
 		</object>
 	</object>
 </wxsmith>

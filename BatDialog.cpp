@@ -24,6 +24,11 @@ const long BatDialog::ID_SPINCTRL2 = wxNewId();
 const long BatDialog::ID_SPINCTRL3 = wxNewId();
 const long BatDialog::ID_STATICTEXT4 = wxNewId();
 const long BatDialog::ID_STATICTEXT5 = wxNewId();
+const long BatDialog::ID_RADIOBUTTON3 = wxNewId();
+const long BatDialog::ID_RADIOBUTTON4 = wxNewId();
+const long BatDialog::ID_SPINCTRL4 = wxNewId();
+const long BatDialog::ID_STATICTEXT6 = wxNewId();
+const long BatDialog::ID_STATICTEXT7 = wxNewId();
 //*)
 
 BEGIN_EVENT_TABLE(BatDialog,wxDialog)
@@ -35,7 +40,7 @@ BatDialog::BatDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxS
 {
 	//(*Initialize(BatDialog)
 	Create(parent, wxID_ANY, _T("图片批量导出"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("wxID_ANY"));
-	SetClientSize(wxSize(400,387));
+	SetClientSize(wxSize(400,405));
 	RichTextCtrl_List = new wxRichTextCtrl(this, ID_RICHTEXTCTRL1, wxEmptyString, wxPoint(8,16), wxSize(288,240), wxRE_MULTILINE, wxDefaultValidator, _T("ID_RICHTEXTCTRL1"));
 	wxRichTextAttr rchtxtAttr_1;
 	rchtxtAttr_1.SetBulletStyle(wxTEXT_ATTR_BULLET_STYLE_ALIGN_LEFT);
@@ -45,8 +50,8 @@ BatDialog::BatDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxS
 	RadioButton_Gif->SetValue(true);
 	RadioButton_Png = new wxRadioButton(this, ID_RADIOBUTTON2, _T("PNG"), wxPoint(320,176), wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTON2"));
 	StaticText1 = new wxStaticText(this, ID_STATICTEXT1, _T("导出为："), wxPoint(304,120), wxDefaultSize, 0, _T("ID_STATICTEXT1"));
-	Button_Ok = new wxButton(this, ID_BUTTON3, _T("确定"), wxPoint(72,350), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON3"));
-	Button_Cancle = new wxButton(this, ID_BUTTON4, _T("取消"), wxPoint(224,350), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON4"));
+	Button_Ok = new wxButton(this, ID_BUTTON3, _T("确定"), wxPoint(72,370), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON3"));
+	Button_Cancle = new wxButton(this, ID_BUTTON4, _T("取消"), wxPoint(224,370), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON4"));
 	CheckBox_isShd = new wxCheckBox(this, ID_CHECKBOX1, _T("SHD"), wxPoint(16,272), wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOX1"));
 	CheckBox_isShd->SetValue(true);
 	CheckBox_isShd->SetToolTip(_T("是否包含影子"));
@@ -61,6 +66,12 @@ BatDialog::BatDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxS
 	SpinCtrl_FrameBegin->SetValue(_T("1"));
 	StaticText4 = new wxStaticText(this, ID_STATICTEXT4, _T("到"), wxPoint(180,307), wxDefaultSize, 0, _T("ID_STATICTEXT4"));
 	StaticText5 = new wxStaticText(this, ID_STATICTEXT5, _T("帧范围："), wxPoint(24,307), wxDefaultSize, 0, _T("ID_STATICTEXT5"));
+	RadioButton_Mpc = new wxRadioButton(this, ID_RADIOBUTTON3, _T("MPC"), wxPoint(320,200), wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTON3"));
+	RadioButton_Asf = new wxRadioButton(this, ID_RADIOBUTTON4, _T("ASF"), wxPoint(320,224), wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTON4"));
+	SpinCtrl_Scale = new wxSpinCtrl(this, ID_SPINCTRL4, _T("100"), wxPoint(80,336), wxSize(88,21), 0, 1, 100, 100, _T("ID_SPINCTRL4"));
+	SpinCtrl_Scale->SetValue(_T("100"));
+	StaticText6 = new wxStaticText(this, ID_STATICTEXT6, _T("缩放："), wxPoint(34,340), wxDefaultSize, 0, _T("ID_STATICTEXT6"));
+	StaticText7 = new wxStaticText(this, ID_STATICTEXT7, _T("%"), wxPoint(176,340), wxDefaultSize, 0, _T("ID_STATICTEXT7"));
 
 	Connect(ID_BUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&BatDialog::OnButton_AddClick);
 	Connect(ID_BUTTON2,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&BatDialog::OnButton_EmptyClick);

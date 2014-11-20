@@ -9555,7 +9555,7 @@
 1362620473 e:\programmingworkshop\_store_\jxqy\mpcasftool\app.h
 	<wx/app.h>
 
-1416397621 e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.h
+1416447329 e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.h
 	<wx/scrolwin.h>
 	<wx/sizer.h>
 	<wx/stattext.h>
@@ -9644,12 +9644,12 @@
 	"wx/filename.h"
 	<fstream>
 
-1415874149 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\batdialog.cpp
+1416446556 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\batdialog.cpp
 	"BatDialog.h"
 	"wx/filedlg.h"
 	<wx/string.h>
 
-1409793470 e:\programmingworkshop\_store_\jxqy\mpcasftool\batdialog.h
+1416448518 e:\programmingworkshop\_store_\jxqy\mpcasftool\batdialog.h
 	<wx/stattext.h>
 	<wx/checkbox.h>
 	<wx/spinctrl.h>
@@ -9705,7 +9705,7 @@
 	"wx/filename.h"
 	<cstdlib>
 
-1416397777 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.cpp
+1416447564 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.cpp
 	"MpcAsfTool.h"
 	"DlgAddFrames.h"
 	"wx/filedlg.h"
@@ -13083,7 +13083,7 @@
 1416378117 e:\programmingworkshop\_store_\jxqy\mpcasftool\utils.hpp
 	"FreeImage.h"
 
-1416383520 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\utils.cpp
+1416447220 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\utils.cpp
 	"Utils.hpp"
 	"wx/string.h"
 	"wx/msgdlg.h"
@@ -13096,7 +13096,7 @@
 	<wx/button.h>
 	<wx/dialog.h>
 
-1416396403 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\resizedialog.cpp
+1416447795 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\resizedialog.cpp
 	"ResizeDialog.h"
 	<wx/string.h>
 
