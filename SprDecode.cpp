@@ -139,7 +139,7 @@ void SprDecode::InitTransparentColor()
     TransparentColor.Blue = 0x00;
     TransparentColor.Alpha = 0x00;
 }
-unsigned char* SprDecode::GetDecodedFrameData(const unsigned long index, long* Width, long* Height,
+unsigned char* SprDecode::GetDecodedFrameData(const unsigned long index, int* Width, int* Height,
         COLOUR_MODLE mod, bool *isTransparent, Palette_Colour *TransparentColor, unsigned char transmask,
         int *offX, int *offY)
 {
@@ -351,10 +351,8 @@ unsigned char* SprDecode::GetDecodedFrameData(const unsigned long index, long* W
     }
     else return NULL;
 }
-FILOCRGBQUAD* SprDecode::GetFIDecodedFrameData(const unsigned long index)
+FILOCRGBQUAD* SprDecode::GetFIDecodedFrameData(const unsigned long index, int &width, int &height, int &offx, int &offy)
 {
-	int offx, offy;
-	long width, height;
     unsigned char* data = GetDecodedFrameData(index, &width, &height, PIC_RGBA,
 											NULL,
 											NULL,
@@ -363,16 +361,14 @@ FILOCRGBQUAD* SprDecode::GetFIDecodedFrameData(const unsigned long index)
 											&offy);
 
 	if(data == NULL) return NULL;
-	long globalWidth = GetGlobleWidth(), globalHeight = GetGlobleHeight();
-//	wxMessageBox(wxString::Format("gw:%d,gh:%d,w:%d,h:%d,ox:%d, oy:%d", globalWidth,
-//								globalHeight,width,height,offx,offy));
-	return RGBAtoFIRGBA(data, width, height, globalWidth, globalHeight, offx, offy);
+
+	return RGBAtoFIRGBA(data, true, width, height, width, height, 0, 0);
 }
 wxImage SprDecode::GetFrameImage(const unsigned long index, unsigned char transmask)
 {
     if(index < FileHead.FrameCounts)
     {
-        long width, height;
+        int width, height;
         unsigned char *decdata = GetDecodedFrameData(index, &width, &height, PIC_RGB, NULL, NULL, transmask);
         if(decdata == NULL)
         {

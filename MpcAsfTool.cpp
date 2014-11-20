@@ -1058,6 +1058,7 @@ void MpcAsfTool::ResizeFrame(WorkManager *manager, int i, int toWidth, int toHei
         }
         frame->width = toWidth;
         frame->height = toHeight;
+        frame->ispicoffsetlocked = false;
         SetStateChange(true);
     }
 }
@@ -1231,8 +1232,21 @@ void MpcAsfTool::InitFromManager()
     SpinCtrl_Direction->SetValue((int)manager.GetDirection());
     SpinCtrl_Bottom->SetValue((int)manager.GetBottom());
     Slider_Interval->SetValue((int)manager.GetInterval());
-    SpinCtrl_PicOffX->SetValue((int)manager.GetPicOffX());
-    SpinCtrl_PicOffY->SetValue((int)manager.GetPicOffY());
+
+    FRAMERGBA *frame = manager.GetFrameData(currentframeindex-1);
+    if(frame && frame->ispicoffsetlocked)
+	{
+		CheckBox_LockPicOffset->SetValue(true);
+		SpinCtrl_PicOffX->SetValue(frame->picoffx);
+		SpinCtrl_PicOffY->SetValue(frame->picoffy);
+	}
+	else
+	{
+		CheckBox_LockPicOffset->SetValue(false);
+		SpinCtrl_PicOffX->SetValue((int)manager.GetPicOffX());
+		SpinCtrl_PicOffY->SetValue((int)manager.GetPicOffY());
+	}
+
     manager.SetShdIncluded(CheckBox_ShowShd->GetValue());
     SpinCtrl_Left->SetValue((int)manager.GetLeft());
     CheckBox_LockFrame->SetValue(manager.IsFrameLocked(0));

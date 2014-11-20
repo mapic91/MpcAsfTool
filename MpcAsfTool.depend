@@ -9576,7 +9576,7 @@
 	"FocusSequence.h"
 	"AdjustPositionDialog.h"
 
-1409824226 e:\programmingworkshop\_store_\jxqy\mpcasftool\workmanager.hpp
+1416449794 e:\programmingworkshop\_store_\jxqy\mpcasftool\workmanager.hpp
 	"wx/image.h"
 	"MAPICDATA.hpp"
 	"MpcDecode.hpp"
@@ -9705,7 +9705,7 @@
 	"wx/filename.h"
 	<cstdlib>
 
-1416447564 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.cpp
+1416451063 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.cpp
 	"MpcAsfTool.h"
 	"DlgAddFrames.h"
 	"wx/filedlg.h"
@@ -9757,13 +9757,13 @@
 	<cstring>
 	<fstream>
 
-1416378820 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\workmanager.cpp
+1416450503 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\workmanager.cpp
 	"WorkManager.hpp"
 	"GifData.hpp"
 	"wx/filename.h"
 	"RpcDecode.hpp"
 
-1416381121 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\sprdecode.cpp
+1416450273 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\sprdecode.cpp
 	"SprDecode.hpp"
 	"wx/image.h"
 	"wx/msgdlg.h"
@@ -9771,7 +9771,7 @@
 	<cstring>
 	<fstream>
 
-1416378450 e:\programmingworkshop\_store_\jxqy\mpcasftool\sprdecode.hpp
+1416450161 e:\programmingworkshop\_store_\jxqy\mpcasftool\sprdecode.hpp
 	"wx/string.h"
 	"wx/image.h"
 	"mydefs.hpp"
@@ -13080,10 +13080,10 @@
 	"Utils.hpp"
 	"wx/msgdlg.h"
 
-1416378117 e:\programmingworkshop\_store_\jxqy\mpcasftool\utils.hpp
+1416450238 e:\programmingworkshop\_store_\jxqy\mpcasftool\utils.hpp
 	"FreeImage.h"
 
-1416447220 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\utils.cpp
+1416449587 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\utils.cpp
 	"Utils.hpp"
 	"wx/string.h"
 	"wx/msgdlg.h"

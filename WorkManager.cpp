@@ -165,18 +165,19 @@ wxArrayString WorkManager::AddFiles(wxArrayString files)
             {
             	tempwidth = sprdecode.GetGlobleWidth();
             	tempheight = sprdecode.GetGlobleHeight();
+            	int width, height,offx, offy;
                 for(unsigned long i = 0; i < sprdecode.GetFramesCounts(); i++)
                 {
-                    buffer = sprdecode.GetFIDecodedFrameData(i);
+                    buffer = sprdecode.GetFIDecodedFrameData(i, width, height, offx, offy);
                     if(buffer)
                     {
                         if(totalframecounts == 0)
                         {
-                            SetGlobalWidth((long)tempwidth);
-                            SetGlobalHeight((long)tempheight);
+                            SetGlobalWidth((long)width);
+                            SetGlobalHeight((long)height);
                         }
 
-                        AddFrame(buffer, tempwidth, tempheight, NULL);
+                        AddFrame(buffer, width, height, NULL, true, offx, offy);
                     }
                     else
                     {
@@ -300,11 +301,12 @@ bool WorkManager::OpenFile(wxString InPath, int frameBegin, int frameEnd )
             SetBottom(sprdecode.GetBottom());
             SetLeft(sprdecode.GetLeft());
 
+			int width, height,offx, offy;
             for(unsigned long conti = frameBegin; conti < sprdecode.GetFramesCounts() && ((int)conti) <= frameEnd; conti++)
             {
-                tempdata = sprdecode.GetFIDecodedFrameData(conti);
+                tempdata = sprdecode.GetFIDecodedFrameData(conti, width, height, offx, offy);
                 if(!tempdata) return false;
-                AddFrame(tempdata, tempwidth, tempheight);
+                AddFrame(tempdata, width, height, NULL, true, offx, offy);
             }
         }
         else
@@ -313,35 +315,38 @@ bool WorkManager::OpenFile(wxString InPath, int frameBegin, int frameEnd )
 
     return true;
 }
-bool WorkManager::AddFrame(FILOCRGBQUAD *frame, long width, long height, FILOCRGBQUAD *shddata)
+bool WorkManager::AddFrame(FILOCRGBQUAD *frame, long width, long height, FILOCRGBQUAD *shddata,
+				bool isOffsetLocked, int offx, int offy)
 {
     if(frame == NULL || width < 1 || height < 1) return false;
 
     if(totalframecounts == 0)
     {
         firstframe = new FRAMERGBA();
-        firstframe->data = frame;
-        firstframe->shddata = shddata;
-        firstframe->next = NULL;
-        firstframe->width = width;
-        firstframe->height = height;
-        firstframe->islocked = false;
-        firstframe->isdeleted = false;
-
         currentframe = firstframe;
     }
     else
     {
         currentframe->next = new FRAMERGBA();
         currentframe = currentframe->next;
-        currentframe->data = frame;
+    }
+
+    if(currentframe)
+	{
+		currentframe->data = frame;
         currentframe->shddata = shddata;
         currentframe->next = NULL;
         currentframe->width = width;
         currentframe->height = height;
         currentframe->islocked = false;
         currentframe->isdeleted = false;
-    }
+        if(isOffsetLocked)
+		{
+			currentframe->ispicoffsetlocked = true;
+			currentframe->picoffx = offx;
+			currentframe->picoffy = offy;
+		}
+	}
 
     totalframecounts++;
     framecounts++;

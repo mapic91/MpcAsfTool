@@ -35,13 +35,13 @@ public:
 
     //data must be free() if won't use anymore
     Palette_Colour GetTransparentColor();
-    unsigned char* GetDecodedFrameData(const unsigned long index, long* Width = NULL, long* Height = NULL,
+    unsigned char* GetDecodedFrameData(const unsigned long index, int* Width = NULL, int* Height = NULL,
                                        COLOUR_MODLE mod = PIC_RGB,bool *isTransparent = NULL,
                                        Palette_Colour *TransparentColor = NULL, unsigned char transmask = 0,
                                        int *offX = NULL, int *offY = NULL);
 
     //transmask - pixel alpha value is less than transmask consider tottle transparent
-    FILOCRGBQUAD* GetFIDecodedFrameData(const unsigned long index);
+    FILOCRGBQUAD* GetFIDecodedFrameData(const unsigned long index, int &width, int &height, int &offX, int &offY);
     wxImage GetFrameImage(const unsigned long index, unsigned char transmask = 0);
 
 

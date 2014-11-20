@@ -54,7 +54,8 @@ public:
 
 
 
-    bool AddFrame(FILOCRGBQUAD *frame, long width, long height, FILOCRGBQUAD *shddata = NULL);
+    bool AddFrame(FILOCRGBQUAD *frame, long width, long height, FILOCRGBQUAD *shddata = NULL,
+				bool isOffsetLocked = false, int offx = 0, int offy = 0);
 
     //set frame local info,frame marked deleted is excluded
     bool SetUndeletedFrame(unsigned long index, bool isLock = true,

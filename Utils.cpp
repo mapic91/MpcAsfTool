@@ -46,12 +46,16 @@ void Bit5ToBit8RGB(char* char2, unsigned char *rgb)
 }
 #include "wx/string.h"
 #include "wx/msgdlg.h"
-FILOCRGBQUAD *RGBAtoFIRGBA(unsigned char *data, long width, long height, long globalWidth, long globalHeight, int offx, int offy)
+FILOCRGBQUAD *RGBAtoFIRGBA(unsigned char *data, bool freeData, long width, long height, long globalWidth, long globalHeight, int offx, int offy)
 {
 	if(data == NULL) return NULL;
 	long size = globalWidth*globalHeight;
 	FILOCRGBQUAD *fidata = new FILOCRGBQUAD[size];
-	if(!fidata) return NULL;
+	if(!fidata)
+	{
+		if(freeData) free(data);
+		return NULL;
+	}
 	for(long i = 0; i < size; i++)
 	{
 		fidata[i].rgbRed = 0;
@@ -78,5 +82,6 @@ FILOCRGBQUAD *RGBAtoFIRGBA(unsigned char *data, long width, long height, long gl
             }
         }
     }
+    if(freeData) free(data);
     return fidata;
 }

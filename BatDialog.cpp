@@ -56,9 +56,9 @@ BatDialog::BatDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxS
 	CheckBox_isShd->SetValue(true);
 	CheckBox_isShd->SetToolTip(_T("是否包含影子"));
 	StaticText2 = new wxStaticText(this, ID_STATICTEXT2, _T("底色："), wxPoint(72,272), wxDefaultSize, 0, _T("ID_STATICTEXT2"));
-	ColourPickerCtrl_BaseColor = new wxColourPickerCtrl(this, ID_COLOURPICKERCTRL1, wxColour(255,255,255), wxPoint(112,268), wxDefaultSize, 0, wxDefaultValidator, _T("ID_COLOURPICKERCTRL1"));
+	ColourPickerCtrl_BaseColor = new wxColourPickerCtrl(this, ID_COLOURPICKERCTRL1, wxColour(255,255,255), wxPoint(112,268), wxSize(48,20), 0, wxDefaultValidator, _T("ID_COLOURPICKERCTRL1"));
 	StaticText3 = new wxStaticText(this, ID_STATICTEXT3, _T("透明域："), wxPoint(176,272), wxDefaultSize, 0, _T("ID_STATICTEXT3"));
-	SpinCtrl_AlphaMask = new wxSpinCtrl(this, ID_SPINCTRL1, _T("0"), wxPoint(230,268), wxDefaultSize, 0, 0, 255, 0, _T("ID_SPINCTRL1"));
+	SpinCtrl_AlphaMask = new wxSpinCtrl(this, ID_SPINCTRL1, _T("0"), wxPoint(230,268), wxSize(88,21), 0, 0, 255, 0, _T("ID_SPINCTRL1"));
 	SpinCtrl_AlphaMask->SetValue(_T("0"));
 	SpinCtrl_FrameEnd = new wxSpinCtrl(this, ID_SPINCTRL2, _T("99999999"), wxPoint(210,305), wxSize(88,21), 0, 1, 99999999, 99999999, _T("ID_SPINCTRL2"));
 	SpinCtrl_FrameEnd->SetValue(_T("99999999"));
