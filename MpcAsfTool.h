@@ -246,6 +246,7 @@ class MpcAsfTool: public wxFrame
 		void OnExportToGif(wxCommandEvent &event);
 		void OnExportToPng(wxCommandEvent &event);
 		void OnBat(wxCommandEvent &event);
+		void OnShowFile(wxCommandEvent &event);
 		void OnExit(wxCommandEvent &event);
 		void PreviousFrame(wxCommandEvent &event);
 		void NextFrame(wxCommandEvent &event);
@@ -301,7 +302,9 @@ class MpcAsfTool: public wxFrame
             ID_BAT,
             ID_BAT_PIC_CANCLE,
             ID_ANIMATE_TIMER,
-            ID_SHOWHIDE_FILEEXPLORER
+            ID_SHOWHIDE_FILEEXPLORER,
+            ID_SHOW_IN_FILEEXPLORERWINDOW,
+            ID_SHOW_IN_EXPLOER
         };
 
         WorkManager manager;
@@ -345,6 +348,7 @@ public:
 		m_genericDirCtrl1->SetFilterIndex(1);
 		m_parent = (MpcAsfTool*)parent;
 	}
+	void ExpandPath(wxString path){m_genericDirCtrl1->ExpandPath(path);}
 protected:
 	virtual void OnFilterChange( wxCommandEvent& event );
 	virtual void OnTreeItemActivated( wxTreeEvent& event );

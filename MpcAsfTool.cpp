@@ -115,6 +115,8 @@ BEGIN_EVENT_TABLE(MpcAsfTool,wxFrame)
     EVT_MENU(ID_EXPORT_TO_GIF, MpcAsfTool::OnExportToGif)
     EVT_MENU(ID_EXPORT_TO_PNG, MpcAsfTool::OnExportToPng)
     EVT_MENU(ID_BAT, MpcAsfTool::OnBat)
+    EVT_MENU(ID_SHOW_IN_FILEEXPLORERWINDOW, MpcAsfTool::OnShowFile)
+    EVT_MENU(ID_SHOW_IN_EXPLOER, MpcAsfTool::OnShowFile)
     EVT_MENU(wxID_EXIT, MpcAsfTool::OnExit)
     EVT_MENU(ID_FRAME_PREVIOUS, MpcAsfTool::PreviousFrame)
     EVT_MENU(ID_FRAME_NEXT, MpcAsfTool::NextFrame)
@@ -539,6 +541,8 @@ MpcAsfTool::MpcAsfTool(wxWindow* parent,wxWindowID id,const wxPoint& pos,const w
     menu_file->Append(ID_EXPORT_TO_GIF, wxT("导出为 GIF..."));
     menu_file->Append(ID_EXPORT_TO_PNG, wxT("导出为 PNG..."));
     menu_file->Append(ID_BAT, wxT("图片批量导出...\tCtrl+P"));
+    menu_file->Append(ID_SHOW_IN_FILEEXPLORERWINDOW, wxT("在文件浏览窗口显示\tCtrl+W"));
+    menu_file->Append(ID_SHOW_IN_EXPLOER, wxT("打开文件所在文件夹\tCtrl+J"));
     menu_file->Append(wxID_EXIT, wxT("退出\tAlt+F4"));
     menu_file->Enable(wxID_SAVE, false);
     menu_file->Enable(wxID_SAVEAS, false);
@@ -924,6 +928,29 @@ void MpcAsfTool::OnBat(wxCommandEvent &event)
         }
     }
 }
+
+void MpcAsfTool::OnShowFile(wxCommandEvent& event)
+{
+	int id = event.GetId();
+    wxString filePath = currentfile;
+    if(id == ID_SHOW_IN_FILEEXPLORERWINDOW)
+	{
+		if(wxFileName::FileExists(filePath))
+		{
+			m_fileExplorer->Show();
+			m_fileExplorer->ExpandPath(filePath);
+		}
+	}
+	else if(id == ID_SHOW_IN_EXPLOER)
+	{
+		if(wxFileName::FileExists(filePath))
+        {
+            wxString cmd = wxT("explorer /select,\"") + filePath + wxT("\"");
+            wxExecute(cmd);
+        }
+	}
+}
+
 void MpcAsfTool::OnExit(wxCommandEvent &event)
 {
     if(!batpiccancle)
@@ -2098,7 +2125,7 @@ void FileExplorerPanel::OnTreeItemActivated(wxTreeEvent& event)
 {
 	event.Skip();
 	wxString path = m_genericDirCtrl1->GetPath();
-	if(!wxFileName(path).IsDir())
+	if(wxFileName::FileExists(path))
 	{
         m_parent->OpenFile(path);
 	}
