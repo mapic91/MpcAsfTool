@@ -249,6 +249,8 @@
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="wxFormBuilder/FileExplorerPanelBase.cpp" />
+		<Unit filename="wxFormBuilder/FileExplorerPanelBase.h" />
 		<Unit filename="wxsmith/About.wxs" />
 		<Unit filename="wxsmith/AdjustPositionDialog.wxs" />
 		<Unit filename="wxsmith/BatDialog.wxs" />

@@ -573,6 +573,10 @@ MpcAsfTool::MpcAsfTool(wxWindow* parent,wxWindowID id,const wxPoint& pos,const w
     //Tab Sequence
     InitTabSequence();
 
+    //Pnaels
+    m_fileExplorer = new FileExplorerPanel(this);
+    m_fileExplorer->Show();
+
     manager.Init();
 }
 
@@ -2061,3 +2065,31 @@ void MpcAsfTool::OnCheckBox_LockPicOffsetClick(wxCommandEvent& event)
     }
     RefreshBmpShow();
 }
+
+void FileExplorerPanel::OnFilterChange(wxCommandEvent& event)
+{
+	switch(event.GetSelection())
+	{
+	case -1:
+	case 0:
+		m_genericDirCtrl1->SetFilterIndex(0);
+		break;
+	default:
+		m_genericDirCtrl1->SetFilterIndex(event.GetSelection());
+		break;
+	}
+	wxString path = m_genericDirCtrl1->GetPath();
+	m_genericDirCtrl1->ReCreateTree();
+	m_genericDirCtrl1->ExpandPath(path);
+}
+
+void FileExplorerPanel::OnTreeItemActivated(wxTreeEvent& event)
+{
+	event.Skip();
+	wxString path = m_genericDirCtrl1->GetPath();
+	if(!wxFileName(path).IsDir())
+	{
+        m_parent->OpenFile(path);
+	}
+}
+

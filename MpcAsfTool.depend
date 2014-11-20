@@ -9555,7 +9555,7 @@
 1362620473 e:\programmingworkshop\_store_\jxqy\mpcasftool\app.h
 	<wx/app.h>
 
-1416447329 e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.h
+1416470433 e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.h
 	<wx/scrolwin.h>
 	<wx/sizer.h>
 	<wx/stattext.h>
@@ -9575,6 +9575,7 @@
 	"WorkManager.hpp"
 	"FocusSequence.h"
 	"AdjustPositionDialog.h"
+	"wxFormBuilder/FileExplorerPanelBase.h"
 
 1416449794 e:\programmingworkshop\_store_\jxqy\mpcasftool\workmanager.hpp
 	"wx/image.h"
@@ -9644,7 +9645,7 @@
 	"wx/filename.h"
 	<fstream>
 
-1416446556 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\batdialog.cpp
+1416451195 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\batdialog.cpp
 	"BatDialog.h"
 	"wx/filedlg.h"
 	<wx/string.h>
@@ -9705,7 +9706,7 @@
 	"wx/filename.h"
 	<cstdlib>
 
-1416451063 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.cpp
+1416468809 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.cpp
 	"MpcAsfTool.h"
 	"DlgAddFrames.h"
 	"wx/filedlg.h"
@@ -13099,4 +13100,101 @@
 1416447795 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\resizedialog.cpp
 	"ResizeDialog.h"
 	<wx/string.h>
+
+1416470269 e:\programmingworkshop\_store_\jxqy\mpcasftool\wxformbuilder\fileexplorerpanel.h
+	"FileExplorerPanelBase.h"
+	"../MpcAsfTool.h"
+
+1416470097 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\wxformbuilder\fileexplorerpanelbase.cpp
+	"FileExplorerPanelBase.h"
+
+1416470125 e:\programmingworkshop\_store_\jxqy\mpcasftool\wxformbuilder\fileexplorerpanelbase.h
+	<wx/artprov.h>
+	<wx/xrc/xmlres.h>
+	<wx/string.h>
+	<wx/dirctrl.h>
+	<wx/gdicmn.h>
+	<wx/font.h>
+	<wx/colour.h>
+	<wx/settings.h>
+	<wx/combobox.h>
+	<wx/sizer.h>
+	<wx/panel.h>
+	<wx/frame.h>
+
+1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\xrc\xmlres.h
+	"wx/defs.h"
+	"wx/string.h"
+	"wx/dynarray.h"
+	"wx/arrstr.h"
+	"wx/datetime.h"
+	"wx/list.h"
+	"wx/gdicmn.h"
+	"wx/filesys.h"
+	"wx/bitmap.h"
+	"wx/icon.h"
+	"wx/artprov.h"
+	"wx/colour.h"
+	"wx/vector.h"
+	"wx/xrc/xmlreshandler.h"
+
+1412631242 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\filesys.h
+	"wx/defs.h"
+	"wx/stream.h"
+	"wx/datetime.h"
+	"wx/filename.h"
+	"wx/hashmap.h"
+
+1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\xrc\xmlreshandler.h
+	"wx/defs.h"
+	"wx/string.h"
+	"wx/artprov.h"
+	"wx/colour.h"
+	"wx/filesys.h"
+	"wx/imaglist.h"
+	"wx/window.h"
+
+1412631242 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\dirctrl.h
+	"wx/generic/dirctrlg.h"
+
+1412631242 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\generic\dirctrlg.h
+	"wx/treectrl.h"
+	"wx/dialog.h"
+	"wx/dirdlg.h"
+	"wx/choice.h"
+
+1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\treectrl.h
+	"wx/defs.h"
+	"wx/control.h"
+	"wx/treebase.h"
+	"wx/textctrl.h"
+	"wx/generic/treectlg.h"
+	"wx/msw/treectrl.h"
+	"wx/generic/treectlg.h"
+	"wx/generic/treectlg.h"
+	"wx/generic/treectlg.h"
+	"wx/generic/treectlg.h"
+	"wx/generic/treectlg.h"
+
+1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\treebase.h
+	"wx/defs.h"
+	"wx/window.h"
+	"wx/event.h"
+	"wx/dynarray.h"
+	"wx/itemid.h"
+
+1412631242 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\itemid.h
+
+1412631242 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\generic\treectlg.h
+	"wx/scrolwin.h"
+	"wx/pen.h"
+
+1412631243 d:\protools\wxwidgets\wxwidgets-3.0\include\wx\msw\treectrl.h
+	"wx/textctrl.h"
+	"wx/dynarray.h"
+	"wx/treebase.h"
+	"wx/hashmap.h"
+
+1416469083 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\wxformbuilder\fileexplorerpanel.cpp
+	"FileExplorerPanel.h"
 

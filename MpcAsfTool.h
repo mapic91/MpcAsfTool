@@ -24,6 +24,7 @@
 #include "FocusSequence.h"
 #include "AdjustPositionDialog.h"
 
+class FileExplorerPanel;
 class MpcAsfTool: public wxFrame
 {
 	public:
@@ -314,6 +315,7 @@ class MpcAsfTool: public wxFrame
 		bool isplay;
 
 		AdjustPositionDialog *m_adjustPosDlg;
+		FileExplorerPanel *m_fileExplorer;
 };
 
 class MpcAsfDrop:public wxFileDropTarget
@@ -326,6 +328,24 @@ public:
 private:
     MpcAsfTool *mainfram;
 
+};
+
+#include "wxFormBuilder/FileExplorerPanelBase.h"
+
+class FileExplorerPanel: public FileExplorerPanelBase
+{
+public:
+	FileExplorerPanel(wxWindow *parent)
+		:FileExplorerPanelBase(parent)
+	{
+		m_genericDirCtrl1->SetFilter(wxT("ALL|*.*|MPC ASF SPR RPC(*.mpc,*.asf,*.spr,*.rpc)|*.mpc;*.asf;*.spr;*.rpc|MPC(*.mpc)|*.mpc|ASF(*.asf)|*.asf|SPR(*.spr)|*.spr|RPC(*.rpc)|*.rpc"));
+		m_parent = (MpcAsfTool*)parent;
+	}
+protected:
+	virtual void OnFilterChange( wxCommandEvent& event );
+	virtual void OnTreeItemActivated( wxTreeEvent& event );
+
+	MpcAsfTool *m_parent;
 };
 
 #endif
