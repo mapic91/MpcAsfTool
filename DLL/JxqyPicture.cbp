@@ -43,6 +43,7 @@
 					<Add option="-s" />
 					<Add option="-static-libgcc" />
 					<Add option="-static-libstdc++" />
+					<Add option="-Wl,--kill-at" />
 					<Add library="$(#wx.lib)\gcc_lib\libwxmsw30u_stc.a" />
 					<Add library="$(#wx.lib)\gcc_lib\libwxmsw30u_richtext.a" />
 					<Add library="$(#wx.lib)\gcc_lib\libwxmsw30u_xrc.a" />

@@ -1,5 +1,5 @@
-#include "JxqyPicture.h"
 #include "WorkManager.hpp"
+#include "JxqyPicture.h"
 
 WorkManager *worked;
 

@@ -9577,7 +9577,7 @@
 	"AdjustPositionDialog.h"
 	"wxFormBuilder/FileExplorerPanelBase.h"
 
-1416449794 e:\programmingworkshop\_store_\jxqy\mpcasftool\workmanager.hpp
+1416571493 e:\programmingworkshop\_store_\jxqy\mpcasftool\workmanager.hpp
 	"wx/image.h"
 	"MAPICDATA.hpp"
 	"MpcDecode.hpp"
@@ -9706,7 +9706,7 @@
 	"wx/filename.h"
 	<cstdlib>
 
-1416472160 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.cpp
+1416475350 source:e:\programmingworkshop\_store_\jxqy\mpcasftool\mpcasftool.cpp
 	"MpcAsfTool.h"
 	"DlgAddFrames.h"
 	"wx/filedlg.h"
