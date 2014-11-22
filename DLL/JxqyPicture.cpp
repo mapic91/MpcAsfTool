@@ -34,6 +34,11 @@ BYTE ApplyAlpha(BYTE color, BYTE alpha)
                             ((double)255)*((double)(0xFF-alpha)/(double)0xFF));
 }
 
+void DLL_CALLCONV SetAlphaMask(BYTE mask)
+{
+	worked->SetAlphaMask(mask);
+}
+
 enum ColorType {RGBA, BGRA, RGB};
 PBYTE DLL_CALLCONV GetFrameData(int index, ColorType type)
 {

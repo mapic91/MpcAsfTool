@@ -21,6 +21,9 @@ JXQYPICTURE_DLL int DLL_CALLCONV GetFrameCount();
 //获得文件的画布大小
 JXQYPICTURE_DLL int DLL_CALLCONV GetCanvasWidth();
 JXQYPICTURE_DLL int DLL_CALLCONV GetCanvasHeight();
+//设置透明域
+//像素透明度小于mask的为透明
+JXQYPICTURE_DLL void DLL_CALLCONV SetAlphaMask(BYTE mask);
 //获得帧图像数据，每帧图片得长宽都是画布大小，失败返回NULL
 //RGBA,BGRA,RGB为颜色循序
 //数据的循序是从左到右，从上到下。
