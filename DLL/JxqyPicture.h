@@ -46,6 +46,10 @@ JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataRGBA_R(int index);
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataBGRA_R(int index);
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataRGB_R(int index);
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataBGR_R(int index);
+//Mpc 文件每帧长宽不一样。
+JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadMpcFile(const char* path);
+JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetMpcFrameDataRGBA_R(int index, int *width, int *height);
+
 
 #ifdef __cplusplus
 }

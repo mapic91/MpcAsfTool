@@ -118,6 +118,10 @@
 				<ExtraCommands>
 					<Add after="D:\Protools\ExeTool\UPX\upx.exe -9 E:\ProgrammingWorkshop\_STORE_\jxqy\MpcAsfTool\DLL\bin\Release\libJxqyPicture.dll" />
 					<Add after="C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\lib.exe /def:$(TARGET_OUTPUT_DIR)libJxqyPicture.def /machine:x86 /out:$(TARGET_OUTPUT_DIR)libJxqyPicture.lib" />
+					<Add after="cmd /c copy /Y /B $(TARGET_OUTPUT_DIR)libJxqyPicture.lib E:\ProgrammingWorkshop\_STORE_\jxqy\MapEditor\lib\libJxqyPicture.lib" />
+					<Add after="cmd /c copy /Y /B $(TARGET_OUTPUT_DIR)libJxqyPicture.dll E:\ProgrammingWorkshop\_STORE_\jxqy\MapEditor\lib\libJxqyPicture.dll" />
+					<Add after="cmd /c copy /Y /B $(TARGET_OUTPUT_DIR)libJxqyPicture.exp E:\ProgrammingWorkshop\_STORE_\jxqy\MapEditor\lib\libJxqyPicture.exp" />
+					<Add after="cmd /c copy /Y /B $(PROJECT_DIR)JxqyPicture.h E:\ProgrammingWorkshop\_STORE_\jxqy\MapEditor\JxqyPicture.h" />
 				</ExtraCommands>
 			</Target>
 		</Build>

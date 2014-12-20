@@ -182,3 +182,42 @@ JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataBGR_R(int index)
 {
 	return GetFrameData_R(index, BGR);
 }
+
+MpcDecode mpcDecoder;
+JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadMpcFile(const char* path)
+{
+	return mpcDecoder.ReadMpcFile(wxString(path));
+}
+JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetMpcFrameDataRGBA_R(int index, int *width, int *height)
+{
+	long fw, fh;
+	PBYTE data = mpcDecoder.GetDecodedFrameData(index, &fw, &fh, MpcDecode::PIC_RGBA);
+	PBYTE rData = NULL;
+	if(data)
+	{
+		rData = (PBYTE)malloc(fw*fh*4);
+		int i = 0;
+		//Reverse row order
+		for(long h = fh - 1; h >= 0; h--)
+		{
+			for(long w = 0; w < fw; w++)
+			{
+				int index = (w + h * fw)*4;
+				rData[i++] = data[index++];
+				rData[i++] = data[index++];
+				rData[i++] = data[index++];
+				rData[i++] = data[index++];
+			}
+		}
+		free(data);
+		if(width)
+		{
+			*width = (int)fw;
+		}
+		if(height)
+		{
+			*height = (int)fh;
+		}
+	}
+	return rData;
+}
