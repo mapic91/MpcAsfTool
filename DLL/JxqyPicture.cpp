@@ -1,5 +1,9 @@
 #include "WorkManager.hpp"
 #include "JxqyPicture.h"
+#include "RpcDecode.hpp"
+#include "MpcDecode.hpp"
+#include "AsfDecode.hpp"
+#include "SprDecode.hpp"
 
 WorkManager worked = WorkManager();
 
@@ -183,6 +187,28 @@ JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataBGR_R(int index)
 	return GetFrameData_R(index, BGR);
 }
 
+//free in data, return row reverted data.
+PBYTE RevertRowRGBA(PBYTE data, long width, long height)
+{
+	if(!data)return NULL;
+	PBYTE toData = (PBYTE)malloc(width*height*4);
+	if(!toData)
+	{
+		free(data);
+		return NULL;
+	}
+	int rowStep = width*4;
+	int i = 0;
+	for(long h = height - 1; h >=0; h++)
+	{
+		long begin = h * width * 4;
+		memcpy(toData + i, data+begin, rowStep);
+		i += rowStep;
+	}
+	free(data);
+	return toData;
+}
+
 MpcDecode mpcDecoder;
 JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadMpcFile(const char* path)
 {
@@ -195,21 +221,6 @@ JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetMpcFrameDataRGBA_R(int index, int *widt
 	PBYTE rData = NULL;
 	if(data)
 	{
-		rData = (PBYTE)malloc(fw*fh*4);
-		int i = 0;
-		//Reverse row order
-		for(long h = fh - 1; h >= 0; h--)
-		{
-			for(long w = 0; w < fw; w++)
-			{
-				int index = (w + h * fw)*4;
-				rData[i++] = data[index++];
-				rData[i++] = data[index++];
-				rData[i++] = data[index++];
-				rData[i++] = data[index++];
-			}
-		}
-		free(data);
 		if(width)
 		{
 			*width = (int)fw;
@@ -218,6 +229,84 @@ JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetMpcFrameDataRGBA_R(int index, int *widt
 		{
 			*height = (int)fh;
 		}
+		rData = RevertRowRGBA(data, fw, fh);
+	}
+	return rData;
+}
+
+
+RpcDecode rpcDecoder;
+JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadRpcFile(const char* path)
+{
+	return rpcDecoder.ReadFile(wxString(path));
+}
+JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetRpcFrameDataRGBA_R(int index, int *width, int *height)
+{
+	long fw = rpcDecoder.GetGlobleWidth(),
+		 fh = rpcDecoder.GetGlobleHeight();
+	PBYTE data = rpcDecoder.GetDecodedFrameData(index);
+	PBYTE rData = NULL;
+	if(data)
+	{
+		if(width)
+		{
+			*width = (int)fw;
+		}
+		if(height)
+		{
+			*height = (int)fh;
+		}
+		rData = RevertRowRGBA(data, fw, fh);
+	}
+	return rData;
+}
+
+SprDecode sprDecoder;
+JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadSprFile(const char* path)
+{
+	return sprDecoder.ReadSprFile(wxString(path));
+}
+JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetSprFrameDataRGBA_R(int index, int *width, int *height)
+{
+	int fw, fh;
+	PBYTE data = sprDecoder.GetDecodedFrameData(index, &fw, &fh, SprDecode::PIC_RGBA);
+	PBYTE rData = NULL;
+	if(data)
+	{
+		if(width)
+		{
+			*width = (int)fw;
+		}
+		if(height)
+		{
+			*height = (int)fh;
+		}
+		rData = RevertRowRGBA(data, fw, fh);
+	}
+	return rData;
+}
+
+AsfDecode asfDecoder;
+JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadAsfFile(const char* path)
+{
+	return asfDecoder.ReadAsfFile(wxString(path));
+}
+JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetAsfFrameDataRGBA_R(int index, int *width, int *height)
+{
+	long fw, fh;
+	PBYTE data = asfDecoder.GetDecodedFrameData(index, &fw, &fh, AsfDecode::PIC_RGBA);
+	PBYTE rData = NULL;
+	if(data)
+	{
+		if(width)
+		{
+			*width = (int)fw;
+		}
+		if(height)
+		{
+			*height = (int)fh;
+		}
+		rData = RevertRowRGBA(data, fw, fh);
 	}
 	return rData;
 }

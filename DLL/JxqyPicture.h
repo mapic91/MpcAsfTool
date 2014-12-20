@@ -46,10 +46,18 @@ JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataRGBA_R(int index);
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataBGRA_R(int index);
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataRGB_R(int index);
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataBGR_R(int index);
-//Mpc 文件每帧长宽不一样。
+//读取MPC文件
 JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadMpcFile(const char* path);
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetMpcFrameDataRGBA_R(int index, int *width, int *height);
-
+//读取ASF文件
+JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadAsfFile(const char* path);
+JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetAsfFrameDataRGBA_R(int index, int *width, int *height);
+//读取RPC文件
+JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadRpcFile(const char* path);
+JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetRpcFrameDataRGBA_R(int index, int *width, int *height);
+//读取SPR文件
+JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadSprFile(const char* path);
+JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetSprFrameDataRGBA_R(int index, int *width, int *height);
 
 #ifdef __cplusplus
 }
