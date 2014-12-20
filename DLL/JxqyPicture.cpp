@@ -3,23 +3,23 @@
 
 WorkManager worked = WorkManager();
 
-bool DLL_CALLCONV ReadFile(const char* filePath)
+bool DLL_CALLCONV JX_ReadFile(const char* filePath)
 {
     worked.ReNew();
     return worked.OpenFile(wxString(filePath));
 }
 
-int DLL_CALLCONV GetFrameCount()
+int DLL_CALLCONV JX_GetFrameCount()
 {
     return worked.GetFrameCounts();
 }
 
-int DLL_CALLCONV GetCanvasWidth()
+int DLL_CALLCONV JX_GetCanvasWidth()
 {
     return worked.GetGlobalWidth();
 }
 
-int DLL_CALLCONV GetCanvasHeight()
+int DLL_CALLCONV JX_GetCanvasHeight()
 {
     return worked.GetGlobalHeight();
 }
@@ -30,7 +30,7 @@ BYTE ApplyAlpha(BYTE color, BYTE alpha)
                             ((double)255)*((double)(0xFF-alpha)/(double)0xFF));
 }
 
-void DLL_CALLCONV SetAlphaMask(BYTE mask)
+void DLL_CALLCONV JX_SetAlphaMask(BYTE mask)
 {
 	worked.SetAlphaMask(mask);
 }
@@ -89,22 +89,22 @@ PBYTE DLL_CALLCONV GetFrameData(int index, ColorType type)
     return data;
 }
 
-PBYTE DLL_CALLCONV GetFrameDataRGBA(int index)
+PBYTE DLL_CALLCONV JX_GetFrameDataRGBA(int index)
 {
 	return GetFrameData(index, RGBA);
 }
 
-PBYTE DLL_CALLCONV GetFrameDataBGRA(int index)
+PBYTE DLL_CALLCONV JX_GetFrameDataBGRA(int index)
 {
 	return GetFrameData(index, BGRA);
 }
 
-PBYTE DLL_CALLCONV GetFrameDataRGB(int index)
+PBYTE DLL_CALLCONV JX_GetFrameDataRGB(int index)
 {
 	return GetFrameData(index, RGB);
 }
 
-PBYTE DLL_CALLCONV GetFrameDataBGR(int index)
+PBYTE DLL_CALLCONV JX_GetFrameDataBGR(int index)
 {
 	return GetFrameData(index, BGR);
 }

@@ -72,6 +72,54 @@
 					<Add after="D:\Protools\ExeTool\UPX\upx.exe -9 E:\ProgrammingWorkshop\_STORE_\jxqy\MpcAsfTool\DLL\bin\Release\libJxqyPicture.dll" />
 				</ExtraCommands>
 			</Target>
+			<Target title="Relase-NoKillAt">
+				<Option output="bin/Release/libJxqyPicture" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="$(#wx.lib)/gcc_lib/mswu" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(#wx.lib)/gcc_lib/mswu" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-static-libgcc" />
+					<Add option="-static-libstdc++" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw30u_stc.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw30u_richtext.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw30u_xrc.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw30u_adv.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw30u_html.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxbase30u_xml.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw30u_core.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxbase30u.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxpng.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxjpeg.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxtiff.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxzlib.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxexpat.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw30u_aui.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxbase30u_net.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw30u_gl.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw30u_media.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw30u_propgrid.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw30u_ribbon.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxmsw30u_webview.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxregexu.a" />
+					<Add library="$(#wx.lib)\gcc_lib\libwxscintilla.a" />
+					<Add directory="$(#wx.lib)/gcc_lib" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="D:\Protools\ExeTool\UPX\upx.exe -9 E:\ProgrammingWorkshop\_STORE_\jxqy\MpcAsfTool\DLL\bin\Release\libJxqyPicture.dll" />
+					<Add after="C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\lib.exe /def:$(TARGET_OUTPUT_DIR)libJxqyPicture.def /machine:x86 /out:$(TARGET_OUTPUT_DIR)libJxqyPicture.lib" />
+				</ExtraCommands>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />

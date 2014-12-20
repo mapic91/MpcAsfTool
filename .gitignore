@@ -27,4 +27,7 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
-Ship
+#Ignore CodeBlocks layout file
+*.layout
+#Ingnore doxygen document
+doxygen

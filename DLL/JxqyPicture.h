@@ -15,15 +15,15 @@ extern "C" {
 #endif
 
 //读取文件，读取成功返回true
-JXQYPICTURE_DLL bool DLL_CALLCONV ReadFile(const char* filePath);
+JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadFile(const char* filePath);
 //读取文件后，获得帧数量
-JXQYPICTURE_DLL int DLL_CALLCONV GetFrameCount();
+JXQYPICTURE_DLL int DLL_CALLCONV JX_GetFrameCount();
 //获得文件的画布大小
-JXQYPICTURE_DLL int DLL_CALLCONV GetCanvasWidth();
-JXQYPICTURE_DLL int DLL_CALLCONV GetCanvasHeight();
+JXQYPICTURE_DLL int DLL_CALLCONV JX_GetCanvasWidth();
+JXQYPICTURE_DLL int DLL_CALLCONV JX_GetCanvasHeight();
 //设置透明域
 //像素透明度小于mask的为透明
-JXQYPICTURE_DLL void DLL_CALLCONV SetAlphaMask(BYTE mask);
+JXQYPICTURE_DLL void DLL_CALLCONV JX_SetAlphaMask(BYTE mask);
 //获得帧图像数据，每帧图片得长宽都是画布大小，失败返回NULL
 //RGBA,BGRA,RGB,BGR为颜色循序
 //数据的循序是从左到右，从上到下。
@@ -31,10 +31,10 @@ JXQYPICTURE_DLL void DLL_CALLCONV SetAlphaMask(BYTE mask);
 //    4 5 6 7
 //    . . .
 //返回的data不需要时要free()
-JXQYPICTURE_DLL PBYTE DLL_CALLCONV GetFrameDataRGBA(int index);
-JXQYPICTURE_DLL PBYTE DLL_CALLCONV GetFrameDataBGRA(int index);
-JXQYPICTURE_DLL PBYTE DLL_CALLCONV GetFrameDataRGB(int index);
-JXQYPICTURE_DLL PBYTE DLL_CALLCONV GetFrameDataBGR(int index);
+JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataRGBA(int index);
+JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataBGRA(int index);
+JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataRGB(int index);
+JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataBGR(int index);
 
 #ifdef __cplusplus
 }
