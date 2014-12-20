@@ -69,7 +69,7 @@
 					<Add directory="$(#wx.lib)/gcc_lib" />
 				</Linker>
 				<ExtraCommands>
-					<Add after="D:\Protools\ExeTool\UPX&gt;D:\Protools\ExeTool\UPX\upx.exe -9 E:\ProgrammingWorkshop\_STORE_\jxqy\MpcAsfTool\DLL\bin\Release\libJxqyPicture.dll" />
+					<Add after="D:\Protools\ExeTool\UPX\upx.exe -9 E:\ProgrammingWorkshop\_STORE_\jxqy\MpcAsfTool\DLL\bin\Release\libJxqyPicture.dll" />
 				</ExtraCommands>
 			</Target>
 		</Build>

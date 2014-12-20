@@ -25,7 +25,7 @@ JXQYPICTURE_DLL int DLL_CALLCONV GetCanvasHeight();
 //像素透明度小于mask的为透明
 JXQYPICTURE_DLL void DLL_CALLCONV SetAlphaMask(BYTE mask);
 //获得帧图像数据，每帧图片得长宽都是画布大小，失败返回NULL
-//RGBA,BGRA,RGB为颜色循序
+//RGBA,BGRA,RGB,BGR为颜色循序
 //数据的循序是从左到右，从上到下。
 //即：0 1 2 3
 //    4 5 6 7
@@ -34,8 +34,7 @@ JXQYPICTURE_DLL void DLL_CALLCONV SetAlphaMask(BYTE mask);
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV GetFrameDataRGBA(int index);
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV GetFrameDataBGRA(int index);
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV GetFrameDataRGB(int index);
-//释放资源，最后不再需要此dll时使用
-JXQYPICTURE_DLL void DLL_CALLCONV FreeResource();
+JXQYPICTURE_DLL PBYTE DLL_CALLCONV GetFrameDataBGR(int index);
 
 #ifdef __cplusplus
 }

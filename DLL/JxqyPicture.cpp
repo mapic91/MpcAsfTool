@@ -1,31 +1,27 @@
 #include "WorkManager.hpp"
 #include "JxqyPicture.h"
 
-WorkManager *worked;
+WorkManager worked = WorkManager();
 
 bool DLL_CALLCONV ReadFile(const char* filePath)
 {
-    if(worked == NULL)
-    {
-        worked = new WorkManager();
-    }
-    worked->ReNew();
-    return worked->OpenFile(wxString(filePath));
+    worked.ReNew();
+    return worked.OpenFile(wxString(filePath));
 }
 
 int DLL_CALLCONV GetFrameCount()
 {
-    return worked->GetFrameCounts();
+    return worked.GetFrameCounts();
 }
 
 int DLL_CALLCONV GetCanvasWidth()
 {
-    return worked->GetGlobalWidth();
+    return worked.GetGlobalWidth();
 }
 
 int DLL_CALLCONV GetCanvasHeight()
 {
-    return worked->GetGlobalHeight();
+    return worked.GetGlobalHeight();
 }
 
 BYTE ApplyAlpha(BYTE color, BYTE alpha)
@@ -36,18 +32,18 @@ BYTE ApplyAlpha(BYTE color, BYTE alpha)
 
 void DLL_CALLCONV SetAlphaMask(BYTE mask)
 {
-	worked->SetAlphaMask(mask);
+	worked.SetAlphaMask(mask);
 }
 
-enum ColorType {RGBA, BGRA, RGB};
+enum ColorType {RGBA, BGRA, RGB, BGR};
 PBYTE DLL_CALLCONV GetFrameData(int index, ColorType type)
 {
-    FILOCRGBQUAD *frame = worked->GetUndeletedGlobalizedFrameData((unsigned long)index);
+    FILOCRGBQUAD *frame = worked.GetUndeletedGlobalizedFrameData((unsigned long)index);
     PBYTE data = NULL;
-    long width = worked->GetGlobalWidth();
-    long height = worked->GetGlobalHeight();
+    long width = worked.GetGlobalWidth();
+    long height = worked.GetGlobalHeight();
     int pixelSize = 4;
-    if(type == RGB) pixelSize = 3;
+    if(type == RGB || type == BGR) pixelSize = 3;
     long size = width*height*pixelSize;
     if(frame && size != 0)
     {
@@ -78,6 +74,12 @@ PBYTE DLL_CALLCONV GetFrameData(int index, ColorType type)
                     data[i++] = ApplyAlpha(frame[index].rgbGreen, alpha);
                     data[i++] = ApplyAlpha(frame[index].rgbBlue, alpha);
                     break;
+				case BGR:
+					alpha = frame[index].rgbReserved;
+					data[i++] = ApplyAlpha(frame[index].rgbBlue, alpha);
+                    data[i++] = ApplyAlpha(frame[index].rgbGreen, alpha);
+                    data[i++] = ApplyAlpha(frame[index].rgbRed, alpha);
+                    break;
                 }
                 index++;
             }
@@ -102,7 +104,7 @@ PBYTE DLL_CALLCONV GetFrameDataRGB(int index)
 	return GetFrameData(index, RGB);
 }
 
-void DLL_CALLCONV FreeResource()
+PBYTE DLL_CALLCONV GetFrameDataBGR(int index)
 {
-    if(worked) delete worked;
+	return GetFrameData(index, BGR);
 }
