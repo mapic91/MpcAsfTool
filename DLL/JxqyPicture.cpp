@@ -210,9 +210,14 @@ PBYTE RevertRowRGBA(PBYTE data, long width, long height)
 }
 
 MpcDecode mpcDecoder;
-JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadMpcFile(const char* path)
+JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadMpcFile(const char* path, int *frameCount)
 {
-	return mpcDecoder.ReadMpcFile(wxString(path));
+	bool ret = mpcDecoder.ReadMpcFile(wxString(path));
+	if(ret && frameCount)
+	{
+		*frameCount = (int)mpcDecoder.GetFramesCounts();
+	}
+	return ret;
 }
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetMpcFrameDataRGBA_R(int index, int *width, int *height)
 {
@@ -236,9 +241,14 @@ JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetMpcFrameDataRGBA_R(int index, int *widt
 
 
 RpcDecode rpcDecoder;
-JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadRpcFile(const char* path)
+JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadRpcFile(const char* path, int *frameCount)
 {
-	return rpcDecoder.ReadFile(wxString(path));
+	bool ret = rpcDecoder.ReadFile(wxString(path));
+	if(ret && frameCount)
+	{
+		*frameCount = (int)rpcDecoder.GetFramesCounts();
+	}
+	return ret;
 }
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetRpcFrameDataRGBA_R(int index, int *width, int *height)
 {
@@ -262,9 +272,14 @@ JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetRpcFrameDataRGBA_R(int index, int *widt
 }
 
 SprDecode sprDecoder;
-JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadSprFile(const char* path)
+JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadSprFile(const char* path, int *frameCount)
 {
-	return sprDecoder.ReadSprFile(wxString(path));
+	bool ret = sprDecoder.ReadSprFile(wxString(path));
+	if(ret && frameCount)
+	{
+		*frameCount = (int)sprDecoder.GetFramesCounts();
+	}
+	return ret;
 }
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetSprFrameDataRGBA_R(int index, int *width, int *height)
 {
@@ -287,9 +302,14 @@ JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetSprFrameDataRGBA_R(int index, int *widt
 }
 
 AsfDecode asfDecoder;
-JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadAsfFile(const char* path)
+JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadAsfFile(const char* path, int *frameCount)
 {
-	return asfDecoder.ReadAsfFile(wxString(path));
+	bool ret = asfDecoder.ReadAsfFile(wxString(path));
+	if(ret && frameCount)
+	{
+		*frameCount = (int)asfDecoder.GetFramesCounts();
+	}
+	return ret;
 }
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetAsfFrameDataRGBA_R(int index, int *width, int *height)
 {
