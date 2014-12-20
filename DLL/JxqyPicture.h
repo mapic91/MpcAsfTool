@@ -35,6 +35,17 @@ JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataRGBA(int index);
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataBGRA(int index);
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataRGB(int index);
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataBGR(int index);
+//获得帧图像数据，每帧图片得长宽都是画布大小，失败返回NULL
+//RGBA,BGRA,RGB,BGR为颜色循序
+//数据的循序是从左到右，从下到上。
+//即：8 9 . .
+//    4 5 6 7
+//    0 1 2 3
+//返回的data不需要时要free()
+JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataRGBA_R(int index);
+JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataBGRA_R(int index);
+JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataRGB_R(int index);
+JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataBGR_R(int index);
 
 #ifdef __cplusplus
 }
