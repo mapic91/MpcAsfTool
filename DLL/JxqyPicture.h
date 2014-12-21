@@ -30,7 +30,7 @@ JXQYPICTURE_DLL void DLL_CALLCONV JX_SetAlphaMask(BYTE mask);
 //即：0 1 2 3
 //    4 5 6 7
 //    . . .
-//返回的data不需要时要free()
+//返回的data不需要时要使用JX_FreeData释放
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataRGBA(int index);
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataBGRA(int index);
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataRGB(int index);
@@ -41,7 +41,7 @@ JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataBGR(int index);
 //即：8 9 . .
 //    4 5 6 7
 //    0 1 2 3
-//返回的data不需要时要free()
+//返回的data不需要时要使用JX_FreeData释放
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataRGBA_R(int index);
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataBGRA_R(int index);
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataRGB_R(int index);
@@ -58,6 +58,9 @@ JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetRpcFrameDataRGBA_R(int index, int *widt
 //读取SPR文件
 JXQYPICTURE_DLL bool DLL_CALLCONV JX_ReadSprFile(const char* path, int *frameCount);
 JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetSprFrameDataRGBA_R(int index, int *width, int *height);
+
+//释放资源
+JXQYPICTURE_DLL void DLL_CALLCONV JX_FreeData(PBYTE data);
 
 #ifdef __cplusplus
 }

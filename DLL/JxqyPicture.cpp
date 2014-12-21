@@ -199,7 +199,7 @@ PBYTE RevertRowRGBA(PBYTE data, long width, long height)
 	}
 	int rowStep = width*4;
 	int i = 0;
-	for(long h = height - 1; h >=0; h++)
+	for(long h = height - 1; h >=0; h--)
 	{
 		long begin = h * width * 4;
 		memcpy(toData + i, data+begin, rowStep);
@@ -329,4 +329,12 @@ JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetAsfFrameDataRGBA_R(int index, int *widt
 		rData = RevertRowRGBA(data, fw, fh);
 	}
 	return rData;
+}
+
+JXQYPICTURE_DLL DLL_CALLCONV void JX_FreeData(PBYTE data)
+{
+	if(data)
+	{
+		free(data);
+	}
 }
