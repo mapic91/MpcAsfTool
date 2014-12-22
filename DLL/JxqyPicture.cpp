@@ -190,10 +190,9 @@ JXQYPICTURE_DLL PBYTE DLL_CALLCONV JX_GetFrameDataBGR_R(int index)
 long GetGreaterNear2Fold(long d)
 {
 	long fd = 1;
-	while(d >>= 1)
+	while(d > fd)
 	{
 		fd <<= 1;
-		fd |= 1;
 	}
 	return fd;
 }
