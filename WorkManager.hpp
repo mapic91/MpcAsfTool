@@ -47,7 +47,7 @@ public:
     void ReNew(){FreeRGBAData();Init();}
 
     //return failed file
-    wxArrayString AddFiles(wxArrayString files);
+    wxArrayString AddFiles(const wxArrayString& files);
 
     //open mpc asf file
     bool OpenFile(wxString InPath, int frameBegin = 0, int frameEnd = 99999999);

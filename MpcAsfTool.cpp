@@ -864,7 +864,15 @@ void MpcAsfTool::OnBat(wxCommandEvent &event)
                 conv.SetShdIncluded(batdlg.isShd());
                 conv.SetBaseColor(batdlg.GetBaseColor());
                 conv.SetAlphaMask(batdlg.GetAlphaMask());
-                if(conv.OpenFile(files[j], frameBegin, frameEnd))
+                bool result = conv.OpenFile(files[j], frameBegin, frameEnd);
+                if(!result)
+				{
+					wxArrayString picfile;
+					picfile.Add(files[j]);
+					wxArrayString out = conv.AddFiles(picfile);
+					result = out.IsEmpty();
+				}
+                if(result)
                 {
                 	if(ratio != 1)
 					{
@@ -2124,6 +2132,10 @@ void FileExplorerPanel::OnFilterChange(wxCommandEvent& event)
 void FileExplorerPanel::OnTreeItemActivated(wxTreeEvent& event)
 {
 	event.Skip();
+
+	m_parent->ReNewFocus();
+    if(!m_parent->ChangeSaved()) return;
+
 	wxString path = m_genericDirCtrl1->GetPath();
 	if(wxFileName::FileExists(path))
 	{

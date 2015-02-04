@@ -6,7 +6,7 @@
 ///////////////
 //public
 //////////////
-wxArrayString WorkManager::AddFiles(wxArrayString files)
+wxArrayString WorkManager::AddFiles(const wxArrayString& files)
 {
     if(files.IsEmpty())return wxArrayString();
 
@@ -288,7 +288,7 @@ bool WorkManager::OpenFile(wxString InPath, int frameBegin, int frameEnd )
         }
         else return false;
     }
-    else
+    else if(ext.CmpNoCase(wxT("spr")) == 0)
     {
         if(sprdecode.ReadSprFile(InPath))
         {
@@ -312,6 +312,10 @@ bool WorkManager::OpenFile(wxString InPath, int frameBegin, int frameEnd )
         else
             return false;
     }
+    else
+	{
+		return false;
+	}
 
     return true;
 }

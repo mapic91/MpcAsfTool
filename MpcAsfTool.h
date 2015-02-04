@@ -264,6 +264,10 @@ class MpcAsfTool: public wxFrame
 
 		bool OpenFile(const wxString path);
 
+		//let SpinCtril update value when renewfocus
+        void ReNewFocus();
+        bool ChangeSaved();
+
     private:
         void ReNew();
         void EnableCtrl();
@@ -274,7 +278,6 @@ class MpcAsfTool: public wxFrame
 		//than if keep setting InitPrevShadowFromManagerGlobalShadow,
 		//than Renew,than if keep setting InitToManager
 		void InitToManager();
-		bool ChangeSaved();
 		void SetStateChange(bool StateChange = true);
         bool SaveFile(bool CurentFile = true);
         void RefreshBmpShow();
@@ -282,8 +285,6 @@ class MpcAsfTool: public wxFrame
         void RefreshFrameSlide();
         void SetLockState();
         void InitTabSequence();
-        //let SpinCtril update value when renewfocus
-        void ReNewFocus();
         void BeginAnimate(bool ReNewIndex = false);
         void StopAnimate(bool ReNewIndex = false);
         void ResizeFrame(WorkManager *manager, int i, int toWidth, int toHeight);

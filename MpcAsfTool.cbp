@@ -167,6 +167,9 @@
 					<Add library="$(#wx.lib)\gcc_lib\libwxscintilla.a" />
 					<Add directory="$(#wx.lib)/gcc_lib" />
 				</Linker>
+				<ExtraCommands>
+					<Add after="upx.exe -9 $(PROJECT_DIR)$(TARGET_OUTPUT_FILE)" />
+				</ExtraCommands>
 			</Target>
 		</Build>
 		<Compiler>

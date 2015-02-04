@@ -41,13 +41,13 @@ About::About(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& siz
 	Panel1 = new wxPanel(this, ID_PANEL1, wxPoint(0,0), wxSize(400,200), wxTAB_TRAVERSAL, _T("ID_PANEL1"));
 	Panel1->SetBackgroundColour(wxColour(202,209,247));
 	StaticBitmap1 = new wxStaticBitmap(Panel1, ID_STATICBITMAP1, showbitmap, wxPoint(250,50), wxSize(96,96), wxNO_BORDER, _T("ID_STATICBITMAP1"));
-	StaticText2 = new wxStaticText(Panel1, ID_STATICTEXT2, _T("MPC ASF ±à¼­Æ÷ V1.7.1"), wxPoint(130,24), wxDefaultSize, 0, _T("ID_STATICTEXT2"));
+	StaticText2 = new wxStaticText(Panel1, ID_STATICTEXT2, _T("MPC ASF ±à¼­Æ÷ V1.7.2"), wxPoint(130,24), wxDefaultSize, 0, _T("ID_STATICTEXT2"));
 	StaticText1 = new wxStaticText(Panel1, ID_STATICTEXT1, _T("GUI Framework£º"), wxPoint(55,60), wxDefaultSize, 0, _T("ID_STATICTEXT1"));
 	StaticText3 = new wxStaticText(Panel1, ID_STATICTEXT3, _T("Í¼Æ¬½âÂë¿â£º"), wxPoint(55,85), wxDefaultSize, 0, _T("ID_STATICTEXT3"));
 	StaticText4 = new wxStaticText(Panel1, ID_STATICTEXT4, _T("³ÌÐò£º"), wxPoint(55,110), wxDefaultSize, 0, _T("ID_STATICTEXT4"));
 	StaticText5 = new wxStaticText(Panel1, ID_STATICTEXT5, _T("¸ÐÐ»£º"), wxPoint(55,135), wxDefaultSize, 0, _T("ID_STATICTEXT5"));
 	Button_OK = new wxButton(Panel1, ID_BUTTON1, _T("²»ÈÌÖ±ÊÓ"), wxPoint(265,165), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
-	StaticText6 = new wxStaticText(Panel1, ID_STATICTEXT6, _T("2014.11.20"), wxPoint(136,160), wxDefaultSize, 0, _T("ID_STATICTEXT6"));
+	StaticText6 = new wxStaticText(Panel1, ID_STATICTEXT6, _T("2015.02.04"), wxPoint(136,160), wxDefaultSize, 0, _T("ID_STATICTEXT6"));
 	HyperlinkCtrl_MyWebPage = new wxHyperlinkCtrl(Panel1, ID_HYPERLINKCTRL1, _T("Ð¡ÊÔµ¶½£"), _T("http://hi.baidu.com/qndryqnqbmbbceq"), wxPoint(100,109), wxDefaultSize, wxHL_CONTEXTMENU|wxHL_ALIGN_CENTRE|wxNO_BORDER, _T("ID_HYPERLINKCTRL1"));
 	HyperlinkCtrl1 = new wxHyperlinkCtrl(Panel1, ID_HYPERLINKCTRL2, _T("Upwinded"), _T("http://tieba.baidu.com/p/2279039886"), wxPoint(100,134), wxDefaultSize, wxHL_CONTEXTMENU|wxHL_ALIGN_CENTRE|wxNO_BORDER, _T("ID_HYPERLINKCTRL2"));
 	HyperlinkCtrl2 = new wxHyperlinkCtrl(Panel1, ID_HYPERLINKCTRL3, _T("FreeImage"), _T("http://sourceforge.net/projects/freeimage/"), wxPoint(138,84), wxDefaultSize, wxHL_CONTEXTMENU|wxHL_ALIGN_CENTRE|wxNO_BORDER, _T("ID_HYPERLINKCTRL3"));

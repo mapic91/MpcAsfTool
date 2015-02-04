@@ -91,8 +91,8 @@ BatDialog::~BatDialog()
 
 void BatDialog::OnButton_AddClick(wxCommandEvent& event)
 {
-    wxFileDialog filedlg(this, wxT("选择MPC ASF SPR RPC文件"), wxT(""), wxT(""),
-                         wxT("MPC ASF SPR RPC(*.mpc,*.asf,*.spr,*.rpc)|*.mpc;*.asf;*.spr;*.rpc|MPC(*.mpc)|*.mpc|ASF(*.asf)|*.asf|SPR(*.spr)|*.spr|RPC(*.rpc)|*.rpc"),
+    wxFileDialog filedlg(this, wxT("选择MPC ASF SPR RPC 图片 文件"), wxT(""), wxT(""),
+                         wxT("所有文件|*.*|MPC ASF SPR RPC(*.mpc,*.asf,*.spr,*.rpc)|*.mpc;*.asf;*.spr;*.rpc|图片文件(*.png,*gif,*bmp,*.jpg,*.tif,*.ico,*.psd)|*.png;*.gif;*.bmp;*.jpg;*.tif;*.ico;*.psd|MPC(*.mpc)|*.mpc|ASF(*.asf)|*.asf|SPR(*.spr)|*.spr|RPC(*.rpc)|*.rpc|PNG|*.png|GIF|*.gif|BMP|*.bmp|JPG|*.jpg|TIFF|*.tif|ICO|*.ico|PSD|*.psd"),
                          wxFD_OPEN|wxFD_FILE_MUST_EXIST|wxFD_MULTIPLE);
 
     if(filedlg.ShowModal() == wxID_OK)
