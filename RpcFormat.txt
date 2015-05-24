@@ -3,7 +3,7 @@
 16  (4 bytes): Height
 20  (4 bytes): Frame Sum
 24  (4 bytes): Direction
-
+40  (4 bytes): y offset
 44  (4 bytes): Interval
 
 

@@ -1444,7 +1444,7 @@ bool MpcAsfTool::SaveFile(bool CurrentFile)
         else capital = wxT("保存文件");
 
         wxFileDialog filedlg(this, capital, wxT(""), wxT(""),
-                             wxT("MPC ASF(*.mpc,*.asf)|*.mpc;*.asf|MPC(*.mpc)|*.mpc|ASF(*.asf)|*.asf"),
+                             wxT("MPC-剑侠(*.mpc)|*.mpc|MPC-赵云传(*.mpc)|*.mpc|ASF(*.asf)|*.asf"),
                              wxFD_SAVE|wxFD_OVERWRITE_PROMPT);
         if(filedlg.ShowModal() == wxID_OK)
         {
@@ -1461,7 +1461,8 @@ bool MpcAsfTool::SaveFile(bool CurrentFile)
             }
             else if(ext.CmpNoCase(wxT("mpc")) == 0)
             {
-                if(!manager.SaveToMpc(filedlg.GetPath()))
+            	int type = (filedlg.GetFilterIndex() == 0 ? 0 : 1);
+                if(!manager.SaveToMpc(filedlg.GetPath(), type))
                 {
                     wxMessageBox(wxT("文件保存失败！"), wxT("错误"), wxOK|wxICON_ERROR);
                     return false;

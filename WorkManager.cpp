@@ -680,8 +680,11 @@ wxImage WorkManager::GetUndeletedGlobalizedImage(unsigned long index, bool AssiL
     wxImage img(GetGlobalWidth(), GetGlobalHeight(), rgbdata);
     return img;
 }
-
 bool WorkManager::SaveToMpc(const wxString outpath)
+{
+	return SaveToMpc(outpath, mpcdecode.DecodeType);
+}
+bool WorkManager::SaveToMpc(const wxString outpath, int decodeType)
 {
     MAPICDATA proc(GetGlobalWidth(), GetGlobalHeight());
     MAPICDATA shdproc(GetGlobalWidth(), GetGlobalHeight()), tempshd;
@@ -707,9 +710,12 @@ bool WorkManager::SaveToMpc(const wxString outpath)
         proc.AddFrame(tempfrmdata);
     }
 
-    proc.AddBaseColor(bscol);
+	if(decodeType == 0)
+	{
+		proc.AddBaseColor(bscol);
+	}
 
-    if(!proc.SaveToMpc(outpath, direction, interval, bottom, false)) return false;
+    if(!proc.SaveToMpc(outpath, direction, interval, bottom, false, decodeType)) return false;
 
     if(makeshadow)
     {

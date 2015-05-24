@@ -24,6 +24,7 @@ void MpcDecode::Init()
 {
     memset(&FileHead,0, sizeof(MpcFileHead));
     memset(&PaletteData, 0, sizeof(PaletteData));
+    DecodeType = 0;
 }
 void MpcDecode::SetMpcFile(const wxString MpcFilePath)
 {
@@ -117,6 +118,7 @@ bool MpcDecode::ReadMpcFile()
         tempul |= ( ((unsigned long)temp4b[2] & (unsigned long)0xFF) << 16 );
         tempul |= ( ((unsigned long)temp4b[3] & (unsigned long)0xFF) << 24 );
         DecodeType = (long)(0x0 | tempul);
+        DecodeType = ((DecodeType == 0 || DecodeType == 4) ? 0 : 1);
         mpcfile.read(FileHead.Reserved, 28);
 
         PaletteData.Size = FileHead.ColourCounts;
@@ -348,7 +350,7 @@ unsigned char* MpcDecode::GetDecodedFrameData(const unsigned long index, long* W
             *isTransparent = true;//always transparent
         }
 
-        if(DecodeType == 0 || DecodeType == 4)
+        if(DecodeType == 0)
         {
             mpcfile.read((char*)temp,1);
             for(unsigned long i = 0; i < datalength - 20;)

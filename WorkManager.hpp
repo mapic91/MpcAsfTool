@@ -128,7 +128,8 @@ public:
     long GetFrameShadowX(unsigned long index);
     long GetFrameShadowY(unsigned long index);
 
-    bool SaveToMpc(const wxString outpath);
+	bool SaveToMpc(const wxString outpath);
+    bool SaveToMpc(const wxString outpath, int decodeType);
     bool SaveToAsf(const wxString outpath);
     bool SaveToGif(const wxString outpath);
     bool SaveToPng(const wxString outpath);

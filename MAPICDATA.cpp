@@ -101,11 +101,11 @@ bool MAPICDATA::Quantize(const int palettesize, bool keepalpha)
                 else
                 {
                     sumdata[sumidx++] = (FIBYTE)(((double)blue)*((double)alpha/(double)0xFF) +
-                                               ((double)0xFF)*((double)(0xFF-alpha)/(double)0xFF));
+                                                 ((double)0xFF)*((double)(0xFF-alpha)/(double)0xFF));
                     sumdata[sumidx++] = (FIBYTE)(((double)green)*((double)alpha/(double)0xFF) +
-                                               ((double)0xFF)*((double)(0xFF-alpha)/(double)0xFF));
+                                                 ((double)0xFF)*((double)(0xFF-alpha)/(double)0xFF));
                     sumdata[sumidx++] = (FIBYTE)(((double)red)*((double)alpha/(double)0xFF) +
-                                               ((double)0xFF)*((double)(0xFF-alpha)/(double)0xFF));
+                                                 ((double)0xFF)*((double)(0xFF-alpha)/(double)0xFF));
                     sumdata[sumidx++] = 0xFF;
                 }
 
@@ -200,7 +200,7 @@ bool MAPICDATA::SaveToPng(const wxString path)
         {
             if(!FreeImage_SaveU(FIF_PNG, png, path + wxT(".png")))
             {
-            	FreeImage_Unload(png);
+                FreeImage_Unload(png);
                 free(buffer);
                 return false;
             }
@@ -209,7 +209,7 @@ bool MAPICDATA::SaveToPng(const wxString path)
         {
             if(!FreeImage_SaveU(FIF_PNG, png, path + wxString::Format(wxT("-%03ld.png"), fridx+1)))
             {
-            	FreeImage_Unload(png);
+                FreeImage_Unload(png);
                 free(buffer);
                 return false;
             }
@@ -290,7 +290,7 @@ bool MAPICDATA::SaveToGif(const wxString path)
 
     return true;
 }
-bool MAPICDATA::SaveToMpc(const wxString path, long direction, long interval, long bottom, bool makeshow)
+bool MAPICDATA::SaveToMpc(const wxString path, long direction, long interval, long bottom, bool makeshow, int codeType)
 {
     if(framecounts == 0) return false;
 
@@ -309,14 +309,14 @@ bool MAPICDATA::SaveToMpc(const wxString path, long direction, long interval, lo
         else delete shddata;
     }
 
-    if(!Quantize(256)) return false;
+    if(!Quantize(256, codeType == 1)) return false;
 
     unsigned long databeg, framedatasum, encodelen, pipos, tempsize;
     unsigned char *encdata = NULL;
     long wli = 0,hi = 0;
     FRAMERGBA *tempframe;
-    unsigned char coliline[globalwidth];
-    unsigned char maskline[globalwidth];
+    unsigned char coliline[globalwidth + 1];
+    unsigned char maskline[globalwidth + 1];
 
     unsigned char temp[8];
     char headinf[] = "MPC File Ver2.0";
@@ -363,7 +363,12 @@ bool MAPICDATA::SaveToMpc(const wxString path, long direction, long interval, lo
     temp[2] = (unsigned char)((bottom & 0xFF0000) >> 16);
     temp[3] = (unsigned char)((bottom & 0xFF000000) >> 24);
     outfile.write((char*)temp, 4);//bottom
+    if(codeType == 1)
+    {
+        nullv[0] = 0x06;
+    }
     outfile.write(nullv, 32);//null
+    nullv[0] = 0x00;
     for(int plti = 0; plti < 256; plti++)//palette
     {
         outfile.write((char*)(&palette[plti].rgbBlue), 1);
@@ -403,12 +408,12 @@ bool MAPICDATA::SaveToMpc(const wxString path, long direction, long interval, lo
                 }
                 else
                 {
-                    maskline[wli] = 1;
+                    maskline[wli] = (codeType == 0 ? 1 : tempframe->data[hi*globalwidth+wli].rgbReserved);
                     coliline[wli] = pixindex[pipos++];
                 }
             }
 
-            encdata = MpcRunLenEncode(maskline, coliline, &tempsize);
+            encdata = MpcRunLenEncode(maskline, coliline, &tempsize, codeType);
             if(!encdata)
             {
                 outfile.close();
@@ -863,7 +868,7 @@ bool MAPICDATA::MakeShadow(SHD_TYPE type, MAPICDATA **outshd, long offsetsunx, l
             for(long pixi = 0; pixi < globalwidth*globalheight; pixi++)
             {
                 if(shdframe[pixi].rgbReserved != 0 &&
-                   tempframe->data[pixi].rgbReserved == 0)
+                        tempframe->data[pixi].rgbReserved == 0)
                 {
                     tempframe->data[pixi].rgbBlue = shdframe[pixi].rgbBlue;
                     tempframe->data[pixi].rgbGreen = shdframe[pixi].rgbGreen;
@@ -1052,11 +1057,11 @@ void MAPICDATA::AddBaseColor(FILOCRGBQUAD basecolor)
             if(alpha == 0) continue;
 
             tempframe->data[pixi].rgbRed   = (FIBYTE)(((double)tempframe->data[pixi].rgbRed)*((double)alpha/(double)0xFF) +
-                                                    ((double)basecolor.rgbRed)*((double)(0xFF-alpha)/(double)0xFF));
+                                             ((double)basecolor.rgbRed)*((double)(0xFF-alpha)/(double)0xFF));
             tempframe->data[pixi].rgbGreen = (FIBYTE)(((double)tempframe->data[pixi].rgbGreen)*((double)alpha/(double)0xFF) +
-                                                    ((double)basecolor.rgbGreen)*((double)(0xFF-alpha)/(double)0xFF));
+                                             ((double)basecolor.rgbGreen)*((double)(0xFF-alpha)/(double)0xFF));
             tempframe->data[pixi].rgbBlue  = (FIBYTE)(((double)tempframe->data[pixi].rgbBlue)*((double)alpha/(double)0xFF) +
-                                                    ((double)basecolor.rgbBlue)*((double)(0xFF-alpha)/(double)0xFF));
+                                             ((double)basecolor.rgbBlue)*((double)(0xFF-alpha)/(double)0xFF));
             tempframe->data[pixi].rgbReserved = 0xFF;
         }
         tempframe = tempframe->next;
@@ -1117,57 +1122,107 @@ unsigned char* MAPICDATA::GetFrameRGB(unsigned long index, wxColor transcolor)
 
     return buffer;
 }
-unsigned char* MAPICDATA::MpcRunLenEncode(const unsigned char* maskline, const unsigned char* coliline, unsigned long *outsize)
+unsigned char* MAPICDATA::MpcRunLenEncode(const unsigned char* maskline, const unsigned char* coliline, unsigned long *outsize, int codeType)
 {
     if(maskline == NULL && coliline == NULL && outsize == NULL) return NULL;
 
-    unsigned long buffer[globalwidth], samcot, bufpos, rsize;
-    unsigned char *out = (unsigned char*)malloc(globalwidth*2);
-    if(!out) return NULL;
-
-    samcot = 1;
-    bufpos = 0;
-    for(long i = 1; i < globalwidth; i++)
+    if(codeType == 0)
     {
-        if(maskline[i-1] == maskline[i] && samcot < 0x7F)
-        {
-            samcot++;
-        }
-        else
-        {
-            buffer[bufpos++] = samcot;
-            samcot = 1;
-        }
-    }
-    //last one
-    if(samcot == 1) buffer[bufpos++] = 1;
-    else buffer[bufpos++] = samcot;
+        unsigned long buffer[globalwidth], samcot, bufpos, rsize;
+        unsigned char *out = (unsigned char*)malloc(globalwidth*2);
+        if(!out) return NULL;
 
-    bufpos = 0;
-    rsize = 0;
-    for(long j = 0; j < globalwidth;)
-    {
-        if(maskline[j] == 0)
+        samcot = 1;
+        bufpos = 0;
+        for(long i = 1; i < globalwidth; i++)
         {
-            out[rsize] = (unsigned char)(buffer[bufpos] + 0x80);
-            j += buffer[bufpos];
-            rsize++;
-            bufpos++;
-        }
-        else
-        {
-            out[rsize] = (unsigned char)(buffer[bufpos]);
-            rsize++;
-            for(unsigned char cnt = 0; cnt < buffer[bufpos]; cnt++)
+            if(maskline[i-1] == maskline[i] && samcot < 0x7F)
             {
-                out[rsize] = coliline[j++];
-                rsize++;
+                samcot++;
             }
-            bufpos++;
+            else
+            {
+                buffer[bufpos++] = samcot;
+                samcot = 1;
+            }
         }
+        //last one
+        if(samcot == 1) buffer[bufpos++] = 1;
+        else buffer[bufpos++] = samcot;
+
+        bufpos = 0;
+        rsize = 0;
+        for(long j = 0; j < globalwidth;)
+        {
+            if(maskline[j] == 0)
+            {
+                out[rsize] = (unsigned char)(buffer[bufpos] + 0x80);
+                j += buffer[bufpos];
+                rsize++;
+                bufpos++;
+            }
+            else
+            {
+                out[rsize] = (unsigned char)(buffer[bufpos]);
+                rsize++;
+                for(unsigned char cnt = 0; cnt < buffer[bufpos]; cnt++)
+                {
+                    out[rsize] = coliline[j++];
+                    rsize++;
+                }
+                bufpos++;
+            }
+        }
+        *outsize = rsize;
+        return out;
     }
-    *outsize = rsize;
-    return out;
+    else
+	{
+		unsigned char *out = (unsigned char*)malloc(globalwidth*4);
+        if(!out) return NULL;
+        unsigned long rsize = 0;
+
+        int bj;
+        for(long j = 0; j < globalwidth;)
+		{
+			if(maskline[j] == 0)
+			{
+				bj = j;
+				while(j < globalwidth && (j - bj < 0x7FFF) && maskline[++j] == 0);
+				int o = (j - bj) + 0x8000;
+				 out[rsize++] = (o & 0x00FF);
+				 out[rsize++] = ((o & 0xFF00) >> 8);
+			}
+			else if(maskline[j] == 255)
+			{
+				bj = j;
+				while(j < globalwidth && (j - bj < 0xFF) && maskline[++j] == 255);
+				int o = j - bj;
+				out[rsize++] = (unsigned char)o;
+				out[rsize++] = 0x00;
+				for(int oi = 0; oi < o; oi++)
+				{
+					out[rsize++] = coliline[bj + oi];
+				}
+			}
+			else
+			{
+				bj = j;
+				while(j < globalwidth && (j - bj < 0xFF) && maskline[++j] != 0 && maskline[j] != 255);
+				int o = j - bj;
+				out[rsize++] = (unsigned char)o;
+				out[rsize++] = 0x40;
+				for(int oi = 0; oi < o; oi++)
+				{
+					out[rsize++] = maskline[bj + oi];
+					out[rsize++] = coliline[bj + oi];
+				}
+			}
+		}
+		*outsize = rsize;
+        return out;
+	}
+
 }
 unsigned char* MAPICDATA::AsfRunLenEncode(const unsigned char* maskline, const unsigned char* coliline, unsigned long *outsize)
 {

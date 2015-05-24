@@ -54,7 +54,8 @@ public:
     //SaveToPng's path parameter not contain file extation, others contain
     bool SaveToPng(const wxString path);
     bool SaveToGif(const wxString path);
-    bool SaveToMpc(const wxString path, long direction, long interval, long bottom, bool makeshow = false);
+    //codeType: 0 - Ω£œ¿£¨ 1 - ’‘‘∆¥´
+    bool SaveToMpc(const wxString path, long direction, long interval, long bottom, bool makeshow = false, int codeType = 0);
     bool SaveToAsf(const wxString path, long direction, long interval, long bottom, long left,
                    bool makeshow = false, long offsetsunx = 0, long offsetsuny = 0,long offsetposx = 0, long offsetposy = 0);
     bool SaveToShd(const wxString path, long direction, long interval, long bottom);
@@ -84,7 +85,7 @@ private:
     void Init();
 
     //returned value must free(), outsize is the returned buffer size
-    unsigned char* MpcRunLenEncode(const unsigned char* maskline, const unsigned char* coliline, unsigned long *outsize);
+    unsigned char* MpcRunLenEncode(const unsigned char* maskline, const unsigned char* coliline, unsigned long *outsize, int codeType);
     unsigned char* AsfRunLenEncode(const unsigned char* maskline, const unsigned char* coliline, unsigned long *outsize);
     unsigned char* ShdRunLenEncode(const unsigned char* maskline, unsigned long *outsize);
 

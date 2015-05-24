@@ -4,7 +4,7 @@ transparancy color:
 RGB
 255 240 240
 105 146 103
-framecounts max is 256
+frame count max is 256
 
 pos  	    length       			description
 ---file begin---
@@ -12,24 +12,24 @@ pos  	    length       			description
 64(0x40)   4  bytes(    )           frames data length(head+data) sum
 68(0x44)   4  bytes(long)			width(global)
 72(0x48)   4  bytes(long)			height(global)
-76(0x4C)   4  bytes(ulong)			fram counts
+76(0x4C)   4  bytes(ulong)			fram count
 80(0x50)   4  bytes(long)			direction
-84(0x54)   4  bytes(ulong)          colour counts
+84(0x54)   4  bytes(ulong)          colour count
 88(0x58)   4  bytes(long)		    interval(ms/frame)
 92(0x5C)   4  bytes(long)			bottom
 96(0x60)   32 bytes                 null
-128(0x80)  4*(colour counts)        palette
-+^         4*(fram counts)          each frame data length
+128(0x80)  4*(colour count)        palette
++^         4*(fram count)          each frame data length
 {
 1: 0
-2:framelen(1) + 1's counts
-3:framelen(2) + 2's counts
-4:framelen(3) + 3's counts
+2:framelen(1) + 1's count
+3:framelen(2) + 2's count
+4:framelen(3) + 3's count
 .
 .
 .
-n-1:framelen(n-2) + (n-3)'s counts
-n: framelen(n-1) + (n-2)'s counts
+n-1:framelen(n-2) + (n-3)'s count
+n: framelen(n-1) + (n-2)'s count
 }
 frames data
 {
