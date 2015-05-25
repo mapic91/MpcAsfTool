@@ -319,14 +319,25 @@ bool MAPICDATA::SaveToMpc(const wxString path, long direction, long interval, lo
     unsigned char maskline[globalwidth + 1];
 
     unsigned char temp[8];
-    char headinf[] = "MPC File Ver2.0";
+
     char nullv[60] = {0};
 
     ofstream outfile(path.char_str(), ios_base::out|ios_base::binary);
     if(!outfile.is_open()) return false;
 
-    outfile.write(headinf, 15); //version info
-    outfile.write(nullv, 49); // zero
+    if(codeType == 0)
+	{
+		char headinf[] = "MPC File Ver2.0";
+		outfile.write(headinf, 15); //version info
+		outfile.write(nullv, 49); // zero
+	}
+	else
+	{
+		char headinf[] = "MPC File Ver2.10";
+		outfile.write(headinf, 16); //version info
+		outfile.write(nullv, 48); // zero
+	}
+
     outfile.seekp(4, ios_base::cur); //frames data length(head+data) sum
     temp[0] = (unsigned char)( globalwidth & 0xFF );
     temp[1] = (unsigned char)( (globalwidth & 0xFF00) >> 8 );
@@ -749,6 +760,62 @@ bool MAPICDATA::SaveToShd(const wxString path, long direction, long interval, lo
     outfile.close();
 
     return true;
+}
+bool MAPICDATA::SaveToRpc(const wxString path, long direction, long interval, long bottom)
+{
+//	if(framecounts == 0) return false;
+//
+//    unsigned long databeg, framedatasum, encodelen, tempsize;
+//    unsigned char *encdata = NULL;
+//    long wli = 0,hi = 0;
+//    FRAMERGBA *tempframe;
+//
+//    unsigned char temp[8];
+//    char headinf[12] = {'R',  'P',  'C', 0x00,
+//						0x0C, 0x00, 0x00, 0x00,
+//						0x20, 0x20, 0x20, 0x20};
+//    char nullv[60] = {0};
+//
+//    ofstream outfile(path.char_str(), ios_base::out|ios_base::binary);
+//    if(!outfile.is_open()) return false;
+//
+//    outfile.write(headinf, 12); //version info
+//    temp[0] = (unsigned char)( globalwidth & 0xFF );
+//    temp[1] = (unsigned char)( (globalwidth & 0xFF00) >> 8 );
+//    temp[2] = (unsigned char)( (globalwidth & 0xFF0000) >> 16 );
+//    temp[3] = (unsigned char)( (globalwidth & 0xFF000000) >> 24 );
+//    outfile.write((char*)temp, 4);//width(global)
+//    temp[0] = (unsigned char)( globalheight & 0xFF );
+//    temp[1] = (unsigned char)( (globalheight & 0xFF00) >> 8 );
+//    temp[2] = (unsigned char)( (globalheight & 0xFF0000) >> 16 );
+//    temp[3] = (unsigned char)( (globalheight & 0xFF000000) >> 24 );
+//    outfile.write((char*)temp, 4);//height(global)
+//    temp[0] = (unsigned char)( framecounts & 0xFF );
+//    temp[1] = (unsigned char)( (framecounts & 0xFF00) >> 8 );
+//    temp[2] = (unsigned char)( (framecounts & 0xFF0000) >> 16 );
+//    temp[3] = (unsigned char)( (framecounts & 0xFF000000) >> 24 );
+//    outfile.write((char*)temp, 4);//fram counts
+//    temp[0] = (unsigned char)( direction & 0xFF );
+//    temp[1] = (unsigned char)( (direction & 0xFF00) >> 8 );
+//    temp[2] = (unsigned char)( (direction & 0xFF0000) >> 16 );
+//    temp[3] = (unsigned char)( (direction & 0xFF000000) >> 24 );
+//    outfile.write((char*)temp, 4);//direction
+//    outfile.write(nullv, 12);
+//    temp[0] = (unsigned char)(bottom & 0xFF);
+//    temp[1] = (unsigned char)((bottom & 0xFF00) >> 8);
+//    temp[2] = (unsigned char)((bottom & 0xFF0000) >> 16);
+//    temp[3] = (unsigned char)((bottom & 0xFF000000) >> 24);
+//    outfile.write((char*)temp, 4);//bottom
+//    temp[0] = (unsigned char)(interval & 0xFF);
+//    temp[1] = (unsigned char)((interval & 0xFF00) >> 8);
+//    temp[2] = (unsigned char)((interval & 0xFF0000) >> 16);
+//    temp[3] = (unsigned char)((interval & 0xFF000000) >> 24);
+//    outfile.write((char*)temp, 4);//interval
+//
+//    outfile.write(nullv, 32);//null
+//
+//    databeg = (unsigned long)outfile.tellp();//frame 0 data offset
+      return true;
 }
 bool MAPICDATA::MakeShadow(SHD_TYPE type, MAPICDATA **outshd, long offsetsunx, long offsetsuny,
                            long offsetposx, long offsetposy, unsigned char shadowalpha)

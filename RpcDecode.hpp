@@ -13,7 +13,10 @@ struct DataInfo
 class RpcDecode
 {
 public:
-	RpcDecode(){}
+	RpcDecode()
+	{
+		m_frameDataInfo = NULL;
+	}
 	~RpcDecode()
 	{
 		if(m_frameDataInfo != NULL)delete []m_frameDataInfo;

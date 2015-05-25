@@ -59,6 +59,7 @@ public:
     bool SaveToAsf(const wxString path, long direction, long interval, long bottom, long left,
                    bool makeshow = false, long offsetsunx = 0, long offsetsuny = 0,long offsetposx = 0, long offsetposy = 0);
     bool SaveToShd(const wxString path, long direction, long interval, long bottom);
+    bool SaveToRpc(const wxString path, long direction, long interval, long bottom);
 
     //if outshd is not NULL, internal data is unchanged. outshd must be deleted, if not needed any more
     bool MakeShadow(SHD_TYPE type, MAPICDATA **outshd = NULL, long offsetsunx = 0, long offsetsuny = 0,

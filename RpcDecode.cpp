@@ -5,6 +5,9 @@
 
 bool RpcDecode::ReadFile(wxString filePath)
 {
+	if(m_frameDataInfo != NULL)delete []m_frameDataInfo;
+	m_frameCount = 0;
+
     m_filePath = filePath;
     std::ifstream file(filePath.char_str(), std::ios_base::binary);
     char temp[100];
