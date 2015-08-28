@@ -956,7 +956,7 @@ bool WorkManager::SaveToGif(const wxString outpath)
     if(!GifData::FilePaletteLoctoGlb(outpath, interval)) return false;
     return true;
 }
-bool WorkManager::SaveToPng(const wxString outpath)
+bool WorkManager::SaveToPng(const wxString outpath, bool reverseFrames)
 {
     MAPICDATA proc(GetGlobalWidth(), GetGlobalHeight());
     MAPICDATA shdproc(GetGlobalWidth(), GetGlobalHeight()), tempshd;
@@ -966,8 +966,13 @@ bool WorkManager::SaveToPng(const wxString outpath)
 
     if(!makeshadow)
     {
-        for(unsigned long frmi = 0; frmi < framecounts; frmi++)
+        for(unsigned long frmidx = 0; frmidx < framecounts; frmidx++)
         {
+        	int frmi = frmidx;
+        	if(reverseFrames)
+			{
+				frmi = (framecounts - 1) - frmidx;
+			}
             tempfrmdata = GetUndeletedGlobalizedFrameData(frmi);
             if(tempfrmdata == NULL) return false;
 
@@ -1003,8 +1008,13 @@ bool WorkManager::SaveToPng(const wxString outpath)
     }
     else
     {
-        for(unsigned long frmi = 0; frmi < framecounts; frmi++)
+        for(unsigned long frmidx = 0; frmidx < framecounts; frmidx++)
         {
+        	int frmi = frmidx;
+        	if(reverseFrames)
+			{
+				frmi = (framecounts - 1) - frmidx;
+			}
             tempfrmdata = GetUndeletedGlobalizedFrameData(frmi);
             if(tempfrmdata == NULL) return false;
 

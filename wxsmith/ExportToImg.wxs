@@ -2,7 +2,7 @@
 <wxsmith>
 	<object class="wxDialog" name="ExportToImg">
 		<title>请输入</title>
-		<size>275,110</size>
+		<size>278,125</size>
 		<id_arg>0</id_arg>
 		<object class="wxPanel" name="ID_PANEL1" variable="Panel1" member="yes">
 			<pos>-8,-8</pos>
@@ -13,18 +13,22 @@
 			</object>
 			<object class="wxButton" name="ID_BUTTON1" variable="Button1" member="yes">
 				<label>确定</label>
-				<pos>56,80</pos>
+				<pos>56,90</pos>
 				<handler function="OnButton1Click" entry="EVT_BUTTON" />
 			</object>
 			<object class="wxButton" name="ID_BUTTON2" variable="Button2" member="yes">
 				<label>取消</label>
-				<pos>152,80</pos>
+				<pos>152,90</pos>
 				<handler function="OnButton2Click" entry="EVT_BUTTON" />
 			</object>
 			<object class="wxTextCtrl" name="ID_TEXTCTRL1" variable="TextCtrl_FilePrefix" member="yes">
 				<pos>114,31</pos>
 				<size>152,21</size>
 				<tooltip>不要包含  \\  /  :  *  ?  &quot;  &lt;  &gt;  | </tooltip>
+			</object>
+			<object class="wxCheckBox" name="ID_CHECKBOX1" variable="m_cbReverse" member="yes">
+				<label>帧倒序</label>
+				<pos>32,64</pos>
 			</object>
 		</object>
 	</object>

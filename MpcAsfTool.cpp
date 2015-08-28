@@ -797,7 +797,7 @@ void MpcAsfTool::OnExportToPng(wxCommandEvent &event)
             pngpath += wxFileName::GetPathSeparator();
             pngpath += predlg.GetNamePrefix();
 
-            if(!manager.SaveToPng(pngpath))
+            if(!manager.SaveToPng(pngpath, predlg.IsReverse()))
             {
                 wxMessageBox(wxT("´æ´¢Ê§°Ü"), wxT("´íÎó"), wxOK|wxICON_ERROR);
                 return;

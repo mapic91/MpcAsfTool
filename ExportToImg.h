@@ -4,6 +4,7 @@
 //(*Headers(ExportToImg)
 #include <wx/stattext.h>
 #include <wx/textctrl.h>
+#include <wx/checkbox.h>
 #include <wx/panel.h>
 #include <wx/button.h>
 #include <wx/dialog.h>
@@ -22,6 +23,7 @@ class ExportToImg: public wxDialog
 		wxButton* Button1;
 		wxPanel* Panel1;
 		wxStaticText* StaticText1;
+		wxCheckBox* m_cbReverse;
 		wxButton* Button2;
 		wxTextCtrl* TextCtrl_FilePrefix;
 		//*)
@@ -33,6 +35,7 @@ class ExportToImg: public wxDialog
 		static const long ID_BUTTON1;
 		static const long ID_BUTTON2;
 		static const long ID_TEXTCTRL1;
+		static const long ID_CHECKBOX1;
 		static const long ID_PANEL1;
 		//*)
 
@@ -48,6 +51,7 @@ class ExportToImg: public wxDialog
 		{
 		    TextCtrl_FilePrefix->SetValue(namepre);
 		}
+		bool IsReverse(){return m_cbReverse->IsChecked();}
 
 		DECLARE_EVENT_TABLE()
 };
