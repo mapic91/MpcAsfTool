@@ -47,11 +47,11 @@ wxArrayString WorkManager::AddFiles(const wxArrayString& files)
                                 buffer = new FILOCRGBQUAD[tempwidth*tempheight];
                                 data = (BYTE*)malloc(tempwidth*tempheight*4);
 
-                                if(totalframecounts == 0)
-                                {
-                                    SetGlobalWidth((long)tempwidth);
-                                    SetGlobalHeight((long)tempheight);
-                                }
+//                                if(totalframecounts == 0)
+//                                {
+//                                    SetGlobalWidth((long)tempwidth);
+//                                    SetGlobalHeight((long)tempheight);
+//                                }
 
                                 if(buffer != NULL && data != NULL)
                                 {
@@ -117,11 +117,11 @@ wxArrayString WorkManager::AddFiles(const wxArrayString& files)
                         buffer = new FILOCRGBQUAD[tempwidth*tempheight];
                         data = (BYTE*)malloc(tempwidth*tempheight*4);
 
-                        if(totalframecounts == 0)
-                        {
-                            SetGlobalWidth((long)tempwidth);
-                            SetGlobalHeight((long)tempheight);
-                        }
+//                        if(totalframecounts == 0)
+//                        {
+//                            SetGlobalWidth((long)tempwidth);
+//                            SetGlobalHeight((long)tempheight);
+//                        }
 
                         if(buffer != NULL && data != NULL)
                         {
