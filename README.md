@@ -14,12 +14,17 @@
 
 `mingw32-make -f makefile.gcc BUILD=release`
 
+3.在CodeBlocks里
 
-3.在CodeBlocks里设置wx变量，base是wxWidgets库的路径
+设置wx变量，base是wxWidgets库的路径
+设置freeimage变量，base用工程里的FreeImage库
 
 ![01](doc/01.png)
 
 ![02](doc/02.png)
 
+![03](doc/03.png)
+
+![04](doc/04.png)
 
 4.如果要Build Release-static，需要[upx](https://upx.github.io/)来压缩exe文件，把upx.exe放在PATH系统变量的任何路径里的文件夹就可以
