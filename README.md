@@ -17,6 +17,7 @@
 3.在CodeBlocks里
 
 设置wx变量，base是wxWidgets库的路径
+
 设置freeimage变量，base用工程里的FreeImage库
 
 ![01](doc/01.png)
